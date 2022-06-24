@@ -1,0 +1,428 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+          <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    
+
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a [routerLink]="['/task-mapping']"
+                                        routerLinkActive="router-link-active">Task Mapping</a></li>
+                                <li class="active breadcrumb-item" aria-current="page">Default Task Configuration</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="box box-defualt  ">
+                            <form #taskMappingDefaulyTaskConfigurationForm="ngForm" (ngSubmit)="onSearch()">
+                            
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Search</h3>
+                                </div>
+                                <div class="box-body">
+                                <div class="row">
+                                        <div class="col-md-12">
+                                            <span  class="note-mendatory">* Mendatory Fields</span>
+                                        </div>
+                                    </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Country <span class="mandatory">*</span></label>
+                                            <select [(ngModel)]="taskmappingtaskconfiguration.country"
+                                                name="country" #country="ngModel"
+                                                (change)="ValidateCountry(country.value)" class="form-control">
+                                                <option value="0">Select</option>
+                                                <option *ngFor="let item of getCountriesListFromAPI"
+                                                    value={{item.country_id}}>
+                                                    {{item.country_name}}</option>
+                                            </select>
+                                            <small [class.d-none]="!CountryHasError || country.untouched"
+                                                class="text-danger">This field is a
+                                                required field.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Choose </label>
+                                            <div class="radio-wrapper">
+                                                <input [(ngModel)]="taskmappingtaskconfiguration.choose"
+                                                    (click)="chooseOption()" id="state" #ChooseOption="ngModel"
+                                                    name="Choose" type="radio" value="state">
+                                                <label for="state">State</label>&nbsp;&nbsp;&nbsp;
+                                                <input [(ngModel)]="taskmappingtaskconfiguration.choose"
+                                                    (click)="chooseOption()" id="central" #ChooseOption="ngModel"
+                                                    name="Choose" type="radio" value="central">
+                                                <label for="central">Central</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4" *ngIf="isDisplay">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <select [(ngModel)]="taskmappingtaskconfiguration.state"
+                                                (change)="ValidateState()" name="state" #state="ngModel"
+                                                class="form-control">
+                                                <option value="0">Select</option>
+                                                <option *ngFor="let item of getstateListFromAPI"
+                                                    value={{item.state_id}}>
+                                                    {{item.state_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Category of Law </label>
+                                            <select [(ngModel)]="taskmappingtaskconfiguration.categoryOdLaws"
+                                                (change)="ValidateCategoryOfLaw(categoryOdLaws.value)"
+                                                name="categoryOdLaws" #categoryOdLaws="ngModel"
+                                                class="form-control">
+                                                <option value="0">Select</option>
+                                                <option *ngFor="let item of getCategoryOfLawListFromAPI"
+                                                    value={{item.cat_law_id}}>
+                                                    {{item.cat_law_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Frequency </label>
+                                            <select [(ngModel)]="taskmappingtaskconfiguration.frequency"
+                                                name="frequency" #frequency="ngModel" class="form-control">
+                                                <option value="NA">Select Frequency</option>
+                                                <option value="Event_Based">Event based</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Entity </label>
+                                            <select [(ngModel)]="taskmappingtaskconfiguration.entity" name="entity"
+                                                #entity="ngModel" (change)="ValidateEntityFilter(entity.value)"
+                                                class="form-control">
+                                                <option value="0">Select Entity</option>
+                                                <option *ngFor="let item of getEntityListFilterFromAPI"
+                                                    value={{item.orga_id}}>
+                                                    {{item.orga_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Unit</label>
+                                            <select [(ngModel)]="taskmappingtaskconfiguration.unit" name="unit"
+                                                #unit="ngModel" (change)="ValidateUnitFilter(unit.value)"
+                                                class="form-control">
+                                                <option value="0">Select Unit</option>
+                                                <option *ngFor="let item of getUnitListFilterFromAPI"
+                                                    value={{item.loca_id}}>
+                                                    {{item.loca_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Function </label>
+                                            <select [(ngModel)]="taskmappingtaskconfiguration.functions"
+                                                name="functions" #functions="ngModel"
+                                                (change)="ValidateFunctionFilter(functions.value)"
+                                                class="form-control">
+                                                <option value="0">Select Function</option>
+                                                <option *ngFor="let item of getFunctionListFilterFromAPI"
+                                                    value={{item.dept_id}}>
+                                                    {{item.dept_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Owner </label>
+                                            <select [(ngModel)]="taskmappingtaskconfiguration.owner" name="owner"
+                                                #owner="ngModel" (change)="ValidateOwnerFilter(owner.value)"
+                                                class="form-control">
+                                                <option value="0">Select Owner</option>
+                                                <option *ngFor="let item of getOwnerListFilterFromAPI"
+                                                    value={{item.user_id}}>
+                                                    {{item.user_name}}</option>
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Approver </label>
+                                            <select [(ngModel)]="taskmappingtaskconfiguration.approver"
+                                                name="approver" #approver="ngModel" class="form-control">
+                                                <option value="0">Select Approver</option>
+                                                <option *ngFor="let item of getApproverListFilterFromAPI"
+                                                    value={{item.user_id}}>
+                                                    {{item.user_name}}</option>
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Legislation </label>
+                                            <select [(ngModel)]="taskmappingtaskconfiguration.legislation"
+                                                (change)="ValidateLegislation(legislation.value)" name="legislation"
+                                                #legislation="ngModel" class="form-control">
+                                                <option value="0">Select Legislation</option>
+                                                <option *ngFor="let item of getLegislationListFromAPI"
+                                                    value={{item.legi_id}}>
+                                                    {{item.legi_name}}</option>
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Rules </label>
+                                            <select [(ngModel)]="taskmappingtaskconfiguration.rules" name="rules"
+                                                class="form-control">
+                                                <option value="0">Select Rules</option>
+                                                <option *ngFor="let item of getRulesListFromAPI"
+                                                    value={{item.rule_id}}>
+                                                    {{item.rule_name}}</option>
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Event </label>
+                                            <select class="form-control">
+                                                <option value="">Select Event</option>
+                                                <option value="">NA</option>
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Sub Event </label>
+                                            <select class="form-control">
+                                                <option value="">Select Sub Event</option>
+                                                <option value="">NA</option>
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <span class="mt-2 text-center col-md-12">(Note : If Rule is not available then select <b >'NA'</b> Option )</span>
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                                <!-- /.box-body -->
+                                </div>
+                                <div class="box-footer text-center">
+                                    <button
+                                    [disabled]="taskMappingDefaulyTaskConfigurationForm.form.invalid || CountryHasError"
+                                    type="submit" class="btn btn-primary">Search</button>
+                                </div>
+                            
+                            </form>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div> 
+
+                    <div *ngIf="selectedRecords?.length != 0">
+                        <form #taskMappingTaskSaveConfigurationForm="ngForm" (ngSubmit)="onSubmit()">
+                            <div class="col-md-12">
+                                <div class="box box-defualt">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Settings</h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="">Frequency</label>
+                                                    <input type="text" class="form-control" value="Event Based" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="dtco_after_before">Type</label>
+                                                    <select required class="form-control" name="dtco_after_before" [(ngModel)]="saveConfigurationModel.dtco_after_before" #dtco_after_before="ngModel">
+                                                        <option value="" class="" selected="selected">--Select--</option>
+                                                        <option label="Same" value="Same">Same</option>
+                                                        <option label="Before" value="Before">Before</option>
+                                                        <option label="After" value="After">After</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">#</th>
+                                                        <th>Buffer Days</th>
+                                                        <th>Legal Days</th>
+                                                        <th>Unit Head Days</th>
+                                                        <th>Function Head Days</th>
+                                                        <th>Approver Days</th>
+                                                        <th>Owner Days</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-center">1</td>
+                                                        <td class=""> 
+                                                            <input type="text" name="ttrn_prior_days_buffer" class="form-control"
+                                                                [(ngModel)]="saveConfigurationModel.ttrn_prior_days_buffer"
+                                                                #ttrn_prior_days_buffer="ngModel" min="0"
+                                                                type="number"
+                                                            > 
+                                                        </td>
+                                                        <td class=""> 
+                                                            <input type="text" name="dtco_legal_days" class="form-control"
+                                                                [(ngModel)]="saveConfigurationModel.dtco_legal_days"
+                                                                #dtco_legal_days="ngModel" min="0"
+                                                                type="number"> 
+                                                        </td>
+                                                        <td class=""> 
+                                                            <input type="text" name="dtco_uh_days" class="form-control"
+                                                                [(ngModel)]="saveConfigurationModel.dtco_uh_days"
+                                                                #dtco_uh_days="ngModel" min="0"
+                                                                type="number">  
+                                                        </td>
+                                                        <td class=""> 
+                                                            <input type="text" name="dtco_fh_days" class="form-control"
+                                                                [(ngModel)]="saveConfigurationModel.dtco_fh_days"
+                                                                #dtco_fh_days="ngModel" min="0"
+                                                                type="number">                                        
+                                                        </td>
+                                                        <td class=""> 
+                                                            <input type="text" name="dtco_rw_days" class="form-control"
+                                                                [(ngModel)]="saveConfigurationModel.dtco_rw_days"
+                                                                #dtco_rw_days="ngModel" min="0"
+                                                                type="number"> 
+                                                        </td>
+                                                        <td class=""> 
+                                                            <input type="text" name="dtco_pr_days" class="form-control"
+                                                                [(ngModel)]="saveConfigurationModel.dtco_pr_days"
+                                                                #dtco_pr_days="ngModel" min="0"
+                                                                type="number"> 
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="box-footer text-center">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>  
+                        </form>
+                    </div>
+
+                    <div class="clearfix"></div> 
+                    <div class="col-md-12">
+                        <div class="box box-defualt  ">
+                        
+                            <div class="box-body">
+                                <div class="row">
+                                    <!-- <div class="col-md-2">
+                                        <input type="checkbox" class="mr-10"> <label>Select All</label>
+                                    </div> -->
+                                        <div class="col-md-2">
+                                            <label>Total Task : <span>{{responseData?.length}}</span></label>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Selected Task : <span>{{selectedRecords?.length}}</span></label>
+                                        </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>#</th>
+                                                <th>Client Task ID</th>
+                                                <th>Emcure Task ID</th>
+                                                <th>Name of Legislation</th>
+                                                <th>Rule</th>
+                                                <th>Refrence</th>
+                                                <th>Who</th>
+                                                <th>When</th>
+                                                <th>Activity</th>
+                                                <th>Frequency</th>
+                                                <th>Impact</th>
+                                                <th>Unit Impact</th>
+                                                <th>Entity Impact</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="responseData?.length <= 0">
+                                            <tr>
+                                                <td colspan="14" class="text-center">
+                                                    Data not available !
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngIf="responseData?.length != 0">
+                                            <tr
+                                                *ngFor="let item of responseData | paginate: {id: 'taskMappingEnableDisable', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+                                                <td class="text-center">
+                                                    <input type="checkbox"
+                                                        (click)="checkFunction(item.tmap_client_task_id)" />
+                                                </td>
+                                                <td class="text-center">{{( i + 1) + (Pagination.CurrentPage - 1) *
+                                                    Pagination.ItemsPerPage}}</td>
+
+                                                <td>{{item.tmap_client_task_id}}</td>
+                                                <td>{{item.task_lexcare_id}}</td>
+                                                <td>{{item.task_legi_name}}</td>
+                                                <td>{{item.task_rule_name}}</td>
+                                                <td>{{item.task_reference}}</td>
+                                                <td>{{item.task_activity_who}}</td>
+                                                <td>{{item.task_activity_when}}</td>
+                                                <td>{{item.task_activity}}</td>
+                                                <td>{{item.task_frequency_for_operation}}</td>
+                                                <td>{{item.task_impact}}</td>
+                                                <td>{{item.task_impact_on_unit}}</td>
+                                                <td>{{item.task_impact_on_orga}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div *ngIf="responseData?.length != 0">
+                                        <pagination-controls id="taskMappingEnableDisable" maxSize="5"
+                                            directionLinks="true" (pageChange)="Pagination.CurrentPage=$event">
+                                        </pagination-controls>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                    
+                        </div>
+                    </div>
+                </div>
+            
+             <!-- /.box -->
+            </section>
+          <!-- /.content -->
+        </div>
+    </div>
+    <!-- /.container -->
+ </div>
+
+
+
+

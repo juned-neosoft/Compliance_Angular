@@ -1,0 +1,663 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+<div class="content-wrapper" *ngIf="showDashboard">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="box box-defualt  ">
+                    <div class="box-body">
+                        <div class="p-3">
+                            <div class="row">
+                                <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
+                                    <div class="card text-black o-hidden h-100 " style="background-color: #00cc33a6;">
+                                        <div class="card-body" title="Complied">
+                                            <h4>{{statustabs.Complied}}</h4>
+                                            <div class="card-body-icon"><i class="fas fa-fw fa-users"></i></div>
+                                            <div>Complied</div>
+                                        </div>
+                                        <a class="card-footer text-black clearfix small z-1" href="javascript:void(0)"
+                                            (click)="filterDataByStatus('complied')">
+                                            <span class="float-left">View Details</span>
+                                            <span class="float-right">
+                                                <i style="margin-left: 5px;" class="fas fa-angle-right"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
+                                    <div class="card text-black o-hidden h-100 " style="background-color: #ffff00a6;">
+                                        <div class="card-body" title="Posing">
+                                            <h4>{{statustabs.Posing}}</h4>
+                                            <div class="card-body-icon"><i class="fas fa-fw fa-users"></i></div>
+                                            <div>Posing</div>
+                                        </div>
+                                        <a class="card-footer text-black clearfix small z-1" href="javascript:void(0)"
+                                            (click)="filterDataByStatus('posingrisk')">
+                                            <span class="float-left">View Details</span>
+                                            <span class="float-right"><i style="margin-left: 5px;"
+                                                    class="fas fa-angle-right"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
+                                    <div class="card text-black o-hidden h-100 " style="background-color: #ff0000a6;">
+                                        <div class="card-body" title="Overdue">
+                                            <h4>{{statustabs.NonComplied}}</h4>
+                                            <div class="card-body-icon"><i class="fas fa-fw fa-users"></i></div>
+                                            <div>Overdue</div>
+                                        </div>
+                                        <a class="card-footer text-black clearfix small z-1" href="javascript:void(0)"
+                                            (click)="filterDataByStatus('noncomplied')">
+                                            <span class="float-left">View Details</span>
+                                            <span class="float-right"><i style="margin-left: 5px;"
+                                                    class="fas fa-angle-right"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
+                                    <div class="card text-black o-hidden h-100 " style="background-color: #bfbfbfa6;">
+                                        <div class="card-body" title="Delayed">
+                                            <h4>{{statustabs.Delayed}}</h4>
+                                            <div class="card-body-icon"><i class="fas fa-fw fa-users"></i></div>
+                                            <div>Delayed</div>
+                                        </div>
+                                        <a class="card-footer text-black clearfix small z-1" href="javascript:void(0)"
+                                            (click)="filterDataByStatus('delayed')">
+                                            <span class="float-left">View Details</span>
+                                            <span class="float-right"><i style="margin-left: 5px;"
+                                                    class="fas fa-angle-right"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
+                                    <div class="card text-black o-hidden h-100 " style="background-color: #bfd630a6;">
+                                        <div class="card-body" title="Delayed Reported">
+                                            <h4>{{statustabs.DelayedReported}}</h4>
+                                            <div class="card-body-icon"><i class="fas fa-fw fa-users"></i></div>
+                                            <div>Delayed Reported</div>
+                                        </div>
+                                        <a class="card-footer text-black clearfix small z-1" href="javascript:void(0)"
+                                            (click)="filterDataByStatus('delayed-reported')">
+                                            <span class="float-left">View Details</span>
+                                            <span class="float-right"><i style="margin-left: 5px;"
+                                                    class="fas fa-angle-right"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
+                                    <div class="card text-black o-hidden h-100 " style="background-color: #499ed6a6;">
+                                        <div class="card-body" title="Waiting For Approval">
+                                            <h4>{{statustabs.WFA}}</h4>
+                                            <div class="card-body-icon"><i class="fas fa-fw fa-users"></i></div>
+                                            <div>WFA</div>
+                                        </div>
+                                        <a class="card-footer text-black clearfix small z-1" href="javascript:void(0)"
+                                            (click)="filterDataByStatus('watingforapproval')"><span
+                                                class="float-left">View Details</span><span class="float-right"><i
+                                                    style="margin-left: 5px;" class="fas fa-angle-right"></i></span></a>
+                                    </div>
+                                </div>
+
+                                <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
+                                    <div class="card text-black o-hidden h-100 " style="background-color: #f9ac31a6;">
+                                        <div class="card-body" title="Re-Opened">
+                                            <h4>{{statustabs.ReOpened}}</h4>
+                                            <div class="card-body-icon"><i class="fas fa-fw fa-users"></i></div>
+                                            <div>Re-Opened</div>
+                                        </div>
+                                        <a class="card-footer text-black clearfix small z-1" href="javascript:void(0)"
+                                            (click)="filterDataByStatus('reopen')"><span class="float-left">View
+                                                Details</span><span class="float-right"><i style="margin-left: 5px;"
+                                                    class="fas fa-angle-right"></i></span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 row">
+                                <div class="col-md-12">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item active">
+                                            <a class="nav-link active" (click)="TabOnClick('')" id="ViewGrid-tab"
+                                                data-toggle="tab" href="#ViewGrid" role="tab" aria-controls="ViewGrid"
+                                                aria-selected="true">Grid</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" (click)="TabOnClick('overall')" id="Overall-tab"
+                                                data-toggle="tab" href="#Overall" role="tab" aria-controls="Overall"
+                                                aria-selected="false">Overall</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" (click)="TabOnClick('entity')" id="Entity-tab"
+                                                data-toggle="tab" href="#Entity" role="tab" aria-controls="Entity"
+                                                aria-selected="false">Entity</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" (click)="TabOnClick('unit')" id="Unit-tab"
+                                                data-toggle="tab" href="#Unit" role="tab" aria-controls="Unit"
+                                                aria-selected="false">Unit</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" (click)="TabOnClick('function')" id="Function-tab"
+                                                data-toggle="tab" href="#Function" role="tab" aria-controls="Function"
+                                                aria-selected="false">Function</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" (click)="TabOnClick('finantial')" id="Financial-tab"
+                                                data-toggle="tab" href="#Financial" role="tab" aria-controls="Financial"
+                                                aria-selected="false">Financial</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade in active" id="ViewGrid" role="tabpanel"
+                                            aria-labelledby="ViewGrid-tab">
+                                            <div class="row m-5">
+                                                Data shown on filter: <strong>{{filterDataStatus}}</strong> Total
+                                                records are: <strong>{{responseData?.length}}</strong>
+
+                                                <div class="box-body" *ngIf="responseData?.length != 0">
+                                                    <div class="col-md-3 pull-left" style="padding-left: 0px">
+                                                        <input type="text" class="input form-control"
+                                                            placeholder="Search" [(ngModel)]="TableFilter">
+                                                    </div>
+                                                    <div class="btn-group pull-right">
+                                                        <button type="button" (click)="exportExcel()"
+                                                            class="btn btn-success"><i class="fa fa-download"></i>
+                                                            &emsp; Excel</button>
+                                                        <button style="display: none;" type="button"
+                                                            (click)="exportPDF()" class="btn btn-primary"><i
+                                                                class="fa fa-download"></i>
+                                                            &emsp; PDF</button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="table-responsive">
+                                                    <table class=" table table-bordered mt10">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-center w80">Sr. No.</th>
+                                                                <th>Client Task ID</th>
+                                                                <th>Entity</th>
+                                                                <th>Unit</th>
+                                                                <th>Function</th>
+                                                                <th>Legislation</th>
+                                                                <th>Rule</th>
+                                                                <th>Reference</th>
+                                                                <th>Who</th>
+                                                                <th>When</th>
+                                                                <th>Activity</th>
+                                                                <th>Impact</th>
+                                                                <th>Implication</th>
+                                                                <th>Owner</th>
+                                                                <th>Approver</th>
+                                                                <th>Function Head</th>
+                                                                <th>Legal Due Date</th>
+                                                                <th>Ttrn ID</th>
+                                                                <th>Comments</th>
+                                                                <th>Event_Not_Occured (Yes / No)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody *ngIf="responseData?.length <= 0">
+                                                            <tr>
+                                                                <td colspan="21" class="text-center">
+                                                                    Data not available !
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody *ngIf="responseData?.length != 0">
+                                                            <tr
+                                                                *ngFor="let item of responseData | stringFilter: TableFilter | paginate: {id: 'entityData', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+                                                                <td class="text-center">{{( i + 1) +
+                                                                    (Pagination.CurrentPage - 1) *
+                                                                    Pagination.ItemsPerPage}}</td>
+
+                                                                <td><a href="javascript:void(0)"
+                                                                        (click)="showTaskDetailsPage(item.ttrn_client_task_id)">{{item.ttrn_client_task_id}}</a>
+                                                                </td>
+                                                                <td>{{item.orga_name}}</td>
+                                                                <td>{{item.loca_name}}</td>
+                                                                <td>{{item.dept_name}}</td>
+                                                                <td>{{item.task_legi_name}}</td>
+                                                                <td>{{item.task_rule_name}}</td>
+                                                                <td>{{item.task_reference}}</td>
+                                                                <td>{{item.task_who}}</td>
+                                                                <td>{{item.task_when}}</td>
+                                                                <td>{{item.task_activity}}</td>
+                                                                <td>{{item.tsk_impact}}</td>
+                                                                <td>{{item.implications}}</td>
+                                                                <td>{{item.task_executor}}</td>
+                                                                <td>{{item.evaluator}}</td>
+                                                                <td>{{item.function_head}}</td>
+                                                                <td>{{item.ttrn_legal_due_date}}</td>
+                                                                <td></td>
+                                                                <td>{{item.ttrn_performer_comments}}</td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="text-center"
+                                                        *ngIf="responseData?.length != 0 && TableFilter == ''">
+                                                        <pagination-controls id="entityData" maxSize="8"
+                                                            directionLinks="true"
+                                                            (pageChange)="Pagination.CurrentPage=$event">
+                                                        </pagination-controls>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" id="Overall" role="tabpanel"
+                                            aria-labelledby="Overall-tab">
+                                            <div class="row m-5">
+                                                <div class="row ml-5">
+                                                    <form style="display: none;">
+                                                        <div class="col-sm-4">
+                                                            <input type="date" class="form-control " id="fromDate"
+                                                                placeholder="From Date" name="fromDate"
+                                                                uib-datepicker-popup="dd-MM-yyyy" ng-model="date_from">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="date" class="form-control " id="toDate"
+                                                                placeholder="From Date" name="toDate"
+                                                                uib-datepicker-popup="dd-MM-yyyy" ng-model="date_to">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <button type="submit" class="btn btn-default">
+                                                                <i class="fa fa-search"></i> Search
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="row m-3">
+                                                    <table class="table table-bordered table-hover table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Complied</th>
+                                                                <th>Posing</th>
+                                                                <th>Overdue</th>
+                                                                <th>Delayed</th>
+                                                                <th>Delayed Reported</th>
+                                                                <th>WFA</th>
+                                                                <th>Re-Opened</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="text-center">1</td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByStatus('complied')">{{statustabs.Complied}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByStatus('posingrisk')">{{statustabs.Posing}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByStatus('noncomplied')">{{statustabs.NonComplied}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByStatus('delayed')">{{statustabs.Delayed}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByStatus('delayed-reported')">{{statustabs.DelayedReported}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByStatus('watingforapproval')">{{statustabs.WFA}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByStatus('reopen')">{{statustabs.ReOpened}}</a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="Entity" role="tabpanel"
+                                            aria-labelledby="Entity-tab">
+                                            <div class="row m-5">
+                                                <div class="row ml-5">
+                                                    <form style="display: none;">
+                                                        <div class="col-sm-4">
+                                                            <input type="date" class="form-control " id="fromDate"
+                                                                placeholder="From Date" name="fromDate"
+                                                                uib-datepicker-popup="dd-MM-yyyy" ng-model="date_from">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="date" class="form-control " id="toDate"
+                                                                placeholder="From Date" name="toDate"
+                                                                uib-datepicker-popup="dd-MM-yyyy" ng-model="date_to">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <button type="submit" class="btn btn-default">
+                                                                <i class="fa fa-search"></i> Search
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="row m-3">
+                                                    <table class="table table-bordered table-hover table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Entity</th>
+                                                                <th>Complied</th>
+                                                                <th>Posing</th>
+                                                                <th>Overdue</th>
+                                                                <th>Delayed</th>
+                                                                <th>Delayed Reported</th>
+                                                                <th>WFA</th>
+                                                                <th>Re-Opened</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody *ngIf="entityTableData?.length != 0">
+                                                            <tr *ngFor="let item of entityTableData; let i = index">
+                                                                <td class="text-center">{{i+1}}</td>
+                                                                <td>{{item.entity}}
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.entity, 'complied', 'entity')">{{item.complied}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.entity, 'posingrisk', 'entity')">{{item.posing}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.entity, 'noncomplied', 'entity')">{{item.non_complied}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.entity, 'delayed', 'entity')">{{item.delayed}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.entity, 'delayed-reported', 'entity')">{{item.delayed_reported}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.entity, 'watingforapproval', 'entity')">{{item.wfa}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.entity, 'reopen', 'entity')">{{item.re_opened}}</a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody *ngIf="entityTableData?.length == 0">
+                                                            <tr>
+                                                                <td colspan="9">Data not found</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="Unit" role="tabpanel" aria-labelledby="Unit-tab">
+                                            <div class="row m-5">
+                                                <div class="row ml-5">
+                                                    <form style="display: none;">
+                                                        <div class="col-sm-4">
+                                                            <input type="date" class="form-control " id="fromDate"
+                                                                placeholder="From Date" name="fromDate"
+                                                                uib-datepicker-popup="dd-MM-yyyy" ng-model="date_from">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="date" class="form-control " id="toDate"
+                                                                placeholder="From Date" name="toDate"
+                                                                uib-datepicker-popup="dd-MM-yyyy" ng-model="date_to">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <button type="submit" class="btn btn-default">
+                                                                <i class="fa fa-search"></i> Search
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="row m-3">
+                                                    <table class="table table-bordered table-hover table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Unit</th>
+                                                                <th>Complied</th>
+                                                                <th>Posing</th>
+                                                                <th>Overdue</th>
+                                                                <th>Delayed</th>
+                                                                <th>Delayed Reported</th>
+                                                                <th>WFA</th>
+                                                                <th>Re-Opened</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody *ngIf="unitTableData?.length != 0">
+                                                            <tr *ngFor="let item of unitTableData; let i = index">
+                                                                <td class="text-center">{{i+1}}</td>
+                                                                <td>{{item.unit}}
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.unit, 'complied', 'unit')">{{item.complied}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.unit, 'posingrisk', 'unit')">{{item.posing}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.unit, 'noncomplied', 'unit')">{{item.non_complied}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.unit, 'delayed', 'unit')">{{item.delayed}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.unit, 'delayed-reported', 'unit')">{{item.delayed_reported}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.unit, 'watingforapproval', 'unit')">{{item.wfa}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.unit, 'reopen', 'unit')">{{item.re_opened}}</a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody *ngIf="unitTableData?.length == 0">
+                                                            <tr>
+                                                                <td colspan="9">Data not found</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="Function" role="tabpanel"
+                                            aria-labelledby="Function-tab">
+                                            <div class="row m-5">
+                                                <div class="row ml-5">
+                                                    <form style="display: none;">
+                                                        <div class="col-sm-4">
+                                                            <input type="date" class="form-control " id="fromDate"
+                                                                placeholder="From Date" name="fromDate"
+                                                                uib-datepicker-popup="dd-MM-yyyy" ng-model="date_from">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="date" class="form-control " id="toDate"
+                                                                placeholder="From Date" name="toDate"
+                                                                uib-datepicker-popup="dd-MM-yyyy" ng-model="date_to">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <button type="submit" class="btn btn-default">
+                                                                <i class="fa fa-search"></i> Search
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="row m-3">
+                                                    <table class="table table-bordered table-hover table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Function</th>
+                                                                <th>Complied</th>
+                                                                <th>Posing</th>
+                                                                <th>Overdue</th>
+                                                                <th>Delayed</th>
+                                                                <th>Delayed Reported</th>
+                                                                <th>WFA</th>
+                                                                <th>Re-Opened</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody *ngIf="functionTableData?.length != 0">
+                                                            <tr *ngFor="let item of functionTableData; let i = index">
+                                                                <td class="text-center">{{i+1}}</td>
+                                                                <td>{{item.function}}
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.function, 'complied', 'function')">{{item.complied}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.function, 'posingrisk', 'function')">{{item.posing}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.function, 'noncomplied', 'function')">{{item.non_complied}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.function, 'delayed', 'function')">{{item.delayed}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.function, 'delayed-reported', 'function')">{{item.delayed_reported}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.function, 'watingforapproval', 'function')">{{item.wfa}}</a>
+                                                                </td>
+                                                                <td class="text-center"><a
+                                                                        (click)="filterDataByTabs(item.function, 'reopen', 'function')">{{item.re_opened}}</a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody *ngIf="functionTableData?.length == 0">
+                                                            <tr>
+                                                                <td colspan="9">Data not found</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="Financial" role="tabpanel"
+                                            aria-labelledby="Financial-tab">
+                                            <div class="row  m-5">
+                                                <div class="col-sm-6 row" style="display: none;">
+                                                    <div class="col-sm-4">
+                                                        <label>Year :</label>
+                                                        <select class="form-control">
+                                                            <option value="" class="" selected="selected">-- Select --
+                                                            </option>
+                                                            <option label="2016-2017" value="number:2016">2016-2017
+                                                            </option>
+                                                            <option label="2017-2018" value="number:2017">2017-2018
+                                                            </option>
+                                                            <option label="2018-2019" value="number:2018">2018-2019
+                                                            </option>
+                                                            <option label="2019-2020" value="number:2019">2019-2020
+                                                            </option>
+                                                            <option label="2020-2021" value="number:2020">2020-2021
+                                                            </option>
+                                                            <option label="2021-2022" value="number:2021">2021-2022
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>Quarter :</label>
+                                                        <select class="form-control">
+                                                            <option label="--select--" value="number:0">--select--
+                                                            </option>
+                                                            <option label="Quarter 1" value="number:1"
+                                                                selected="selected">Quarter 1</option>
+                                                            <option label="Quarter 2" value="number:2">Quarter 2
+                                                            </option>
+                                                            <option label="Quarter 3" value="number:3">Quarter 3
+                                                            </option>
+                                                            <option label="Quarter 4" value="number:4">Quarter 4
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <form class="form-inline m-5" style="display: none;">
+                                                        <div class="form-group">
+                                                            <label class="sr-only" for="fromDate">From Date:</label>
+                                                            <input type="date" class="form-control" id="fromDate"
+                                                                placeholder="From Date" name="fromDate"
+                                                                uib-datepicker-popup="dd-MM-yyyy"
+                                                                ng-model="date_from" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="sr-only" for="date-to">To Date:</label>
+                                                            <input type="date" class="form-control" id="toDate"
+                                                                placeholder="To Date" name="toDate"
+                                                                uib-datepicker-popup="dd-MM-yyyy" ng-model="date_to" />
+                                                        </div>
+                                                        <button type="submit" class="btn btn-default"
+                                                            ng-click="searchGraph();validateDates()">
+                                                            <i class="fa fa-search"></i> Search
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" *ngIf="isOverall">
+                                    <div class="row m-5">
+                                        <app-overallchart [OverallChart]='overallChartData'></app-overallchart>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" *ngIf="isEntity">
+                                    <div class="row m-5">
+                                        <app-entitychart [EntityChart]="entityChartData"></app-entitychart>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" *ngIf="isUnit">
+                                    <div class="row m-5">
+                                        <app-unitchart [UnitChart]="unitChartData"></app-unitchart>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" *ngIf="isFunction">
+                                    <div class="row m-5">
+                                        <app-functionchart [FunctionChart]="functionChartData"></app-functionchart>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" *ngIf="isFinantial">
+                                    <div class="row m-5">
+                                        <app-finantialchart [FinantialChart]="finantialChartData"></app-finantialchart>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+
+    </div>
+
+    <!-- /.container -->
+</div>
+
+
+<div class="content-wrapper" *ngIf="showTaskDetails">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="back_dashbord">
+                    <a href="javascript:void(0)" (click)="showDashboardPage()" class="btn btn-primary btn_back">Back</a>
+                    <app-dashboardtaskdetails [FromParentData]='parentData'>
+                    </app-dashboardtaskdetails>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="login-page">
+  <div class="login-box">
+
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+      <div class="login-logo">
+        <img src="assets/img/logo1.png" alt="Emcure" />
+      </div>
+      <form #loginForm="ngForm" (ngSubmit)="loginUser()">
+        <div class="form-group has-feedback">
+          <input [(ngModel)]="loginData.user_name" required #user_name="ngModel" name="user_name" type="text"
+            class="form-control" placeholder="Username">
+          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+          <small [class.d-none]="user_name.valid || user_name.untouched" class="text-danger">User name is a required
+            field.</small>
+        </div>
+        <div class="form-group has-feedback">
+          <input [(ngModel)]="loginData.password" required #password="ngModel" name="password" type="password"
+            class="form-control" placeholder="Password">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          <small [class.d-none]="password.valid || password.untouched" class="text-danger">Password is a required
+            field.</small>
+        </div>
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-xs-12">
+            <button [disabled]="loginForm.form.invalid" type="submit"
+              class="btn btn-primary btn-block btn-flat">Login</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+      <br>
+      <div class="col-xs-12 text-center">
+        <a routerLink="/forgotpassword">I forgot my password</a><br>
+      </div>
+      <br>
+
+    </div>
+    <!-- /.login-box-body -->
+  </div>
+</div>

@@ -1,0 +1,287 @@
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="active breadcrumb-item" aria-current="page">Home</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="p-5 card dashboard-iconset">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3 row">
+              <div *ngIf="true" class="col-md-4">
+                <div class="card card-primary">
+                  <div class="panel-body p-3 text-center">
+                    <div class="panel-heading text-center">
+                      <img src="assets/dist/img/dash-icon/dashboard.png" height="80px" width="80px">
+                    </div>
+                    <div class="panel-body text-center">
+                      <a routerLink="/dashboard">Dashboard</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="AuthMenus.Repository" class="col-md-4">
+                <div class="card card-primary">
+                  <div class="panel-body p-3 text-center">
+                    <div class="panel-heading text-center">
+                      <img src="assets/dist/img/dash-icon/completed-task.png" height="80px" width="80px">
+                    </div>
+                    <div class="panel-body text-center">
+                      <a routerLink="/repository">Task Repository</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="AuthMenus.Calendar" class="col-md-4">
+                <div class="card card-primary">
+                  <div class="panel-body p-3 text-center">
+                    <div class="panel-heading text-center">
+                      <img src="assets/dist/img/dash-icon/calendar.png" height="80px" width="80px">
+                    </div>
+                    <div class="panel-body text-center">
+                      <a routerLink="/calendar">Calendar</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+           
+              <div *ngIf="AuthMenus.Support" class="col-md-4">
+                <div class="card card-primary">
+                  <div class="panel-body p-3 text-center">
+                    <div class="panel-heading text-center">
+                      <img src="assets/dist/img/dash-icon/call-center-agent.png" height="80px" width="80px">
+                    </div>
+                    <div class="panel-body text-center">
+                      <a routerLink="/support">Support</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="AuthMenus.ShowCauseNotice" class="col-md-4">
+                <div class="card card-primary">
+                  <div class="panel-body p-3 text-center">
+                    <div class="panel-heading text-center">
+                      <img src="assets/dist/img/dash-icon/sticky-notes.png" height="80px" width="80px">
+                    </div>
+                    <div class="panel-body text-center">
+                      <a routerLink="/show-cause-notice">Show-Cause Notice</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="AuthMenus.Users || AuthMenus.Entity || AuthMenus.Unit || AuthMenus.Functions || AuthMenus.Roles || AuthMenus.Designation || AuthMenus.ManageEntityMappings || AuthMenus.TaskMapping || AuthMenus.ExportData" class="col-md-4">
+                <div class="card card-primary">
+                  <div class="panel-body p-3 text-center">
+                    <div class="panel-heading text-center">
+                      <img src="assets/dist/img/dash-icon/engineer.png" height="80px" width="80px">
+                    </div>
+                    <div class="panel-body text-center">
+                      <a href="" data-toggle="modal" data-target="#AdminMenus">Admin</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header color">
+                <strong>Chairman's <span>Message</span></strong>
+              </div>
+              <div class="card-body">
+                <img src="assets/img/ceoimg.png" class="img-layout" align="right" width="175px" height="185px" />
+                <p>We, at Emcure, believe in being a legally compliant and ethical Organisation.
+                  Good Corporate Governance is part of our DNA. Compliance for us is not an option but an integral part
+                  of our corporate culture.
+
+                  Legal Compliance Manager is an IT-enabled Legal Compliance Management System to monitor and ensure
+                  legal compliance of all Central, State and Local laws across the Company, it's Subsidiaries and all
+                  locations.
+                  <br>
+                  Emcure expects every Employee to demonstrate his/her commitment in observing and complying with the
+                  various Laws, Rules and Regulations of the Country and help the Company in becoming a responsinble
+                  corporate citizen.
+                  I look forward to your using the system and ensuring that the Company is legally compliant at all
+                  times.
+                </p>
+                <p> With best wishes, <br> <b>Satish Mehta </b><br> <i>Managing Director &amp; CEO</i> </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="AdminMenus" class="modal fade update_his" role="dialog">
+        <div class="modal-dialog" style="width: 60%;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" id="AdminMenus_Close" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title"><i class="fa fa-lg mr-2 fa-th"></i> Modules</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div *ngIf="AuthMenus.Users" class="col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                      <i class="fa fa-lg mr-2 fa-users" style="color: black; font-size: 30px;"></i>
+                    </div>
+                    <div class="panel-body text-center">
+                      <a (click)="clickOnMenu('users')">Users</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="AuthMenus.Entity" class="col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                      <i class="fa fa-lg mr-2 fa-asterisk" style="color: black; font-size: 30px;"></i>
+                    </div>
+                    <div class="panel-body text-center">
+                      <a (click)="clickOnMenu('entity')">Entity</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="AuthMenus.Unit" class="col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                      <i class="fa fa-lg mr-2 fa-university" style="color: black; font-size: 30px;"></i>
+                    </div>
+                    <div class="panel-body text-center">
+                      <a (click)="clickOnMenu('unit')">Unit</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="AuthMenus.Functions" class="col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                      <i class="fa fa-lg mr-2 fa-cogs" style="color: black; font-size: 30px;"></i>
+                    </div>
+                    <div class="panel-body text-center">
+                      <a (click)="clickOnMenu('function')">Function</a>
+                    </div>
+                  </div>
+                </div>
+                
+                <div *ngIf="AuthMenus.Roles" class="col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                      <i class="fa fa-lg mr-2 fa-recycle" style="color: black; font-size: 30px;"></i>
+                    </div>
+                    <div class="panel-body text-center">
+                      <a (click)="clickOnMenu('roles')">Roles</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="AuthMenus.Designation" class="col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                      <i class="fa fa-lg mr-2 fa-street-view" style="color: black; font-size: 30px;"></i>
+                    </div>
+                    <div class="panel-body text-center">
+                      <a (click)="clickOnMenu('designation')">Designation</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="AuthMenus.ManageEntityMappings" class="col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                      <i class="fa fa-lg mr-2 fa-map-pin" style="color: black; font-size: 30px;"></i>
+                    </div>
+                    <div class="panel-body text-center">
+                      <a (click)="clickOnMenu('manage_entity_mapping')">Manage Entity Mappings</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="AuthMenus.TaskMapping" class="col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                      <i class="fa fa-lg mr-2 fa-tasks" style="color: black; font-size: 30px;"></i>
+                    </div>
+                    <div class="panel-body text-center">
+                      <a (click)="clickOnMenu('task_mapping')">Task Mapping</a>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-md-3">
+                  <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                      <i class="fa fa-lg mr-2 fa-subway" style="color: black; font-size: 30px;"></i>
+                    </div>
+                    <div class="panel-body text-center">
+                      <a (click)="clickOnMenu('sub_task')">Sub Task</a>
+                    </div>
+                  </div>
+                </div> -->
+
+                <div *ngIf="AuthMenus.ExportData" class="col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                      <i class="fa fa-lg mr-2 fa-building" style="color: black; font-size: 30px;"></i>
+                    </div>
+                    <div class="panel-body text-center">
+                      <a (click)="clickOnMenu('export_data')">Export Data</a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="col-md-3">
+                  <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                      <i class="fa fa-lg mr-2 fa-building" style="color: black; font-size: 30px;"></i>
+                    </div>
+                    <div class="panel-body text-center">
+                      <a (click)="clickOnMenu('common_email')">Common Email</a>
+                    </div>
+                  </div>
+                </div> -->
+
+                <!-- <div class="col-md-3">
+                  <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                      <i class="fa fa-lg mr-2 fa-building" style="color: black; font-size: 30px;"></i>
+                    </div>
+                    <div class="panel-body text-center">
+                      <a (click)="clickOnMenu('logs')">Logs</a>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+
+              <div class="row">
+                <!-- <div class="col-md-3">
+                  <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                      <i class="fa fa-lg mr-2 fa-building" style="color: black; font-size: 30px;"></i>
+                    </div>
+                    <div class="panel-body text-center">
+                      <a (click)="clickOnMenu('query_builder')">Query Builder</a>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.box -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.container -->
+</div>

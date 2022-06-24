@@ -1,0 +1,894 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <li class="breadcrumb-item"><a [routerLink]="['/task-mapping']"
+                                        routerLinkActive="router-link-active">Task Mapping</a></li>
+                                <li class="active breadcrumb-item" aria-current="page">Active Tasks</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form #taskMappingEnableDisableForm="ngForm" (ngSubmit)="onSearch()">
+                            <div class="box box-defualt  ">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Search</h3>
+                                </div>
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="note-mendatory">* Mendatory Fields</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Entity <span class="mandatory">*</span></label>
+                                                <select [(ngModel)]="taskmappingenabledisableData.entity" name="entity"
+                                                    #entity="ngModel" (change)="ValidateEntity(entity.value)"
+                                                    class="form-control">
+                                                    <option value="0">Select Entity</option>
+                                                    <option *ngFor="let item of getEntityListFromAPI"
+                                                        value={{item.orga_id}}>
+                                                        {{item.orga_name}}</option>
+                                                </select>
+                                                <small [class.d-none]="!entityHasError || entity.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Unit <span class="mandatory">*</span></label>
+                                                <select [(ngModel)]="taskmappingenabledisableData.unit" name="unit"
+                                                    #unit="ngModel" (change)="ValidateUnit(unit.value)"
+                                                    class="form-control">
+                                                    <option value="0">Select Unit</option>
+                                                    <option *ngFor="let item of getUnitListFromAPI"
+                                                        value={{item.loca_id}}>
+                                                        {{item.loca_name}}</option>
+                                                </select>
+                                                <small [class.d-none]="!unitHasError || unit.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Function <span class="mandatory">*</span></label>
+                                                <select [(ngModel)]="taskmappingenabledisableData.functions"
+                                                    name="functions" #functions="ngModel"
+                                                    (change)="ValidateFunctions(functions.value)" class="form-control">
+                                                    <option value="0">Select Function</option>
+                                                    <option *ngFor="let item of getFunctionsListFromAPI"
+                                                        value={{item.dept_id}}>
+                                                        {{item.dept_name}}</option>
+                                                </select>
+                                                <small [class.d-none]="!functionsHasError || functions.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Owner </label>
+                                                <select [(ngModel)]="taskmappingenabledisableData.owner" name="owner"
+                                                    #owner="ngModel" class="form-control">
+                                                    <option value="0">Select Owner</option>
+                                                    <option *ngFor="let item of getOwnerListFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Approver </label>
+                                                <select [(ngModel)]="taskmappingenabledisableData.approver"
+                                                    name="approver" #approver="ngModel" class="form-control">
+                                                    <option value="0">Select Approver</option>
+                                                    <option *ngFor="let item of getApproverListFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Active/Inactive </label>
+                                                <select [(ngModel)]="taskmappingenabledisableData.status" name="status"
+                                                    #status="ngModel" class="form-control">
+                                                    <option value="">Select status</option>
+                                                    <option *ngFor="let item of statusData" value={{item}}>
+                                                        {{item}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Legislation </label>
+                                                <select [(ngModel)]="taskmappingenabledisableData.legislation"
+                                                    (change)="ValidateLegislation(legislation.value)" name="legislation"
+                                                    #legislation="ngModel" class="form-control">
+                                                    <option value="0">Select Legislation</option>
+                                                    <option *ngFor="let item of getLegislationListFromAPI"
+                                                        value={{item.task_legi_id}}>
+                                                        {{item.task_legi_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Rules </label>
+                                                <select [(ngModel)]="taskmappingenabledisableData.rules" name="rules"
+                                                    #rules="ngModel" class="form-control">
+                                                    <option value="0">Select Rules</option>
+                                                    <option *ngFor="let item of getRulesListFromAPI"
+                                                        value={{item.task_rule_id}}>
+                                                        {{item.task_rule_name}}</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- /.box-body -->
+                                </div>
+                                <div class="box-footer text-center">
+                                    <button
+                                        [disabled]="taskMappingEnableDisableForm.form.invalid||entityHasError||unitHasError||functionsHasError"
+                                        type="submit" class="btn btn-primary">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="box box-defualt  ">
+
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Total Task : <span>{{responseData?.length}}</span></label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>| Selected Task : <span>{{selectedRecords?.length}}</span></label>
+                                    </div>
+                                    <div class="col-md-4 text-center" *ngIf="selectedRecords?.length > 1">
+                                        <button class="btn btn-success"
+                                            (click)="MultipleTaskEnableDisable('activate')">Enable
+                                            Selected({{selectedRecords?.length}})</button>
+                                        <button class="btn btn-danger"
+                                            (click)="MultipleTaskEnableDisable('inactivate')">Disable
+                                            Selected({{selectedRecords?.length}})</button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <input *ngIf="responseData?.length != 0"
+                                                        type="checkbox" (click)="checkAllFunction()" />
+                                                </th>
+                                                <th>Sr. No.</th>
+                                                <th>Client Task ID</th>
+                                                <th>Emcure Task ID</th>
+                                                <th>Name of Legislation</th>
+                                                <th>Rule</th>
+                                                <th>Refrence</th>
+                                                <th>Who</th>
+                                                <th>When</th>
+                                                <th>Activity</th>
+                                                <th>Procedure</th>
+                                                <th>Owner</th>
+                                                <th>Edit</th>
+                                                <th class="text-center">Action</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="responseData?.length <= 0">
+                                            <tr>
+                                                <td colspan="14" class="text-center">
+                                                    Data not available !
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngIf="responseData?.length != 0">
+                                            <tr *ngFor="let item of responseData; let i = index">
+                                                <td class="text-center">
+                                                    <input type="checkbox" *ngIf="showAllchecked == false"
+                                                        (click)="checkFunction(item.ttrn_id)" />
+                                                    <input *ngIf="showAllchecked == true" type="checkbox" checked
+                                                        (click)="checkFunction(item.ttrn_id)" />
+                                                </td>
+                                                <td class="text-center">{{ i + 1}}</td>
+                                                <td>{{item.tmap_client_tasks_id}}</td>
+                                                <td>{{item.task_lexcare_id}}</td>
+                                                <td>{{item.task_legi_name}}</td>
+                                                <td>{{item.task_rule_name}}</td>
+                                                <td>{{item.task_reference}}</td>
+                                                <td>{{item.task_activity_who}}</td>
+                                                <td>{{item.task_activity_when}}</td>
+                                                <td>{{item.task_activity}}</td>
+                                                <td>{{item.task_procedure}}</td>
+                                                <td>{{item.executor_name}}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger" (click)="OpenEditDatesModal(item)">Edit</button>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-success"
+                                                        *ngIf="item.ttrn_status == 'Inactive'" type="button"
+                                                        (click)="TaskEnableDisable('activate', item.ttrn_id)">Active</button>
+                                                    <button class="btn btn-danger" *ngIf="item.ttrn_status == 'Active'"
+                                                        type="button"
+                                                        (click)="TaskEnableDisable('inactivate', item.ttrn_id)">Inactive</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- <div *ngIf="responseData?.length != 0">
+                                        <pagination-controls id="taskMappingEnableDisable" maxSize="5"
+                                            directionLinks="true" (pageChange)="Pagination.CurrentPage=$event">
+                                        </pagination-controls>
+                                    </div> -->
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+
+
+<div id="EditDates_Admin" class="modal fade update_his" role="dialog">
+    <div class="modal-dialog">
+        <form #EditDatesForm="ngForm" (submit)="onConfigurationSubmit()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="EditDates_Close" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Update Configuration</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <!-- <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Old Dates</th>
+                                    <th>New Dates</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Buffer days</td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="editDatesModel.ttrn_prior_days_buffer"
+                                            name="ttrn_prior_days_buffer" class="form-control" type="number" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Legal due date</td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.Prev_LegalDueDate"
+                                            name="Prev_LegalDueDate" class="form-control" type="date">
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="editDatesModel.ttrn_legal_due_date"
+                                            name="ttrn_legal_due_date" class="form-control" type="date">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Unit head date</td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.Prev_UnitHeadDate"
+                                            name="Prev_UnitHeadDate" class="form-control" type="date">
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="editDatesModel.ttrn_uh_due_date" name="ttrn_uh_due_date"
+                                            class="form-control" type="date">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Function date</td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.Prev_FunctionDate"
+                                            name="Prev_FunctionDate" class="form-control" type="date">
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="editDatesModel.ttrn_fh_due_date" name="ttrn_fh_due_date"
+                                            class="form-control" type="date">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Approver date</td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.Prev_ApproverDate"
+                                            name="Prev_ApproverDate" class="form-control" type="date">
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="editDatesModel.ttrn_rw_due_date" name="ttrn_rw_due_date"
+                                            class="form-control" type="date">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Owner date</td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.Prev_OwnerDate"
+                                            name="Prev_OwnerDate" class="form-control" type="date">
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="editDatesModel.ttrn_pr_due_date" name="ttrn_pr_due_date"
+                                            class="form-control" type="date">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+<table class="table table-responsive table-bordered">
+<thead>
+    <tr>
+        <th></th>
+        <th>Original Configuration</th>
+        <th>New Configuration</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td class="Font-Weight-Bold">Impact On Entity</td>
+        <td>{{ OriginalConfigurationModel.impactOnEntity }}</td>
+        <td>
+            <select
+                (change)="changeImpactOnEntity(impactOnEntity.value)"
+                [(ngModel)]="NewConfigurationModel.impactOnEntity"
+                name="impactOnEntity" #impactOnEntity="ngModel"
+                class="form-control">
+                <option value="">Select</option>
+                <option *ngFor="let item of ImpactOnEntity"
+                    value={{item}}>
+                    {{item}}</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="Font-Weight-Bold">Impact On Unit</td>
+        <td>{{ OriginalConfigurationModel.impactOnUnit }}</td>
+        <td>
+            <select [(ngModel)]="NewConfigurationModel.impactOnUnit"
+                name="impactOnUnit" #impactOnUnit="ngModel"
+                class="form-control">
+                <option value="">Select</option>
+                <option *ngFor="let item of ImpactOnUnit"
+                    value={{item}}>
+                    {{item}}</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="Font-Weight-Bold">Impact</td>
+        <td>{{ OriginalConfigurationModel.impact }}</td>
+        <td>
+            <select [(ngModel)]="NewConfigurationModel.impact"
+                name="impact" #impact="ngModel" class="form-control">
+                <option value="">Select</option>
+                <option *ngFor="let item of Impact" value={{item}}>
+                    {{item}}</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="Font-Weight-Bold">Document</td>
+        <td>{{ OriginalConfigurationModel.docRadio == '0' ? 'NO' : 'YES' }}</td>
+        <td>
+            <input [(ngModel)]="NewConfigurationModel.docRadio"
+                name="docRadio" id="docyes" type="radio" value="1">
+            <label for="docyes">YES</label>&nbsp;&nbsp;&nbsp;
+            <input [(ngModel)]="NewConfigurationModel.docRadio"
+                name="docRadio" id="docno" type="radio" value="0">
+            <label for="docno">NO</label>
+        </td>
+    </tr>
+    <tr style="display: none;">
+        <td class="Font-Weight-Bold">Hist.</td>
+        <td>{{ OriginalConfigurationModel.histRadio == '0' ? 'NO' : 'YES'  }}</td>
+        <td>
+            <input [(ngModel)]="NewConfigurationModel.histRadio"
+                name="histRadio" id="histyes" type="radio"
+                value="1">
+            <label for="histyes">YES</label>&nbsp;&nbsp;&nbsp;
+            <input [(ngModel)]="NewConfigurationModel.histRadio"
+                name="histRadio" id="histno" type="radio" value="0">
+            <label for="histno">NO</label>
+        </td>
+    </tr>
+    <tr>
+        <td class="Font-Weight-Bold">Frequency</td>
+        <td>{{ OriginalConfigurationModel.frequency }}</td>
+        <td>
+            <select [(ngModel)]="NewConfigurationModel.frequency"
+                name="frequency" #frequency="ngModel"
+                class="form-control">
+                <option value="">Select</option>
+                <option
+                    *ngFor="let item of getFrequencyListFilterFromAPI"
+                    value={{item.task_frequency}}>
+                    {{item.task_frequency}}</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="Font-Weight-Bold">Buffer (Days)</td>
+        <td>{{ OriginalConfigurationModel.daysBuffes }}</td>
+        <td>
+            <input (change)="bufferDaysOnChange(daysBuffes.value, true)"
+            [(ngModel)]="NewConfigurationModel.daysBuffes"
+            name="daysBuffes" #daysBuffes="ngModel" min="0"
+            onKeyDown="returnFalse()"
+            type="number" class="form-control">
+        </td>
+    </tr>
+    <tr>
+        <td class="Font-Weight-Bold">Alert Prior (Days)</td>
+        <td>{{ OriginalConfigurationModel.alertPriorDays }}</td>
+        <td>
+            <input [(ngModel)]="NewConfigurationModel.alertPriorDays"
+            name="alertPriorDays" #alertPriorDays="ngModel" min="0"
+            type="number" class="form-control">
+        </td>
+    </tr>
+    <tr>
+        <td class="Font-Weight-Bold">Legal Due Date</td>
+        <td>{{ OriginalConfigurationModel.legalDueDate }}</td>
+        <td>
+            <input (change)="bufferDaysOnChange(0, false)" [(ngModel)]="NewConfigurationModel.legalDueDate"
+            name="legalDueDate" #legalDueDate="ngModel" type="date"
+            class="form-control">
+        </td>
+    </tr>
+    <tr>
+        <td class="Font-Weight-Bold">Unit Head Due Date</td>
+        <td>{{ OriginalConfigurationModel.unitHeadDueDate }}</td>
+        <td>
+            <input readonly [(ngModel)]="NewConfigurationModel.unitHeadDueDate"
+            name="unitHeadDueDate" #unitHeadDueDate="ngModel"
+            type="date" class="form-control">
+        </td>
+    </tr>
+    <tr>
+        <td class="Font-Weight-Bold">Function Head Due Date</td>
+        <td>{{ OriginalConfigurationModel.functionHeadDueDate }}</td>
+        <td>
+            <input readonly
+            [(ngModel)]="NewConfigurationModel.functionHeadDueDate"
+            name="functionHeadDueDate"
+            #functionHeadDueDate="ngModel" type="date"
+            class="form-control">
+        </td>
+    </tr>
+    <tr>
+        <td class="Font-Weight-Bold">Approver Due Date</td>
+        <td>{{ OriginalConfigurationModel.approverDueDate }}</td>
+        <td>
+            <input readonly [(ngModel)]="NewConfigurationModel.approverDueDate"
+            name="approverDueDate" #approverDueDate="ngModel"
+            type="date" class="form-control">
+        </td>
+    </tr>
+    <tr>
+        <td class="Font-Weight-Bold">Owner Due Date</td>
+        <td>{{ OriginalConfigurationModel.ownerDueDate }}</td>
+        <td>
+            <input readonly [(ngModel)]="NewConfigurationModel.ownerDueDate"
+            name="ownerDueDate" #ownerDueDate="ngModel" type="date"
+            class="form-control">
+        </td>
+    </tr>
+    <tr>
+        <td class="Font-Weight-Bold">Back Dates</td>
+        <td>{{ OriginalConfigurationModel.backDatesRadio == '0' ? 'NO' : 'YES'  }}</td>
+        <td>
+            <input
+                [(ngModel)]="NewConfigurationModel.backDatesRadio"
+                name="backDatesRadio" #backDatesRadio="ngModel"
+                id="backDatesyes" type="radio" value="1">
+            <label for="backDatesyes">YES</label>&nbsp;&nbsp;&nbsp;
+            <input
+                [(ngModel)]="NewConfigurationModel.backDatesRadio"
+                name="backDatesRadio" #backDatesRadio="ngModel"
+                id="backDatesno" type="radio" value="0">
+            <label for="backDatesno">NO</label>
+        </td>
+    </tr>
+    <tr>
+        <td class="Font-Weight-Bold">Task Maker Checker</td>
+        <td>{{ OriginalConfigurationModel.taskMakerCheckerRadio == '0' ? 'NO' : 'YES'  }}</td>
+        <td>
+            <input
+                [(ngModel)]="NewConfigurationModel.taskMakerCheckerRadio"
+                name="taskMakerCheckerRadio"
+                #taskMakerCheckerRadio="ngModel"
+                id="taskMakerCheckeryes" type="radio" value="1">
+            <label
+                for="taskMakerCheckeryes">YES</label>&nbsp;&nbsp;&nbsp;
+            <input
+                [(ngModel)]="NewConfigurationModel.taskMakerCheckerRadio"
+                name="taskMakerCheckerRadio"
+                #taskMakerCheckerRadio="ngModel"
+                id="taskMakerCheckerno" type="radio" value="0">
+            <label for="taskMakerCheckerno">NO</label>
+        </td>
+    </tr>
+    <tr class="Gray-BG">
+        <td class="Font-Weight-Bold">Extra Alerts</td>
+        <td class="Note" colspan="2"><input type="checkbox" name="extraAlert" [(ngModel)]="OriginalConfigurationModel.extraAlert"> Note: Check here for Extra alerts</td>
+    </tr>
+    <tr [hidden]="!OriginalConfigurationModel.extraAlert">
+        <td class="Font-Weight-Bold">First Alert</td>
+        <td>{{ OriginalConfigurationModel.firstAlert }}</td>
+        <td>
+            <input [(ngModel)]="NewConfigurationModel.firstAlert"
+            name="firstAlert" #firstAlert="ngModel" type="date"
+            class="form-control">
+        </td>
+    </tr>
+    <tr [hidden]="!OriginalConfigurationModel.extraAlert">
+        <td class="Font-Weight-Bold">Second Alert</td>
+        <td>{{ OriginalConfigurationModel.secondAlert }}</td>
+        <td>
+            <input [(ngModel)]="NewConfigurationModel.secondAlert"
+            name="secondAlert" #secondAlert="ngModel" type="date"
+            class="form-control">
+        </td>
+    </tr>
+    <tr [hidden]="!OriginalConfigurationModel.extraAlert">
+        <td class="Font-Weight-Bold">Third Alert</td>
+        <td>{{ OriginalConfigurationModel.thirdAlert }}</td>
+        <td>
+            <input [(ngModel)]="NewConfigurationModel.thirdAlert"
+            name="thirdAlert" #thirdAlert="ngModel" type="date"
+            class="form-control">
+        </td>
+    </tr>
+</tbody>
+</table>
+                                <!-- <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Original Configuration</th>
+                                            <th>New Configuration</th>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="sel1" class="control-label col-sm-12">Impact on entity </label></td>
+                                            <td><div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" [(ngModel)]="editDatesModel.ttrn_impact_on_organization"
+                                                        name="ttrn_impact_on_organization" readonly="" class="form-control " required="">
+                                                    </div>
+                                                </div>
+                                               </td>
+                                            <td><select class="form-control" name="Nentity_impact" ng-model="NtmapObj.ttrn_impact_on_organization" ng-options="i.id as i.name for i in impactEntityList" ng-change="getUnitImpact();updateImpact() " aria-invalid="false"><option value="" class="" selected="selected">--Select--</option><option label="Severe" value="string:Severe">Severe</option><option label="Major" value="string:Major">Major</option><option label="Moderate" value="string:Moderate">Moderate</option><option label="Low" value="string:Low">Low</option></select></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="sel1" class="control-label col-sm-12">Impact
+                                                    on unit</label></td>
+                                            <td><div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="ttrn_impact_on_unit"  [(ngModel)]="editDatesModel.ttrn_impact_on_unit" ng-change="updateImpact()" readonly="" class="form-control ng-pristine ng-not-empty ng-valid ng-valid-required ng-touched" required="" aria-invalid="false" style="">
+                                                    </div>
+                                                </div>
+                                                </td>
+                                            <td><select class="form-control" name="Nunit_impact" ng-model="editDatesModel.ttrn_impact_on_unit" ng-change="updateImpact()" ng-options="i.id as i.name for i in impactUnitList" aria-invalid="false"><option value="" class="" selected="selected">--Select--</option><option label="Severe" value="string:Severe">Severe</option><option label="Major" value="string:Major">Major</option><option label="Moderate" value="string:Moderate">Moderate</option><option label="Low" value="string:Low">Low</option></select></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="sel1" class="control-label col-sm-12">Impact</label></td>
+                                            <td><div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="task_impact" [(ngModel)]="editDatesModel.ttrn_impact" readonly="" class="form-control ng-pristine ng-not-empty ng-valid ng-valid-required ng-touched" required="" aria-invalid="false">                                                   </div>
+                                                </div>
+                                                </td>
+                                            <td><select class="form-control" name="Ntask_impact" ng-model="editDatesModel.ttrn_impact" ng-change="updateImpact()" ng-options="i.id as i.name for i in impactList" aria-invalid="false"><option value="" class="" selected="selected">-- Select --</option><option label="Severe" value="string:Severe">Severe</option><option label="Major" value="string:Major">Major</option><option label="Moderate" value="string:Moderate">Moderate</option><option label="Low" value="string:Low">Low</option></select></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="sel1" class="control-label col-sm-12">Frequency</label></td>
+                                            <td><div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" name="frequency_oper" [(ngModel)]="editDatesModel.ttrn_frequency_for_operation" readonly="" class="form-control">
+                                                    </div>
+                                                </div>
+                                               </td>
+                                            <td><div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <select class="form-control" name="Nfrequency_oper" >
+                                                            <option value="" class="">-- Select --</option>
+                                                            <option label="User Defined" value="User_Defined">User Defined</option>
+                                                            <option label="One Time" value="One_Time">One Time</option>
+                                                            <option label="Weekly" value="Weekly">Weekly</option>
+                                                            <option label="Fortnightly" value="Fortnightly">Fortnightly</option>
+                                                            <option label="Monthly" value="Monthly">Monthly</option>
+                                                            <option label="Two Monthly" value="Two_Monthly">Two Monthly</option>
+                                                            <option label="Quarterly" value="Quarterly">Quarterly</option>
+                                                            <option label="Four Monthly" value="Four_Monthly">Four Monthly</option>
+                                                            <option label="Half Yearly" value="Half_Yearly">Half Yearly</option>
+                                                            <option label="Yearly" value="Yearly">Yearly</option>
+                                                            <option label="Eighteen Monthly" value="Eighteen_Monthly">Eighteen Monthly</option>
+                                                            <option label="Two yearly" value="Two_yearly">Two yearly</option>
+                                                            <option label="Three yearly" value="Three_yearly">Three yearly</option>
+                                                            <option label="Five Yearly" value="Five_Yearly">Five Yearly</option>
+                                                            <option label="Six Yearly" value="Six_Yearly">Six Yearly</option>
+                                                            <option label="Seven Yearly" value="Seven_Yearly">Seven Yearly</option>
+                                                            <option label="Eight Yearly" value="Eight_Yearly">Eight Yearly</option>
+                                                            <option label="Nine Yearly" value="Nine_Yearly">Nine Yearly</option>
+                                                            <option label="Ten Yearly" value="Ten_Yearly">Ten Yearly</option>
+                                                            <option label="Twenty Yearly" value="Twenty_Yearly">Twenty Yearly</option>
+                                                        </select>
+                                                       
+                                                    </div>
+                                                </div></td>
+                                        </tr>
+                                        <tr style="background-color: #f7df83; border-radius: 6px;" ng-show="showDatesTr" aria-hidden="true" class="ng-hide">
+                                            <td colspan="3"><table width="100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><label>Buffer days</label></td>
+                                                            <td><input type="number"  class="form-control" name="ttrn_prior_days_buffer" value="{{editDatesModel.ttrn_prior_days_buffer}}" aria-invalid="false" style="" ></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label>Legal due date</label></td>
+                                                            <td>
+                                                                <p class="input-group" style="width: 172px;">
+                                                                    <input type="text" class="form-control" ng-change="getDates()" uib-datepicker-popup="dd-MM-yyyy" value="{{editDatesModel.ttrn_legal_due_date}}" is-open="popup_legal.opened" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" readonly="" required="required" aria-invalid="false" style=""><div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-pristine ng-untouched ng-valid ng-scope ng-not-empty" aria-invalid="false" style=""></div> <span class="input-group-btn">
+                                                                        <button type="button" class="btn btn-default" ng-click="open_legal()">
+                                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                                        </button>
+                                                                    </span>
+                                                                </p> 
+                                                                
+                                                                <p class="error-text ng-binding"></p>
+                                                            </td>
+                                                            <td><label>Unit head date</label></td>
+                                                            <td>
+                                                                <p class="input-group" style="width: 172px;">
+                                                                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" value="{{editDatesModel.ttrn_uh_due_date}}" is-open="popup_unit.opened" ng-required="true" readonly="" close-text="Close" alt-input-formats="altInputFormats" required="required" aria-invalid="false" style=""><div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-pristine ng-untouched ng-valid ng-scope ng-not-empty" aria-invalid="false" style=""></div> <span class="input-group-btn">
+                                                                        <button type="button" class="btn btn-default" ng-click="open_unit()">
+                                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                                        </button>
+                                                                    </span>
+                                                                </p>
+                                                               
+                                                                <p class="error-text ng-binding"></p>
+
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label>Function head date</label></td>
+                                                            <td>
+                                                                <p class="input-group" style="width: 172px;">
+                                                                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" value="{{editDatesModel.ttrn_fh_due_date}}" is-open="popup_func.opened" ng-required="true" readonly="" close-text="Close" alt-input-formats="altInputFormats" required="required" aria-invalid="false" style=""><div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-pristine ng-untouched ng-valid ng-scope ng-not-empty" aria-invalid="false" style=""></div> <span class="input-group-btn">
+                                                                        <button type="button" class="btn btn-default" ng-click="open_func()">
+                                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                                        </button>
+                                                                    </span>
+                                                                </p>
+                                                              
+                                                                <p class="error-text ng-binding"></p>
+                                                            </td>
+
+                                                            <td><label>Evaluate date</label></td>
+                                                            <td>
+                                                                <p class="input-group" style="width: 172px;">
+                                                                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" value="{{editDatesModel.ttrn_rw_due_date}}" is-open="popup_eval.opened" ng-required="true" readonly="" close-text="Close" alt-input-formats="altInputFormats" required="required" aria-invalid="false" style=""><div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-pristine ng-untouched ng-valid ng-scope ng-not-empty" aria-invalid="false" style=""></div> <span class="input-group-btn">
+                                                                        <button type="button" class="btn btn-default" ng-click="open_eval()">
+                                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                                        </button>
+                                                                    </span>
+                                                                </p>
+                                                              
+                                                                <p class="error-text ng-binding"></p>
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label>Owner date</label></td>
+                                                            <td>
+                                                                <p class="input-group" style="width: 172px;">
+                                                                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="exec_date" value="{{editDatesModel.ttrn_pr_due_date}}" is-open="popup_exec.opened" ng-required="true" readonly="" close-text="Close" alt-input-formats="altInputFormats" required="required" aria-invalid="false" style=""><div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-pristine ng-untouched ng-valid ng-scope ng-not-empty" aria-invalid="false" style=""></div> <span class="input-group-btn">
+                                                                        <button type="button" class="btn btn-default" ng-click="open_exec()">
+                                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                                        </button>
+                                                                    </span>
+                                                                </p>
+                                                              
+                                                                <p class="error-text ng-binding"></p>
+
+                                                            </td>
+
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4"><em style="font-size: 12px; margin-left: -30px;">(Note
+                                                                    : All dates are mandatory.)</em></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="sel1" class="control-label col-sm-12">Alert
+                                                    Prior Days</label></td>
+                                            <td><div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <input type="number" [(ngModel)]="editDatesModel.ttrn_alert_days" value="{{editDatesModel.ttrn_alert_days}}"  readonly="" class="form-control" aria-invalid="false" style="">
+                                                    </div>
+                                                </div></td>
+                                            <td><div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <input type="number" ng-change="updateOtherText()" placeholder="Alert Days.." ng-model="NtmapObj.ttrn_alert_days" name="update_alert_prior_days" class="form-control" id="update_alert_prior_days" aria-invalid="false">
+                                                    </div>
+                                                </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="sel1" class="control-label col-sm-12">Document</label></td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" value="Yes" readonly="" class="form-control">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="col-md-6">
+                                                            <input type="checkbox" ng-model="NtmapObj.ttrn_document" class="ng-pristine" aria-invalid="false" style="">&nbsp;
+                                                            Yes
+                                                        </div>
+
+                                                    </div>
+                                                </div></td>
+                                        </tr>
+                                        <tr style="display: none;">
+                                            <td><label for="sel1" class="control-label col-sm-12">Historical</label></td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" value="No" readonly="" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="col-md-6">
+                                                            <input type="checkbox"  name="UPDATE_HISTORICAL"> &nbsp; Yes
+                                                        </div>
+                                                    </div>
+                                                </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label class="control-label col-sm-12">Task
+                                                    Maker Checker</label></td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" value="Yes" readonly="" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="col-md-6">
+                                                            <input type="checkbox" ng-model="NtmapObj.ttrn_allow_approver_reopening" class="ng-pristine ng-untouched ng-valid ng-not-empty" aria-invalid="false" style="">
+                                                            &nbsp;Yes
+                                                        </div>
+                                                    </div>
+                                                </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Back Dates</label></td>
+                                            <td><input type="text" value="No" class="form-control" readonly="readonly"></td>
+                                            <td colspan="2">
+                                                <input type="checkbox"  value="1" >&nbsp;Yes 
+                                                <input type="text"  min="1" style="display: none;" ng-required="NtmapObj.ttrn_allow_back_date_completion" placeholder="Days" name="back_date_allowed" ng-model="tmapObj.ttrn_no_of_back_days_allowed" class="ng-pristine ng-untouched ng-hide ng-valid ng-valid-required ng-not-empty" aria-hidden="true" aria-invalid="false">
+                                                <p class="error-text ng-binding"></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Extra Alert</label></td>
+                                            <td><input type="text" value="No" class="form-control" readonly="readonly"></td>
+                                            <td><input type="checkbox" >&nbsp;&nbsp;
+                                                Yes</td>
+                                            
+                                            <td></td>
+                                        </tr>
+                                        <tr ng-show="extra_alert" aria-hidden="true" class="ng-hide">
+                                            <td><label>First Alert</label></td>
+                                            <td><label>Second Alert</label></td>
+                                            <td><label>Third Alert</label></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr ng-show="extra_alert" aria-hidden="true" class="ng-hide">
+                                            <td>
+                                                <p class="input-group" style="width: 172px;">
+                                                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-isolate-scope ng-empty ng-valid-date" uib-datepicker-popup="dd-MM-yyyy" ng-model="first_alert" is-open="popup_first.opened" readonly="" close-text="Close" alt-input-formats="altInputFormats" aria-invalid="false"><div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-pristine ng-untouched ng-valid ng-scope ng-empty" aria-invalid="false"></div>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" ng-click="open_first()">
+                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                        </button>
+                                                    </span>
+                                                </p>
+                                                <p class="error-text ng-binding"></p>
+                                            </td>
+                                            <td>
+                                                <p class="input-group" style="width: 172px;">
+                                                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-isolate-scope ng-empty ng-valid-date" uib-datepicker-popup="dd-MM-yyyy" ng-model="second_alert" is-open="popup_second.opened" readonly="" close-text="Close" alt-input-formats="altInputFormats" aria-invalid="false"><div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-pristine ng-untouched ng-valid ng-scope ng-empty" aria-invalid="false"></div>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" ng-click="open_second()">
+                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                        </button>
+                                                    </span>
+                                                </p>
+                                                <p class="error-text ng-binding"></p>
+                                            </td>
+                                            <td><p class="input-group" style="width: 172px;">
+                                                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-isolate-scope ng-empty ng-valid-date" uib-datepicker-popup="dd-MM-yyyy" ng-model="third_alert" is-open="popup_third.opened" readonly="" close-text="Close" alt-input-formats="altInputFormats" aria-invalid="false"><div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-pristine ng-untouched ng-valid ng-scope ng-empty" aria-invalid="false"></div>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" ng-click="open_third()">
+                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                        </button>
+                                                    </span>
+                                                </p>
+                                                <p class="error-text ng-binding"></p></td>
+                                            
+                                            <td></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="Display: none;"><input type="text" class="form-control" name="validate_dates" ng-model="tmapObj.validate_dates" aria-invalid="false">
+                                                </td>
+                                            <td style="Display: none;"><input type="submit" ng-click="updateConfiguration(configForm.$valid);" value="Update Configuration" name="config" class="btn btn-success"></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="display: none;">
+    
+    <button type="button" id="EditDates_Open" class="btn btn-danger" data-toggle="modal"
+        data-target="#EditDates_Admin">Edit</button>
+</div>

@@ -1,0 +1,140 @@
+<!-- <p>commonemail works!</p> -->
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <li class="active breadcrumb-item" aria-current="page">Common Email</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="box box-defualt">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Common Email</h3>
+                            </div>
+                            <form #commonEmailForm="ngForm">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label>Entity<span class="mandatory">*</span></label>
+                                            <select name="entity" class="form-control" (change)="changeUnit()"
+                                                [(ngModel)]="commonEmial.entity" #entity="ngModel" required>
+                                                <option value="">---Select---</option>
+                                                <option *ngFor="let item of entityListFromAPI" value={{item.orga_id}}>
+                                                    {{item.orga_name}}</option>
+                                            </select>
+                                            <small [class.d-none]="entity.valid || entity.untouched"
+                                                class="text-danger">This field is a required field.
+                                            </small>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label>Unit<span class="mandatory">*</span></label>
+                                            <select class="form-control" [(ngModel)]="commonEmial.unit" name="unit"
+                                                #unit="ngModel" (change)="changeFunction()" required>
+                                                <option value="">---Select---</option>
+                                                <option *ngFor="let item of ListUnit" value={{item.loca_id}}>
+                                                    {{item.loca_name}}</option>
+                                            </select>
+                                            <small [class.d-none]="unit.valid || unit.untouched"
+                                                class="text-danger">This field is a required field.
+                                            </small>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label>Function<span class="mandatory">*</span></label>
+                                            <select class="form-control" (change)="userFunction()"
+                                                [(ngModel)]="commonEmial.fuction" name="fuction" #fuction="ngModel"
+                                                required>
+                                                <option value="">Select</option>
+                                                <option *ngFor="let item of listFunction" value={{item.dept_id}}>
+                                                    {{item.dept_name}}</option>
+                                            </select>
+                                            <small [class.d-none]="fuction.valid || fuction.untouched"
+                                                class="text-danger">This field is a required field.
+                                            </small>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>Users<span class="mandatory">*</span></label>
+                                            <ng-multiselect-dropdown [placeholder]="'Select User'"
+                                                [(ngModel)]="selectedEmail" name="selectedemil" #selectedemil="ngModel"
+                                                [settings]="dropdownSettings" [data]="ListUsers"
+                                                (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+                                                (onDeSelect)="onItemDeSelect($event)">
+                                            </ng-multiselect-dropdown>
+                                            <!-- <small [class.d-none]="selectedemil.length!='0' || selectedemil.untouched"
+                                                class="text-danger">This field is a required field.
+                                            </small> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="box-footer text-center">
+                                    <button type="submit" class="btn btn-success">Search</button>
+                                </div> -->
+                            </form>
+                        </div>
+                        <div class="box box-defualt">
+                            <div class="col-md-12">
+                                <h4 class="title_heading">Email Body</h4>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="box-body em_body" style="padding-bottom: 0px;">
+                                <div class="row">
+                                    <div class="form-group col-md-4 col-md-offset-2">
+                                        <label>Subject<span class="mandatory">*</span></label>
+                                        <input type="text" class="form-control" [(ngModel)]="commonEmial.subject"
+                                            name="subject" #subject="ngModel" required />
+                                        <small [class.d-none]="subject.valid || subject.untouched"
+                                            class="text-danger">This field is a required field.
+                                        </small>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Attach File<span class="mandatory">*</span></label>
+                                        <input type="file" class="upload_file" multiple
+                                            [(ngModel)]="commonEmial.attachFile" name="attachFile"
+                                            (change)="onFileChange($event)" #attachFile="ngModel" required />
+                                        <small [class.d-none]="attachFile.valid || attachFile.untouched"
+                                            class="text-danger">This field is a required field.
+                                        </small>
+                                    </div>
+                                    <div class="form-group col-md-8 col-md-offset-2">
+                                        <label>Email Body<span class="mandatory">*</span></label>
+                                        <textarea class="form-control text_area" [(ngModel)]="commonEmial.body"
+                                            name="body" #body="ngModel" required></textarea>
+                                        <small [class.d-none]="body.valid || body.untouched" class="text-danger">This
+                                            field is a required field.
+                                        </small>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="box-footer text-center">
+                                        <button type="submit" class="btn btn-success" (click)="SubmitForm()"
+                                            [disabled]="commonEmailForm.form.invalid">
+                                            Send Mail <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+    <!-- /.container -->
+</div>

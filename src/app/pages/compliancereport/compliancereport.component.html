@@ -1,0 +1,492 @@
+<!-- <p>compliancereport works!</p> -->
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <!-- <li class="breadcrumb-item"><a [routerLink]="['/task-mapping']" routerLinkActive="router-link-active">Task Mapping</a></li> -->
+                                <li class="active breadcrumb-item" aria-current="page">Compliance Report</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="box box-defualt  ">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Search</h3>
+                                <!-- <a href="" class="btn btn-primary pull-right">Import Assign Task</a> -->
+                            </div>
+                            <form #complianceReportForm="ngForm">
+                                <div class="box-body">
+                                    <!-- <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="note-mendatory">* Mendatory Fields</span>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="row">
+                                        <div class="form-group col-md-4" style="display: none;">
+                                            <!-- <label>Choose</label> -->
+                                            <div class="radio-wrapper">
+                                                <label><input id="" checked="true"
+                                                        [(ngModel)]="compliacereport.report_period" type="radio"
+                                                        value="yes">Report Period</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label>From Date<span class="mandatory">*</span></label>
+                                            <div class=""><input class="form-control " id="" name="fromDate"
+                                                    placeholder="From Date" type="date"
+                                                    [(ngModel)]="compliacereport.from_date"
+                                                    uib-datepicker-popup="dd-MM-yyyy"></div>
+                                            <!-- <small [class.d-none]="!CountryHasError || country.untouched"
+                                                class="text-danger">This field is a required field.
+                                            </small> -->
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>To Date<span class="mandatory">*</span></label>
+                                            <div class=""><input class="form-control " id="" name="toDate"
+                                                    placeholder="From Date" type="date"
+                                                    [(ngModel)]="compliacereport.to_date"
+                                                    uib-datepicker-popup="dd-MM-yyyy"></div>
+                                            <!-- <small [class.d-none]="!CountryHasError || country.untouched"
+                                                class="text-danger">This field is a required field.
+                                            </small> -->
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label>Entity<span class="mandatory">*</span></label>
+                                            <select name="entity" class="form-control"
+                                                [(ngModel)]="compliacereport.entity" (change)="BindUnit($event)">
+                                                <option value="0">Select</option>
+                                                <option *ngFor="let e of entityList" value={{e.orga_id}}>{{e.orga_name}}
+                                                </option>
+                                            </select>
+                                            <!-- <small [class.d-none]="!CountryHasError || country.untouched"
+                                                class="text-danger">This field is a required field.
+                                            </small> -->
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label>Unit<span class="mandatory">*</span></label>
+                                            <select name="unit" class="form-control" [(ngModel)]="compliacereport.unit"
+                                                (change)="BindFunction($event)">
+                                                <option value="0">Select</option>
+                                                <option *ngFor="let u of unitList" value={{u.loca_id}}>{{u.loca_name}}
+                                                </option>
+                                            </select>
+                                            <!-- <small [class.d-none]="!CountryHasError || country.untouched"
+                                                class="text-danger">This field is a required field.
+                                            </small> -->
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label>Function<span class="mandatory">*</span></label>
+                                            <select name="function" class="form-control"
+                                                [(ngModel)]="compliacereport.function">
+                                                <option value="0">Select</option>
+                                                <option *ngFor="let f of functionList" value={{f.dept_id}}>
+                                                    {{f.dept_name}}</option>
+                                            </select>
+                                            <!-- <small [class.d-none]="!CountryHasError || country.untouched"
+                                                class="text-danger">This field is a required field.
+                                            </small> -->
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>Compiled/Non-compiled</label>
+                                            <select name="complied" class="form-control"
+                                                [(ngModel)]="compliacereport.compiled_noncompiled">
+
+                                                <option *ngFor="let c of compileList" value={{c.compileName}}>
+                                                    {{c.compileName}}</option>
+                                            </select>
+                                            <!-- <small [class.d-none]="!CountryHasError || country.untouched"
+                                                class="text-danger">This field is a required field.
+                                            </small> -->
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>Impact</label>
+                                            <select name="country" class="form-control"
+                                                [(ngModel)]="compliacereport.impact">
+
+                                                <option *ngFor="let i of impactList" value={{i.impactName}}>
+                                                    {{i.impactName}}</option>
+                                            </select>
+                                            <!-- <small [class.d-none]="!CountryHasError || country.untouched"
+                                                class="text-danger">This field is a required field.
+                                            </small> -->
+                                        </div>
+                                        <!-- <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Choose </label>
+                                                <div class="radio-wrapper">
+                                                    <input [(ngModel)]="taskmappingassigntaskdata.choose"
+                                                        (click)="chooseOption()" id="state" #ChooseOption="ngModel"
+                                                        name="Choose" type="radio" value="state">
+                                                    <label for="state">State</label>&nbsp;&nbsp;&nbsp;
+                                                    <input [(ngModel)]="taskmappingassigntaskdata.choose"
+                                                        (click)="chooseOption()" id="central" #ChooseOption="ngModel"
+                                                        name="Choose" type="radio" value="central">
+                                                    <label for="central">Central</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" *ngIf="isDisplay">
+                                            <div class="form-group">
+                                                <label>State</label>
+                                                <select [(ngModel)]="taskmappingassigntaskdata.state"
+                                                    (change)="ValidateState(country.value)" name="state"
+                                                    #state="ngModel" class="form-control">
+                                                    <option value="0">Select</option>
+                                                    <option *ngFor="let item of getstateListFromAPI"
+                                                        value={{item.state_id}}>
+                                                        {{item.state_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Category of Law </label>
+                                                <select [(ngModel)]="taskmappingassigntaskdata.categoryOdLaws"
+                                                    (change)="ValidateCategoryOfLaw(categoryOdLaws.value)"
+                                                    name="categoryOdLaws" #categoryOdLaws="ngModel"
+                                                    class="form-control">
+                                                    <option value="0">Select</option>
+                                                    <option *ngFor="let item of getCategoryOfLawListFromAPI"
+                                                        value={{item.cat_law_id}}>
+                                                        {{item.cat_law_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Legislation </label>
+                                                <select [(ngModel)]="taskmappingassigntaskdata.legislation"
+                                                    (change)="ValidateLegislation(legislation.value)" name="legislation"
+                                                    #legislation="ngModel" class="form-control">
+                                                    <option value="0">Select Legislation</option>
+                                                    <option *ngFor="let item of getLegislationListFromAPI"
+                                                        value={{item.legi_id}}>
+                                                        {{item.legi_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Rules </label>
+                                                <select [(ngModel)]="taskmappingassigntaskdata.rules" name="rules"
+                                                    class="form-control">
+                                                    <option value="0">Select Rules</option>
+                                                    <option *ngFor="let item of getRulesListFromAPI"
+                                                        value={{item.rule_id}}>
+                                                        {{item.rule_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Entity <span class="mandatory">*</span></label>
+                                                <select [(ngModel)]="taskmappingassigntaskdata.entity" name="entity"
+                                                    (change)="ValidateEntity(entity.value)" #entity="ngModel"
+                                                    class="form-control">
+                                                    <option value="0">Select</option>
+                                                    <option *ngFor="let item of getEntityListFromAPI"
+                                                        value={{item.orga_id}}>
+                                                        {{item.orga_name}}</option>
+                                                </select>
+                                                <small [class.d-none]="!EntityHasError || entity.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Unit <span class="mandatory">*</span></label>
+                                                <select [(ngModel)]="taskmappingassigntaskdata.unit" name="unit"
+                                                    (change)="ValidateUnit(unit.value)" #unit="ngModel"
+                                                    class="form-control">
+                                                    <option value="0">Select Unit</option>
+                                                    <option *ngFor="let item of getUnitsListFromAPI"
+                                                        value={{item.loca_id}}>
+                                                        {{item.loca_name}}</option>
+                                                </select>
+                                                <small [class.d-none]="!UnitHasError || unit.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <div class="box-footer text-center">
+                                    <button type="submit" class="btn btn-success" (click)="GenerateReport()">Generate
+                                        Report</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- <div class="box box-defualt  " *ngIf="selectedRecords?.length>0 ? true : false">
+                            <form #taskMappingAssignTaskAssignmentForm="ngForm" (ngSubmit)="onSubmitAssign()">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Assign Compliance</h3>
+                                </div>
+                                <div class="box-body">
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Entity <span class="mandatory">*</span></label>
+                                                <select [(ngModel)]="taskmappingassigntaskAssignmentdata.entity"
+                                                    #entityAssignment="ngModel" name="entityAssignment"
+                                                    (change)="ValidateEntityAssignment(entityAssignment.value)"
+                                                    class="form-control">
+                                                    <option value="0">Select</option>
+                                                    <option *ngFor="let item of getEntityAssignmentListFromAPI"
+                                                        value={{item.orga_id}}>
+                                                        {{item.orga_name}}</option>
+                                                </select>
+                                                <small
+                                                    [class.d-none]="!entityAssignmentHasError || entityAssignment.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Units <span class="mandatory">*</span></label>
+                                                <select multiple [(ngModel)]="taskmappingassigntaskAssignmentdata.unit"
+                                                    (change)="ValidateUnitAssignment(unitAssignment.value)"
+                                                    #unitAssignment="ngModel" name="unit" class="form-control">
+                                                    <option disabled value="0">Select Units</option>
+                                                    <option *ngFor="let item of getUnitAssignmentListFromAPI"
+                                                        value={{item.loca_id}}>
+                                                        {{item.loca_name}}</option>
+                                                </select>
+                                                <small
+                                                    [class.d-none]="!unitAssignmentHasError || unitAssignment.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Function <span class="mandatory">*</span></label>
+                                                <select [(ngModel)]="taskmappingassigntaskAssignmentdata.functions"
+                                                    (change)="ValidateFunctionsAssignment(functionsAssignment.value)"
+                                                    #functionsAssignment="ngModel" name="functions"
+                                                    class="form-control">
+                                                    <option value="0">Select Function</option>
+                                                    <option *ngFor="let item of getFunctionsAssignmentListFromAPI"
+                                                        value={{item.dept_id}}>
+                                                        {{item.dept_name}}</option>
+                                                </select>
+                                                <small
+                                                    [class.d-none]="!functionsAssignmentHasError || functionsAssignment.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Owner <span class="mandatory">*</span></label>
+                                                <select [(ngModel)]="taskmappingassigntaskAssignmentdata.owner"
+                                                    (change)="ValidateOwnerAssignment(ownerAssignment.value)"
+                                                    #ownerAssignment="ngModel" name="owner" class="form-control">
+                                                    <option value="0">Select Owner</option>
+                                                    <option *ngFor="let item of getOwnerAssignmentListFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                                <small
+                                                    [class.d-none]="!ownerAssignmentHasError || ownerAssignment.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Approver <span class="mandatory">*</span></label>
+                                                <select [(ngModel)]="taskmappingassigntaskAssignmentdata.approver"
+                                                    (change)="ValidateApproverAssignment(approverAssignment.value)"
+                                                    #approverAssignment="ngModel" name="approver" class="form-control">
+                                                    <option value="0">Select Approver</option>
+                                                    <option *ngFor="let item of getApproverAssignmentListFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                                <small
+                                                    [class.d-none]="!approverAssignmentHasError || approverAssignment.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Function Head <span class="mandatory">*</span></label>
+                                                <select [(ngModel)]="taskmappingassigntaskAssignmentdata.functionHead"
+                                                    (change)="ValidateFunctionHeadAssignment(functionHeadAssignment.value)"
+                                                    #functionHeadAssignment="ngModel" name="functionHead"
+                                                    class="form-control">
+                                                    <option value="0">Select Function Head</option>
+                                                    <option *ngFor="let item of getFunctionHeadAssignmentListFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                                <small
+                                                    [class.d-none]="!functionHeadAssignmentHasError || functionHeadAssignment.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-footer text-center">
+                                    <button
+                                        [disabled]="entityAssignmentHasError  || unitAssignmentHasError  || functionsAssignmentHasError  || ownerAssignmentHasError || approverAssignmentHasError || functionHeadAssignmentHasError "
+                                        type="submit" class="btn btn-primary">Assign</button>
+                                </div>
+                            </form>
+                        </div> -->
+                        <div class="box box-defualt  ">
+                            <div class="box-body" style="display: none;">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Main Tasks :
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-body" *ngIf="ListData?.length != 0">
+                                <div class="col-md-3 pull-left" style="padding-left: 0px">
+                                    <input type="text" class="input form-control" placeholder="Search"
+                                        [(ngModel)]="TableFilter">
+                                </div>
+                                <div class="btn-group pull-right">
+                                    <button type="button" (click)="exportExcel()" class="btn btn-success"><i
+                                            class="fa fa-download"></i>
+                                        &emsp; Excel</button>
+                                    <button style="display: none;" type="button" (click)="exportPDF()"
+                                        class="btn btn-primary"><i class="fa fa-download"></i>
+                                        &emsp; PDF</button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <!-- <th><input type="checkbox" *ngIf="false" (click)="checkAllFunction()" /></th> -->
+                                                <th>Sr. No.</th>
+                                                <th>Client Task ID</th>
+                                                <th>Entity</th>
+                                                <th>Unit</th>
+                                                <th>Function</th>
+                                                <th>Legislation</th>
+                                                <th>Rule</th>
+                                                <th>Reference</th>
+                                                <th>Who</th>
+                                                <th>When</th>
+                                                <th>Activity</th>
+                                                <th>Owner</th>
+                                                <th>Approver</th>
+                                                <th>Function Head</th>
+                                                <th>Impact</th>
+
+                                                <th>Original Frequency</th>
+                                                <th>Frequency</th>
+                                                <th>Legal Due Date</th>
+                                                <th>Completed Date</th>
+                                                <th>Submitted Date</th>
+                                                <th>Status</th>
+                                                <th>Document Attached</th>
+                                                <th>Comments</th>
+                                                <th>Reason For Non-Compliance</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="ListData?.length <= 0">
+                                            <tr>
+                                                <td colspan="15" class="text-center">
+                                                    Data not available !
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngIf="ListData?.length != 0">
+                                            <!-- <tr *ngFor="let item of getAssignmentTaskListFromAPI | paginate: {id: 'getAssignmentTaskListFromAPI', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index"> -->
+                                            <tr
+                                                *ngFor="let item of ListData | stringFilter: TableFilter  | paginate: {id: 'functionsData', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+                                                <td class="text-center">{{( i + 1) + (Pagination.CurrentPage - 1) *
+                                                    Pagination.ItemsPerPage}}</td>
+                                                <!-- <td class="text-center">{{( i + 1) + (Pagination.CurrentPage - 1) * Pagination.ItemsPerPage}}</td> -->
+                                                <td>{{item.tmap_client_task_id}}</td>
+                                                <td>{{item.entity_name}}</td>
+                                                <td>{{item.unit_name}}</td>
+                                                <td>{{item.function_name}}</td>
+                                                <td>{{item.task_legi_name}}</td>
+                                                <td>{{item.task_rule_name}}</td>
+                                                <td>{{item.task_reference}}</td>
+                                                <td>{{item.task_who}}</td>
+                                                <td>{{item.task_when}}</td>
+                                                <td>{{item.task_activity}}</td>
+                                                <td>{{item.executor_name}}</td>
+                                                <td>{{item.evaluator_name}}</td>
+                                                <td>{{item.fun_head_name}}</td>
+                                                <td>{{item.task_impact}}</td>
+                                                <td></td>
+                                                <td>{{item.task_frequency}}</td>
+                                                <td>{{item.ttrn_legal_due_date}}</td>
+                                                <td>{{item.ttrn_completed_date}}</td>
+                                                <td>{{item.ttrn_submitted_date}}</td>
+                                                <td>{{item.task_status}}</td>
+                                                <td>{{item.document_attached === 0 ? "No" : "Yes"}}</td>
+
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div *ngIf="ListData?.length != 0">
+                                        <pagination-controls id="functionsData" maxSize="5" directionLinks="true"
+                                            (pageChange)="Pagination.CurrentPage=$event"></pagination-controls>
+                                    </div>
+                                    <!-- <div *ngIf="getAssignmentTaskListFromAPI?.length != 0">
+                                        <pagination-controls id="getAssignmentTaskListFromAPI" maxSize="5"
+                                            directionLinks="true" (pageChange)="Pagination.CurrentPage=$event">
+                                        </pagination-controls>
+                                    </div> -->
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+    <!-- /.container -->
+</div>

@@ -1,0 +1,724 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <li class="active breadcrumb-item" aria-current="page">Export Data</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="box box-defualt  ">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Search</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class=" table table-bordered mt10">
+                                <thead>
+                                    <tr>
+                                        <th><input [(ngModel)]="exportdata.selectAll_Filter" (change)="CheckSelectAll()"
+                                                id="selectAll_Filter" name="selectAll_Filter" type="checkbox"><label
+                                                for="selectAll_Filter">
+                                                &nbsp; Select All</label></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center" colspan="6">
+                                            <h3>Checklist Columns</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.country_Filter" id="country_Filter"
+                                                name="country_Filter" type="checkbox"><label for="country_Filter">
+                                                &nbsp; Country</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.procedure_Filter" id="procedure_Filter"
+                                                name="procedure_Filter" type="checkbox"><label for="procedure_Filter">
+                                                &nbsp; Procedure</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.taskImpact_Filter" id="taskImpact_Filter"
+                                                name="taskImpact_Filter" type="checkbox"><label for="taskImpact_Filter">
+                                                &nbsp; Task impact</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.prohibitivePrecriptive_Filter"
+                                                id="prohibitivePrecriptive_Filter" name="prohibitivePrecriptive_Filter"
+                                                type="checkbox"><label for="prohibitivePrecriptive_Filter"> &nbsp;
+                                                Prohibitive / prescriptive</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.frequency_Filter" id="frequency_Filter"
+                                                name="frequency_Filter" type="checkbox"><label for="frequency_Filter">
+                                                &nbsp; Frequency</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.organizationImpact_Filter"
+                                                id="organizationImpact_Filter" name="organizationImpact_Filter"
+                                                type="checkbox"><label for="organizationImpact_Filter"> &nbsp;
+                                                Impact on
+                                                organization</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.specificDueDate_Filter"
+                                                id="specificDueDate_Filter" name="specificDueDate_Filter"
+                                                type="checkbox"><label for="specificDueDate_Filter">
+                                                &nbsp; Specific Due Date</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.categoryOfLaw_Filter" id="categoryOfLaw_Filter"
+                                                name="categoryOfLaw_Filter" type="checkbox"><label
+                                                for="categoryOfLaw_Filter">
+                                                &nbsp; Category Of Law</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.legalDueDate_Filter" id="legalDueDate_Filter"
+                                                name="legalDueDate_Filter" type="checkbox"><label
+                                                for="legalDueDate_Filter">
+                                                &nbsp; Legal Due Date</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.unitImpact_Filter" id="unitImpact_Filter"
+                                                name="unitImpact_Filter" type="checkbox"><label for="unitImpact_Filter">
+                                                &nbsp; Impact On Unit</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.subEvent_Filter" id="subEvent_Filter"
+                                                name="subEvent_Filter" type="checkbox"><label for="subEvent_Filter">
+                                                &nbsp; Sub
+                                                Event</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.legislation_Filter" id="legislation_Filter"
+                                                name="legislation_Filter" type="checkbox"><label
+                                                for="legislation_Filter">
+                                                &nbsp; Legislation</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.effectiveDate_Filter" id="effectiveDate_Filter"
+                                                name="effectiveDate_Filter" type="checkbox"><label
+                                                for="effectiveDate_Filter">
+                                                &nbsp; Effective Date</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.implication_Filter" id="implication_Filter"
+                                                name="implication_Filter" type="checkbox"><label
+                                                for="implication_Filter">
+                                                &nbsp; Implication</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.subsequentAmountPerDay_Filter"
+                                                id="subsequentAmountPerDay_Filter" name="subsequentAmountPerDay_Filter"
+                                                type="checkbox"><label for="subsequentAmountPerDay_Filter">
+                                                &nbsp; Subsequent Amount per day</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()" [(ngModel)]="exportdata.rule_Filter"
+                                                id="rule_Filter" name="rule_Filter" type="checkbox"><label
+                                                for="rule_Filter">
+                                                &nbsp; Rule</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()" [(ngModel)]="exportdata.event_Filter"
+                                                id="event_Filter" name="event_Filter" type="checkbox"><label
+                                                for="event_Filter">
+                                                &nbsp; Event</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.imprisonmentDuration_Filter"
+                                                id="imprisonmentDuration_Filter" name="imprisonmentDuration_Filter"
+                                                type="checkbox"><label for="imprisonmentDuration_Filter">
+                                                &nbsp; Imprisonment Duration</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.typeOfTask_Filter" id="typeOfTask_Filter"
+                                                name="typeOfTask_Filter" type="checkbox"><label for="typeOfTask_Filter">
+                                                &nbsp; Type of task</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.reference_Filter" id="reference_Filter"
+                                                name="reference_Filter" type="checkbox"><label for="reference_Filter">
+                                                &nbsp; Reference</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.exemptionCreiteria_Filter"
+                                                id="exemptionCreiteria_Filter" name="exemptionCreiteria_Filter"
+                                                type="checkbox"><label for="exemptionCreiteria_Filter">
+                                                &nbsp; Exemption Criteria</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.imprisonmentAppliesTo_Filter"
+                                                id="imprisonmentAppliesTo_Filter" name="imprisonmentAppliesTo_Filter"
+                                                type="checkbox"><label for="imprisonmentAppliesTo_Filter">
+                                                &nbsp; Imprisonment Applies To</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.weblink_Filter" id="weblink_Filter"
+                                                name="weblink_Filter" type="checkbox"><label for="weblink_Filter">
+                                                &nbsp; Weblinks</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()" [(ngModel)]="exportdata.who_Filter"
+                                                id="who_Filter" name="who_Filter" type="checkbox"><label
+                                                for="who_Filter">
+                                                &nbsp; Who</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.fineAmount_Filter" id="fineAmount_Filter"
+                                                name="fineAmount_Filter" type="checkbox"><label for="fineAmount_Filter">
+                                                &nbsp; Fine Amount</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.taskLevel_Filter" id="taskLevel_Filter"
+                                                name="taskLevel_Filter" type="checkbox"><label for="taskLevel_Filter">
+                                                &nbsp; Task
+                                                level</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.statutoryAuthority_Filter"
+                                                id="statutoryAuthority_Filter" name="statutoryAuthority_Filter"
+                                                type="checkbox"><label for="statutoryAuthority_Filter">
+                                                &nbsp; Statutory Authority</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()" [(ngModel)]="exportdata.when_Filter"
+                                                id="when_Filter" name="when_Filter" type="checkbox"><label
+                                                for="when_Filter">
+                                                &nbsp; When</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.linkedTaskId_Filter" id="linkedTaskId_Filter"
+                                                name="linkedTaskId_Filter" type="checkbox"><label
+                                                for="linkedTaskId_Filter">
+                                                &nbsp; Linked Task Id</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.moreInfo_Filter" id="moreInfo_Filter"
+                                                name="moreInfo_Filter" type="checkbox"><label for="moreInfo_Filter">
+                                                &nbsp; More
+                                                Information</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.complianceActivity_Filter"
+                                                id="complianceActivity_Filter" name="complianceActivity_Filter"
+                                                type="checkbox"><label for="complianceActivity_Filter">
+                                                &nbsp; Compliance Activity</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.formNo_Filter" id="formNo_Filter"
+                                                name="formNo_Filter" type="checkbox"><label for="formNo_Filter">
+                                                &nbsp; Form No</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.interlinkage_Filter" id="interlinkage_Filter"
+                                                name="interlinkage_Filter" type="checkbox"><label
+                                                for="interlinkage_Filter">
+                                                &nbsp; Interlinkage</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center" colspan="6">
+                                            <h3>Select Configuration</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.configuredFrequency_Filter"
+                                                id="configuredFrequency_Filter" name="configuredFrequency_Filter"
+                                                type="checkbox"><label for="configuredFrequency_Filter">
+                                                &nbsp; Config. Frequency</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.configuredLegalDueDate_Filter"
+                                                id="configuredLegalDueDate_Filter" name="configuredLegalDueDate_Filter"
+                                                type="checkbox"><label for="configuredLegalDueDate_Filter">
+                                                &nbsp; Config. Legal Due Date</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.configuredUnitHeadDate_Filter"
+                                                id="configuredUnitHeadDate_Filter" name="configuredUnitHeadDate_Filter"
+                                                type="checkbox"><label for="configuredUnitHeadDate_Filter">
+                                                &nbsp; Unit Head Date</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.configuredFunctionHeadDate_Filter"
+                                                id="configuredFunctionHeadDate_Filter"
+                                                name="configuredFunctionHeadDate_Filter" type="checkbox"><label
+                                                for="configuredFunctionHeadDate_Filter">
+                                                &nbsp; Function Head Date</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.configuredEvaluatorDate_Filter"
+                                                id="configuredEvaluatorDate_Filter"
+                                                name="configuredEvaluatorDate_Filter" type="checkbox"><label
+                                                for="configuredEvaluatorDate_Filter">
+                                                &nbsp; Evaluator Date</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.ConfiguredExecutorDate_Filter"
+                                                id="ConfiguredExecutorDate_Filter" name="ConfiguredExecutorDate_Filter"
+                                                type="checkbox"><label for="ConfiguredExecutorDate_Filter">
+                                                &nbsp; Executor Date</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.ConfiguredStatus_Filter"
+                                                id="ConfiguredStatus_Filter" name="ConfiguredStatus_Filter"
+                                                type="checkbox"><label for="ConfiguredStatus_Filter">
+                                                &nbsp; Status</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.entityName_Filter" id="entityName_Filter"
+                                                name="entityName_Filter" type="checkbox"><label for="entityName_Filter">
+                                                &nbsp; Entity</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.unitName_Filter" id="unitName_Filter"
+                                                name="unitName_Filter" type="checkbox"><label for="unitName_Filter">
+                                                &nbsp; Unit</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.departmentName_Filter"
+                                                id="departmentName_Filter" name="departmentName_Filter"
+                                                type="checkbox"><label for="departmentName_Filter">
+                                                &nbsp; Function</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.executorName_Filter" id="executorName_Filter"
+                                                name="executorName_Filter" type="checkbox"><label
+                                                for="executorName_Filter">
+                                                &nbsp; Executor Name</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.evaluatorName_Filter" id="evaluatorName_Filter"
+                                                name="evaluatorName_Filter" type="checkbox"><label
+                                                for="evaluatorName_Filter">
+                                                &nbsp; Evaluator Name</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.functionHeadName_Filter"
+                                                id="functionHeadName_Filter" name="functionHeadName_Filter"
+                                                type="checkbox"><label for="functionHeadName_Filter">
+                                                &nbsp; Function Head Name</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.priorDaysBuffer_Filter"
+                                                id="priorDaysBuffer_Filter" name="priorDaysBuffer_Filter"
+                                                type="checkbox"><label for="priorDaysBuffer_Filter">
+                                                &nbsp; Buffer Days</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.backDaysAllowed_Filter"
+                                                id="backDaysAllowed_Filter" name="backDaysAllowed_Filter"
+                                                type="checkbox"><label for="backDaysAllowed_Filter">
+                                                &nbsp; Back Days Allowed</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.alertDays_Filter" id="alertDays_Filter"
+                                                name="alertDays_Filter" type="checkbox"><label for="alertDays_Filter">
+                                                &nbsp; Alert Days</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.emcureTaskId_Filter" id="emcureTaskId_Filter"
+                                                name="emcureTaskId_Filter" type="checkbox"><label
+                                                for="emcureTaskId_Filter">
+                                                &nbsp; Emcure Task ID</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.document_Filter" id="document_Filter"
+                                                name="document_Filter" type="checkbox"><label for="document_Filter">
+                                                &nbsp; Document Mandatory</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.perfomerComments_Filter"
+                                                id="perfomerComments_Filter" name="perfomerComments_Filter"
+                                                type="checkbox"><label for="perfomerComments_Filter">
+                                                &nbsp; Comments</label>
+                                        </td>
+                                        <td>
+                                            <input (change)="checkIsAllSelected()"
+                                                [(ngModel)]="exportdata.reasonForNonCompliance_Filter"
+                                                id="reasonForNonCompliance_Filter" name="reasonForNonCompliance_Filter"
+                                                type="checkbox"><label for="reasonForNonCompliance_Filter">
+                                                &nbsp; Reason for non-compliance</label>
+                                        </td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box box-defualt  ">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Export Data <span *ngIf="responseData?.length != 0">| Total Task:
+                                {{responseData?.length}}</span></h3>
+                    </div>
+                    <!-- <div class="box-body">
+                        <div class="col-md-3" style="padding-left: 0px">
+                            <input type="text" class="input form-control" placeholder="Search"
+                                [(ngModel)]="TableFilter">
+                        </div>
+                    </div> -->
+                    <div class="box-body" *ngIf="responseData?.length != 0">
+                        <!-- <div class="col-md-3 pull-left" style="padding-left: 0px">
+                            <input type="text" class="input form-control" placeholder="Search"
+                                [(ngModel)]="TableFilter">
+                        </div> -->
+                        <div class="btn-group pull-right">
+                            <button type="button" (click)="exportExcel()" class="btn btn-success"><i
+                                    class="fa fa-download"></i>
+                                &emsp; Excel</button>
+                            <button style="display: none;" type="button" (click)="exportPDF()"
+                                class="btn btn-primary"><i class="fa fa-download"></i>
+                                &emsp; PDF</button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class=" table table-bordered mt10">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center w80">Sr. No.</th>
+                                        <th>Client task ID</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.country_Filter">Country
+                                        </th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.state_Filter">State</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.categoryOfLaw_Filter">
+                                            Category Of Law</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.legislation_Filter">
+                                            Legislation</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.rule_Filter">Rule</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.reference_Filter">Reference
+                                        </th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.who_Filter">Who</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.when_Filter">When</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.complianceActivity_Filter">
+                                            Compliance Activity</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.procedure_Filter">Procedure
+                                        </th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.frequency_Filter">Frequency
+                                        </th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.legalDueDate_Filter">Legal
+                                            Due date</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.effectiveDate_Filter">
+                                            Effective Date</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.event_Filter">Event</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.exemptionCreiteria_Filter">
+                                            Exemption Criteria</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.fineAmount_Filter">Fine
+                                            Amount</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.formNo_Filter">Form No</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.taskImpact_Filter">Task
+                                            Impact</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.organizationImpact_Filter">
+                                            Impact on organization</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.unitImpact_Filter">Impact
+                                            On Unit</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.implication_Filter">
+                                            Implication</th>
+                                        <th
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.imprisonmentDuration_Filter">
+                                            Imprisonment Duration</th>
+                                        <th
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.imprisonmentAppliesTo_Filter">
+                                            Imprisonment Applies To</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.taskLevel_Filter">Task
+                                            level</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.linkedTaskId_Filter">Linked
+                                            Task Id</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.moreInfo_Filter">More
+                                            Information</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.interlinkage_Filter">
+                                            Interlinkage</th>
+                                        <th
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.prohibitivePrecriptive_Filter">
+                                            Prohibitive / prescriptive</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.specificDueDate_Filter">
+                                            Specific Due Date</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.subEvent_Filter">Sub Event
+                                        </th>
+                                        <th
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.subsequentAmountPerDay_Filter">
+                                            Subsequent Amount per day</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.typeOfTask_Filter">Type Of
+                                            Task</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.weblink_Filter">Weblinks
+                                        </th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.statutoryAuthority_Filter">
+                                            Statutory Authority</th>
+                                        <th
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.configuredFrequency_Filter">
+                                            Config. Frequency</th>
+                                        <th
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.configuredLegalDueDate_Filter">
+                                            Config. Legal Due Date</th>
+                                        <th
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.configuredUnitHeadDate_Filter">
+                                            Unit Head Date</th>
+                                        <th
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.configuredFunctionHeadDate_Filter">
+                                            Function Head Date</th>
+                                        <th
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.configuredEvaluatorDate_Filter">
+                                            Evaluator Date</th>
+                                        <th
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.ConfiguredExecutorDate_Filter">
+                                            Executor Date</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.ConfiguredStatus_Filter">
+                                            Status</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.entityName_Filter">Entity
+                                        </th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.unitName_Filter">Unit</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.departmentName_Filter">
+                                            Function</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.executorName_Filter">
+                                            Executor Name</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.evaluatorName_Filter">
+                                            Evaluator Name</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.functionHeadName_Filter">
+                                            Function Head Name</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.priorDaysBuffer_Filter">
+                                            Buffer Days</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.backDaysAllowed_Filter">
+                                            Back Days Allowed</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.alertDays_Filter">
+                                            Alert Days</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.emcureTaskId_Filter">
+                                            Emcure Task ID</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.document_Filter">
+                                            Document Mandatory</th>
+                                        <th *ngIf="exportdata.selectAll_Filter || exportdata.perfomerComments_Filter">
+                                            Comments</th>
+                                        <th
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.reasonForNonCompliance_Filter">
+                                            Reason for non-compliance</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="responseData?.length <= 0">
+                                    <tr>
+                                        <td colspan="49">
+                                            Data not available !
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="responseData?.length != 0">
+                                    <tr
+                                        *ngFor="let export of responseData | paginate: {id: 'loginData', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+                                        <td class="text-center">{{( i + 1) + (Pagination.CurrentPage - 1) *
+                                            Pagination.ItemsPerPage}}</td>
+
+                                        <td>{{export.tmap_client_task_id}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.country_Filter">
+                                            {{export.task_country}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.state_Filter">
+                                            {{export.task_state}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.categoryOfLaw_Filter">
+                                            {{export.task_cat_law}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.legislation_Filter">
+                                            {{export.task_legi_name}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.rule_Filter">
+                                            {{export.task_rule_name}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.reference_Filter">
+                                            {{export.task_reference}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.who_Filter">
+                                            {{export.task_activity_who}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.when_Filter">
+                                            {{export.task_activity_when}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.complianceActivity_Filter">
+                                            {{export.task_activity}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.procedure_Filter">
+                                            {{export.task_procedure}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.frequency_Filter">
+                                            {{export.task_frequency_for_operation}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.legalDueDate_Filter">
+                                            {{export.task_legal_due_date}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.effectiveDate_Filter">
+                                            {{export.task_effective_date}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.event_Filter">
+                                            {{export.task_event}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.exemptionCreiteria_Filter">
+                                            {{export.task_excemption_criteria}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.fineAmount_Filter">
+                                            {{export.task_fine_amount}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.formNo_Filter">
+                                            {{export.task_form_no}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.taskImpact_Filter">
+                                            {{export.task_impact}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.organizationImpact_Filter">
+                                            {{export.task_impact_organization}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.unitImpact_Filter">
+                                            {{export.task_impact_on_unit}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.implication_Filter">
+                                            {{export.task_implications}}</td>
+                                        <td
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.imprisonmentDuration_Filter">
+                                            {{export.task_imprisonment_duration}}</td>
+                                        <td
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.imprisonmentAppliesTo_Filter">
+                                            {{export.task_imprisonment_applies_to}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.taskLevel_Filter">
+                                            {{export.task_level}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.linkedTaskId_Filter">
+                                            {{export.task_linked_task_id}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.moreInfo_Filter">
+                                            {{export.task_more_info}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.interlinkage_Filter">
+                                            {{export.task_interlinkage}}</td>
+                                        <td
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.prohibitivePrecriptive_Filter">
+                                            {{export.task_prohibitive}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.specificDueDate_Filter">
+                                            {{export.task_specific_due_date}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.subEvent_Filter">
+                                            {{export.task_sub_event}}</td>
+                                        <td
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.subsequentAmountPerDay_Filter">
+                                            {{export.task_subsequent_amount_per_day}}
+                                        </td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.typeOfTask_Filter">
+                                            {{export.task_type_of_task}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.weblink_Filter">
+                                            {{export.task_weblinks}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.statutoryAuthority_Filter">
+                                            {{export.task_statutory_authority}}</td>
+                                        <td
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.configuredFrequency_Filter">
+                                            {{export.task_frequency_for_operation}}</td>
+                                        <td
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.configuredLegalDueDate_Filter">
+                                            {{export.task_legal_due_date}}</td>
+                                        <td
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.configuredUnitHeadDate_Filter">
+                                            {{export.task_uh_due_date}}</td>
+                                        <td
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.configuredFunctionHeadDate_Filter">
+                                            {{export.task_fh_due_date}}</td>
+                                        <td
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.configuredEvaluatorDate_Filter">
+                                            {{export.task_rw_due_date}}</td>
+                                        <td
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.ConfiguredExecutorDate_Filter">
+                                            {{export.task_pr_due_date}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.ConfiguredStatus_Filter">
+                                            {{export.ttrn_status}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.entityName_Filter">
+                                            {{export.orga_name}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.unitName_Filter">
+                                            {{export.loca_name}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.departmentName_Filter">
+                                            {{export.dept_name}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.executorName_Filter">
+                                            {{export.performer_name}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.evaluatorName_Filter">
+                                            {{export.reviewer_name}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.functionHeadName_Filter">
+                                            {{export.functionHead_name}}</td>
+
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.priorDaysBuffer_Filter">
+                                            {{export.ttrn_prior_days_buffer}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.backDaysAllowed_Filter">
+                                            {{export.ttrn_no_of_back_days_allowed == 0 ? 'NO' : 'YES'}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.alertDays_Filter">
+                                            {{export.ttrn_alert_days}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.emcureTaskId_Filter">
+                                            {{export.task_lexcare_task_id}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.document_Filter">
+                                            {{export.ttrn_document == 0 ? 'NO' : 'YES'}}</td>
+                                        <td *ngIf="exportdata.selectAll_Filter || exportdata.perfomerComments_Filter">
+                                            {{export.ttrn_performer_comments}}</td>
+                                        <td
+                                            *ngIf="exportdata.selectAll_Filter || exportdata.reasonForNonCompliance_Filter">
+                                            {{export.ttrn_reason_for_non_compliance}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div *ngIf="responseData?.length != 0 && TableFilter == ''">
+                                <pagination-controls id="loginData" maxSize="5" directionLinks="true"
+                                    (pageChange)="Pagination.CurrentPage=$event"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

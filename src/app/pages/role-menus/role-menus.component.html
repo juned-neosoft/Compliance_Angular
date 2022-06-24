@@ -1,0 +1,105 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <section class="content">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <li class="breadcrumb-item"><a [routerLink]="['/roles']"
+                                        routerLinkActive="router-link-active">Roles</a>
+                                </li>
+                                <li class="active breadcrumb-item" aria-current="page">Menu Cridentials</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="box box-defualt  ">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Menu Cridentials</h3>
+                    </div>
+                    <div class="box-body">
+                        <form #menuRoleForm="ngForm" (submit)="SubmitForm()">
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label for="Calendar"><i class="fa fa-calendar"></i>&nbsp;&nbsp; Calendar &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="Calendar" name="Calendar" [(ngModel)]="menus.Calendar" #Calendar="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="ComplianceCertificate"><i class="fa fa-certificate"></i>&nbsp;&nbsp; ComplianceCertificate &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="ComplianceCertificate" name="ComplianceCertificate" [(ngModel)]="menus.ComplianceCertificate" #ComplianceCertificate="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="ComplianceReport"><i class="fa fa-clipboard"></i>&nbsp;&nbsp; ComplianceReport &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="ComplianceReport" name="ComplianceReport" [(ngModel)]="menus.ComplianceReport" #ComplianceReport="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="Designation"><i class="fa fa-street-view"></i>&nbsp;&nbsp; Designation &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="Designation" name="Designation" [(ngModel)]="menus.Designation" #Designation="ngModel">
+                                </div>
+                                
+                                <div class="col-md-4 form-group">
+                                    <label for="Document"><i class="fa fa-sticky-note"></i>&nbsp;&nbsp; Document &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="Document" name="Document" [(ngModel)]="menus.Document" #Document="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="Entity"><i class="fa fa-asterisk"></i>&nbsp;&nbsp; Entity &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="Entity" name="Entity" [(ngModel)]="menus.Entity" #Entity="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="ExportData"><i class="fa fa-building"></i>&nbsp;&nbsp; ExportData &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="ExportData" name="ExportData" [(ngModel)]="menus.ExportData" #ExportData="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="Functions"><i class="fa fa-cogs"></i>&nbsp;&nbsp; Functions &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="Functions" name="Functions" [(ngModel)]="menus.Functions" #Functions="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="ManageEntityMappings"><i class="fa fa-map-pin"></i>&nbsp;&nbsp; ManageEntityMappings &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="ManageEntityMappings" name="ManageEntityMappings" [(ngModel)]="menus.ManageEntityMappings" #ManageEntityMappings="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="Repository"><i class="fa fa-calendar"></i>&nbsp;&nbsp; Repository &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="Repository" name="Repository" [(ngModel)]="menus.Repository" #Repository="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="Roles"><i class="fa fa-recycle"></i>&nbsp;&nbsp; Roles &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="Roles" name="Roles" [(ngModel)]="menus.Roles" #Roles="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="ShowCauseNotice"><i class="fa fa-sticky-note"></i>&nbsp;&nbsp; ShowCauseNotice &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="ShowCauseNotice" name="ShowCauseNotice" [(ngModel)]="menus.ShowCauseNotice" #ShowCauseNotice="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="Support"><i class="fa fa-phone"></i>&nbsp;&nbsp; Support &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="Support" name="Support" [(ngModel)]="menus.Support" #Support="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="TaskMapping"><i class="fa fa-tasks"></i>&nbsp;&nbsp; TaskMapping &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="TaskMapping" name="TaskMapping" [(ngModel)]="menus.TaskMapping" #TaskMapping="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="Unit"><i class="fa fa-university"></i>&nbsp;&nbsp; Unit &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="Unit" name="Unit" [(ngModel)]="menus.Unit" #Unit="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="Users"><i class="fa fa-users"></i>&nbsp;&nbsp; Users &nbsp;&nbsp;</label>
+                                    <input type="checkbox" id="Users" name="Users" [(ngModel)]="menus.Users" #Users="ngModel">
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <button type="submit"
+                                        [disabled]="menuRoleForm.form.invalid"
+                                        class="btn btn-primary label-margin">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

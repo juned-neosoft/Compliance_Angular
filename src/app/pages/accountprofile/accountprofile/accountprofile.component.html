@@ -1,0 +1,58 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <li class="active breadcrumb-item" aria-current="page">Profile</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="box box-defualt  ">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <b>Full Name:</b>
+                            </div>
+                            <div class="col-md-3">
+                                {{profileData.user_first_name}}&nbsp;{{profileData.user_last_name}}
+                            </div>
+                            <div class="col-md-3">
+                                <b>User Name:</b>
+                            </div>
+                            <div class="col-md-3">
+                                {{profileData.user_username}}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <b>E-Mail:</b>
+                            </div>
+                            <div class="col-md-3">
+                                {{profileData.user_email}}
+                            </div>
+                            <div class="col-md-3">
+                                <b>Change Password:</b>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-info" (click)="ChangePassword()">Change
+                                    Password</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+    <!-- /.container -->
+</div>

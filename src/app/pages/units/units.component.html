@@ -1,0 +1,88 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <li class="active breadcrumb-item" aria-current="page">Units</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="box box-defualt  ">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Manage Units</h3>
+                            <div class="btn-group pull-right">
+                                <a routerLink="/create-unit" class="btn btn-primary"><i class="fa fa-plus"></i> ADD UNIT</a>
+                                <a routerLink="/import-units" class="btn btn-secondary"><i class="fa fa-upload"></i> Upload Unit</a>
+                            </div>
+                    </div>
+                    <div class="box-body" *ngIf="responseData?.length != 0">
+                        <div class="col-md-3 pull-left" style="padding-left: 0px">
+                            <input type="text" class="input form-control" placeholder="Search"
+                                [(ngModel)]="TableFilter">
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="button" (click)="exportExcel()" class="btn btn-success"><i
+                                    class="fa fa-download"></i>
+                                &emsp; Excel</button>
+                            <button style="display: none;" type="button" (click)="exportPDF()"
+                                class="btn btn-primary"><i class="fa fa-download"></i>
+                                &emsp; PDF</button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class=" table table-bordered mt10">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center w80">Sr. No.</th>
+                                        <th>Unit Name</th>
+                                        <th class="text-center w100">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="responseData?.length <= 0">
+                                    <tr>
+                                        <td colspan="3" class="text-center">
+                                            Data not available !
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="responseData?.length != 0">
+                                    <tr
+                                        *ngFor="let item of responseData | stringFilter: TableFilter  | paginate: {id: 'unitData', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+                                        <td class="text-center">{{( i + 1) + (Pagination.CurrentPage - 1) *
+                                            Pagination.ItemsPerPage}}</td>
+                                        <td>{{item.loca_name}}</td>
+                                        <td class="text-center">
+                                            <a href="javascript:void(0)" (click)="editButton(item.loca_id)"
+                                                class="action-icon" title="Edit"><i class="fa fa-edit"></i></a>
+                                            <a href="javascript:void(0)" (click)="deleteButton(item.loca_id)"
+                                                class="action-icon text-danger" title="Delete"><i
+                                                    class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div *ngIf="responseData?.length != 0 && TableFilter == ''">
+                                <pagination-controls id="unitData" maxSize="5" directionLinks="true"
+                                    (pageChange)="Pagination.CurrentPage=$event"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+    <!-- /.container -->
+</div>

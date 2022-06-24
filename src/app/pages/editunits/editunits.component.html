@@ -1,0 +1,52 @@
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Main content -->
+      <section class="content">
+
+        <div class="row">
+          <div class="col-md-12">
+            <nav class="" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a>
+                </li>
+                <li class="breadcrumb-item"><a [routerLink]="['/units']" routerLinkActive="router-link-active">Units</a>
+                </li>
+                <li class="active breadcrumb-item" aria-current="page">Edit Units</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+
+        <div class="box box-defualt  ">
+          <div class="box-header with-border">
+            <h3 class="box-title">Edit Unit</h3>
+          </div>
+          <div class="box-body">
+            <form #createUnitForm="ngForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <label>Unit Name</label>
+                  <input [(ngModel)]="unitData.loca_name" #loca_name="ngModel" required name="loca_name" type="text"
+                    class="form-control" placeholder="Unit Name">
+                  <small [class.d-none]="loca_name.valid || loca_name.untouched" class="text-danger">Unit name is a
+                    required field.
+                  </small>
+                </div>
+
+                <div class="col-md-4 form-group">
+                  <button [disabled]="createUnitForm.form.invalid" type="submit"
+                    class="btn btn-primary label-margin">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </section>
+      <!-- /.content -->
+    </div>
+  </div>
+  <!-- /.container -->
+</div>

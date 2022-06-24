@@ -1,0 +1,227 @@
+<div class="content-wrapper">
+   <div class="container-fluid">
+      <div class="row">
+         <section class="content">
+            <form #CreateShowCaseForm="ngForm" >
+               <div class="row">
+                  <div class="col-md-12">
+                     <nav class="" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="/show-cause-notice">Show Cause Notice List</a></li>
+                           <li class="active breadcrumb-item" aria-current="page">Create Show Cause Notice</li>
+                        </ol>
+                     </nav>
+                  </div>
+                  <div class="col-md-12">
+                     <div class="box box-defualt  ">
+                        <div class="box-header with-border">
+                           <h3 class="box-title">Create Show Cause Notice</h3>
+                        </div>
+                        <div class="box-body">
+                           <div class="row">
+                              <div class="col-md-4 ">
+                                 <div class="form-group">
+                                    <label>Entity</label>
+                                    <select class="form-control" (change)="changeUnit()" name="scau_orga_id"
+                                       [(ngModel)]="ShowCauseNotice.scau_orga_id" #scau_orga_id="ngModel" required>
+                                       <option value="0">---Select---</option>
+                                       <option *ngFor="let item of entityListFromAPI" value={{item.orga_id}}>
+                                          {{item.orga_name}}</option>
+                                    </select>
+                                    <small [class.d-none]="scau_orga_id.value!='0' || scau_orga_id.untouched"
+                                       class="text-danger">This
+                                       is a required field.</small>
+                                 </div>
+                              </div>
+                           
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Unit</label>
+                                    <select class="form-control" (change)="changeFunction()" name="scau_loca_id"
+                                       [(ngModel)]="ShowCauseNotice.scau_loca_id" #scau_loca_id="ngModel" required>
+                                       <option value="0" selected>---Select---</option>
+                                       <option *ngFor="let item of ListUnit" value={{item.loca_id}}>
+                                          {{item.loca_name}}</option>
+                                    </select>
+                                    <small [class.d-none]="scau_loca_id.value!='0' || scau_loca_id.untouched"
+                                       class="text-danger">This
+                                       is a required field.</small>
+
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Functions</label>
+                                    <select class="form-control" name="scau_dept_id"
+                                       [(ngModel)]="ShowCauseNotice.scau_dept_id" #scau_dept_id="ngModel"
+                                       (change)="userFunction()" required>
+                                       <option value="0" selected>---Select---</option>
+                                       <option *ngFor="let item of listFunction" value={{item.dept_id}}>
+                                          {{item.dept_name}}</option>
+                                    </select>
+                                    <small [class.d-none]="scau_dept_id.value!='0' || scau_dept_id.untouched"
+                                       class="text-danger">This
+                                       is a required field.</small>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Show Cause Related to</label>
+                                    <input type="text" placeholder="Show Cause Related to" class="form-control"
+                                       name="scau_ralated_to" [(ngModel)]="ShowCauseNotice.scau_ralated_to"
+                                       #scau_ralated_to="ngModel" required>
+                                    <small [class.d-none]="scau_ralated_to.valid || scau_ralated_to.untouched"
+                                       class="text-danger">This
+                                       is a required field.</small>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Notice Dated</label>
+                                    <input type="date" class="form-control" name="scau_notice_date"
+                                       [(ngModel)]="ShowCauseNotice.scau_notice_date" #scau_notice_date="ngModel" required>
+                                    <small [class.d-none]="scau_notice_date.valid || scau_notice_date.untouched"
+                                       class="text-danger">This
+                                       is a required field.</small>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Received On</label>
+                                    <input type="date" class="form-control" name="scau_received_date"
+                                       [(ngModel)]="ShowCauseNotice.scau_received_date" #scau_received_date="ngModel"
+                                       required>
+                                    <small [class.d-none]="scau_received_date.valid || scau_received_date.untouched"
+                                       class="text-danger">This
+                                       is a required field.</small>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Notice Reply Deadline</label>
+                                    <input type="date" class="form-control" name="scau_deadline_date"
+                                       [(ngModel)]="ShowCauseNotice.scau_deadline_date" #scau_deadline_date="ngModel"
+                                       required>
+                                    <small [class.d-none]="scau_deadline_date.valid || scau_deadline_date.untouched"
+                                       class="text-danger">This
+                                       is a required field.</small>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Comments</label>
+                                    <textarea class="form-control textarea" placeholder="Enter Comments..."
+                                       name="scau_comments" [(ngModel)]="ShowCauseNotice.scau_comments"
+                                       #scau_comments="ngModel" required>
+                                       <small [class.d-none]="scau_comments.valid || scau_comments.untouched"
+                                       class="text-danger">This
+                                       is a required field.</small>
+
+                                    </textarea>
+                                 </div>
+                              </div>
+                              <div class=" col-md-4">
+                                 <div class="form-group">
+                                    <label for="">Action Taken</label>
+                                    <div class="radio-wrapper">
+                                       <input type="radio" id="yes" name="action" value="yes" name="scau_action_taken"
+                                          [(ngModel)]="ShowCauseNotice.scau_action_taken" #scau_action_taken="ngModel"
+                                          required>
+                                       <label for="yes">Yes</label>&nbsp;&nbsp;&nbsp;
+                                       <input type="radio" id="no" name="action" value="no" name="scau_action_taken"
+                                          [(ngModel)]="ShowCauseNotice.scau_action_taken" #scau_action_taken="ngModel"
+                                          required>
+                                       <label for="no">No</label>
+                                       <small [class.d-none]="scau_action_taken.valid || scau_action_taken.untouched"
+                                          class="text-danger">This
+                                          is a required field.</small>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class=" col-md-4">
+                                 <div class="form-group">
+                                    <label for="">Next Action Item</label>
+                                    <input type="text" class="form-control" placeholder="Next Action Item"
+                                       name="scau_next_action_item" [(ngModel)]="ShowCauseNotice.scau_next_action_item"
+                                       #scau_next_action_item="ngModel" required>
+                                    <small [class.d-none]="scau_next_action_item.valid || scau_next_action_item.untouched"
+                                       class="text-danger">This
+                                       is a required field.</small>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Responsible Person</label>
+                                    <select class="form-control" name="scau_responsible_person"
+                                       [(ngModel)]="ShowCauseNotice.scau_responsible_person"
+                                       #scau_responsible_person="ngModel" required>
+                                       <option value="0">---Select---</option>
+                                       <option *ngFor="let item of ListUsers" value={{item.user_id}}>
+                                          {{item.user_name}}</option>
+
+                                    </select>
+                                    <small
+                                       [class.d-none]="scau_responsible_person.value !='0' || scau_responsible_person.untouched"
+                                       class="text-danger">This
+                                       is a required field.</small>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Reporting Person</label>
+                                    <select class="form-control" name="scau_reporting_person"
+                                       [(ngModel)]="ShowCauseNotice.scau_reporting_person" #scau_reporting_person="ngModel"
+                                       required>
+                                       <option value="0">---Select---</option>
+                                       <option *ngFor="let item of ListUsers" value={{item.user_id}}>
+                                          {{item.user_name}}</option>
+
+                                    </select>
+                                    <small
+                                       [class.d-none]="scau_reporting_person.value !='0' || scau_reporting_person.untouched"
+                                       class="text-danger">This
+                                       is a required field.</small>
+
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Reminder Required on</label>
+                                    <input type="date" class="form-control" name="scau_remainder_date"
+                                       [(ngModel)]="ShowCauseNotice.scau_remainder_date" #scau_remainder_date="ngModel"
+                                       required>
+                                    <small [class.d-none]="scau_remainder_date.valid || scau_remainder_date.untouched"
+                                       class="text-danger">This
+                                       is a required field.</small>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Document</label>
+                                    <input type="file" class="form-control file-input" multiple name="show_cause_doc"
+                                       [(ngModel)]="ShowCauseNotice.show_cause_doc" #scau_remainder_date="ngModel"
+                                       (change)="onFileChange($event)" required>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="box-footer text-center">
+                           <button type="submit" class="btn btn-primary"
+                              [disabled]="CreateShowCaseForm.form.invalid" (click)="SubmitForm()">Submit</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </form>
+         </section>
+      </div>
+   </div>
+</div>

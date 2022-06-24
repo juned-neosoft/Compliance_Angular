@@ -1,0 +1,103 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <li class="breadcrumb-item"><a [routerLink]="['/task-mapping']"
+                                        routerLinkActive="router-link-active">Task Mapping</a></li>
+                                <li class="active breadcrumb-item" aria-current="page">Imported Tasks</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="box box-defualt  ">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Imported Tasks</h3>
+                    </div>
+                    <div class="box-body" *ngIf="responseData?.length != 0">
+                        <div class="col-md-3 pull-left" style="padding-left: 0px">
+                            <input type="text" class="input form-control" placeholder="Search"
+                                [(ngModel)]="TableFilter">
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="button" (click)="exportExcel()" class="btn btn-success"><i
+                                    class="fa fa-download"></i>
+                                &emsp; Excel</button>
+                            <button style="display: none;" type="button" (click)="exportPDF()"
+                                class="btn btn-primary"><i class="fa fa-download"></i>
+                                &emsp; PDF</button>
+                        </div>
+                    </div>
+                    <div class="box-body p-5">
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-condensed custom-table table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Task ID</th>
+                                            <th>Name Of Legislation</th>
+                                            <th>Rule</th>
+                                            <th>Reference</th>
+                                            <th>Who</th>
+                                            <th>When</th>
+                                            <th>Activity</th>
+                                            <th>Procedure</th>
+                                            <th>Impact</th>
+                                            <th>Frequency</th>
+                                            <th>Due date</th>
+                                            <th>Specific Due Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="responseData?.length <= 0">
+                                        <tr>
+                                            <td colspan="13" class="text-center">
+                                                Data not available !
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody *ngIf="responseData?.length != 0">
+                                        <tr
+                                            *ngFor="let item of responseData | stringFilter: TableFilter  | paginate: {id: 'taskMappingImportedTaskData', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+                                            <td class="text-center">{{( i + 1) + (Pagination.CurrentPage - 1) *
+                                                Pagination.ItemsPerPage}}</td>
+                                            <td>{{item.task_lexcare_task_id}}</td>
+                                            <td>{{item.task_legi_name}}</td>
+                                            <td>{{item.task_rule_name}}</td>
+                                            <td>{{item.task_reference}}</td>
+                                            <td>{{item.task_activity_who}}</td>
+                                            <td>{{item.task_activity_when}}</td>
+                                            <td>{{item.task_activity}}</td>
+                                            <td>{{item.task_procedure}}</td>
+                                            <td>{{item.task_impact}}</td>
+                                            <td>{{item.task_frequency}}</td>
+                                            <td>{{item.due_date}}</td>
+                                            <td>{{item.task_specific_due_date}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div *ngIf="responseData?.length != 0 && TableFilter == ''">
+                                    <pagination-controls id="taskMappingImportedTaskData" maxSize="5"
+                                        directionLinks="true" (pageChange)="Pagination.CurrentPage=$event">
+                                    </pagination-controls>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+    <!-- /.container -->
+</div>

@@ -1,0 +1,680 @@
+<div class="box box-defualt  ">
+    <div class="box-header with-border">
+        <h3 class="box-title">Task ({{fromParentData}})</h3>
+    </div>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item active">
+            <a class="nav-link active" id="Overall-tab" data-toggle="tab" href="#TaskDetails" role="tab"
+                aria-controls="Overall" aria-selected="true">Task Details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="Entity-tab" data-toggle="tab" href="#TaskHistory" role="tab" aria-controls="Entity"
+                aria-selected="false">Task History</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade in active" id="TaskDetails" role="tabpanel" aria-labelledby="Overall-tab">
+            <div class="m-5">
+                <div>
+                    <div>
+                        <h4>Organogram Information</h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class=" table table-bordered mt10">
+                            <tbody>
+                                <tr>
+                                    <td>Unit Task ID :</td>
+                                    <td>{{responseDataTaskDetails?.unit_task_id}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Entity :</td>
+                                    <td>{{responseDataTaskDetails?.entity}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Unit :</td>
+                                    <td>{{responseDataTaskDetails?.unit}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Function :</td>
+                                    <td>{{responseDataTaskDetails?.function}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Owner :</td>
+                                    <td>{{responseDataTaskDetails?.executor}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Approver :</td>
+                                    <td>{{responseDataTaskDetails?.evaluator}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Function Head :</td>
+                                    <td>{{responseDataTaskDetails?.function_head}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <h4>Task Details</h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class=" table table-bordered mt10">
+                            <tbody>
+                                <tr>
+                                    <td>Legislation :</td>
+                                    <td>{{responseDataTaskDetails?.legislation}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Rule :</td>
+                                    <td>{{responseDataTaskDetails?.rule}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Reference :</td>
+                                    <td>{{responseDataTaskDetails?.reference}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Who :</td>
+                                    <td>{{responseDataTaskDetails?.who}}</td>
+                                </tr>
+                                <tr>
+                                    <td>When :</td>
+                                    <td>{{responseDataTaskDetails?.when}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Compliance Activity :</td>
+                                    <td>{{responseDataTaskDetails?.activity}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Procedure :</td>
+                                    <td>{{responseDataTaskDetails?.procedure}}</td>
+                                </tr>
+                                <tr>
+                                    <td>More Information :</td>
+                                    <td>{{responseDataTaskDetails?.more_information}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Prohibitive / Prescriptive :</td>
+                                    <td>{{responseDataTaskDetails?.prescriptive}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Frequency :</td>
+                                    <td>{{responseDataTaskDetails?.frequency}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Form No. :</td>
+                                    <td>{{responseDataTaskDetails?.form_no}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Due date :</td>
+                                    <td>{{responseDataTaskDetails?.due_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Specific due date :</td>
+                                    <td>{{responseDataTaskDetails?.specific_due_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Type of Task :</td>
+                                    <td>{{responseDataTaskDetails?.type_of_task}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Responsibility :</td>
+                                    <td>NA</td>
+                                </tr>
+                                <tr>
+                                    <td>Corporate Level or Unit Level :</td>
+                                    <td>{{responseDataTaskDetails?.level}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Exemption Criteria :</td>
+                                    <td>{{responseDataTaskDetails?.excemption_criteria}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Events :</td>
+                                    <td>{{responseDataTaskDetails?.event}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Sub Event :</td>
+                                    <td>{{responseDataTaskDetails?.sub_event}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Implications :</td>
+                                    <td>{{responseDataTaskDetails?.implications}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Imprisonment Duration :</td>
+                                    <td>{{responseDataTaskDetails?.imprisonment}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Imprisonment Applies to :</td>
+                                    <td>{{responseDataTaskDetails?.imprisonment_applies_to}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Fine amount :</td>
+                                    <td>{{responseDataTaskDetails?.fine_amount}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Subsequent Amount per Day :</td>
+                                    <td>{{responseDataTaskDetails?.fine_amount_per_day}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Impact :</td>
+                                    <td>{{responseDataTaskDetails?.impact}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Impact on Unit :</td>
+                                    <td>{{responseDataTaskDetails?.impact_on_unit}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Impact on organization :</td>
+                                    <td>{{responseDataTaskDetails?.impact_on_entity}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Interlinkage :</td>
+                                    <td>{{responseDataTaskDetails?.interlinkage}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Linked Task ID :</td>
+                                    <td>{{responseDataTaskDetails?.linked_task_id}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Weblink :</td>
+                                    <td>{{responseDataTaskDetails?.weblink}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Emcure Task ID :</td>
+                                    <td>{{responseDataTaskDetails?.lexcare_task_id}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade in" id="TaskHistory" role="tabpanel" aria-labelledby="Overall-tab">
+            <!-- <div class="row m-5"> -->
+            <div class="box-body">
+
+                <div class="table-responsive">
+                    <table class=" table table-bordered mt10">
+                        <thead>
+                            <tr>
+                                <th class="text-center w80">Sr. No.</th>
+                                <th>Owner</th>
+                                <th>Owner Date</th>
+                                <th>Approver Date</th>
+                                <th>Function Head Date</th>
+                                <th>Unit Head Date</th>
+                                <th>Legal Date</th>
+                                <th *ngIf="roleID ==6 || roleID ==7">Edit Dates</th>
+                                <th>Completed By</th>
+                                <th>Completed On</th>
+                                <th>Comments</th>
+                                <th>Task Status</th>
+                                <th>Legal Task Status</th>
+                                <th>Document</th>
+                                <th>Update History</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="responseDataTaskHistory?.length <= 0">
+                            <tr>
+                                <td *ngIf="(roleID == 6 || roleID === 7) ; else ElseBlock" colspan="14"
+                                    class="text-center">
+                                    Data not available !
+                                </td>
+                                <ng-template #ElseBlock>
+                                    <td colspan="15" class="text-center">
+                                        Data not available !
+                                    </td>
+                                </ng-template>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="responseDataTaskHistory?.length != 0">
+                            <tr [class]="item.ttrn_legal_task_style"
+                                *ngFor="let item of responseDataTaskHistory | paginate: {id: 'dashboardTaskHintoryData', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+                                <td class="text-center">{{( i + 1) + (Pagination.CurrentPage - 1) *
+                                    Pagination.ItemsPerPage}}</td>
+                                <td>{{item.ttrn_performer_name}}</td>
+                                <td>{{item.ttrn_pr_due_date}}</td>
+                                <td>{{item.ttrn_rw_due_date}}</td>
+                                <td>{{item.ttrn_fh_due_date}}</td>
+                                <td>{{item.ttrn_uh_due_date}}</td>
+                                <td>{{item.ttrn_legal_due_date}}</td>
+                                <td *ngIf="roleID == 6 || roleID == 7">
+                                    <button type="button" class="btn btn-danger" (click)="OpenEditDatesModal(item.ttrn_id,
+                                        item.ttrn_pr_due_date,
+                                        item.ttrn_rw_due_date,
+                                        item.ttrn_fh_due_date,
+                                        item.ttrn_uh_due_date,
+                                        item.ttrn_legal_due_date)">Edit</button>
+                                </td>
+                                <td>{{item.ttrn_task_completed_by}}</td>
+                                <td>{{item.ttrn_completed_date}}</td>
+                                <td>{{item.ttrn_performer_comments}}</td>
+                                <td>{{item.ttrn_task_status}}</td>
+                                <td>{{item.ttrn_legal_task_status}}</td>
+                                <td>
+                                    <table class="table table-bordered" style="background-color: #fff0;">
+                                        <tbody>
+                                            <tr *ngFor="let doc of item.document_list">
+                                                <td>{{doc.udoc_original_file_name}}
+                                                </td>
+                                                <td><i (click)="DownloadDocument(doc.udoc_id,doc.udoc_original_file_name)"
+                                                        class="fa fa-download" style="cursor: pointer;"></i></td>
+                                                <td class="text-danger"><i (click)="DeleteDocument(doc.udoc_id)"
+                                                        class="fa fa-trash" style="cursor: pointer;"></i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- <ul>
+                                        <li *ngFor="let doc of item.document_list">
+                                            {{doc.udoc_original_file_name}}
+                                        </li>
+                                    </ul> -->
+                                </td>
+                                <td>
+                                    <button
+                                        *ngIf="item.ttrn_task_status == 'Active' || item.ttrn_task_status == 'Re_Opened'"
+                                        type="button" class="btn btn-success"
+                                        (click)="OpenCompleteTaskModal(item.ttrn_id, item.task_frequency, item.ttrn_legal_task_status, item.ttrn_document)">Complete
+                                        Task</button>
+                                    <button
+                                        *ngIf="item.ttrn_task_status == 'Completed' || item.ttrn_task_status == 'Partially_Completed'"
+                                        type="button" class="btn btn-success"
+                                        (click)="OpenUpdateTaskModal(item.ttrn_id, item.task_frequency, item.ttrn_legal_task_status, item.ttrn_document)">Update
+                                        Task</button>
+                                    <button *ngIf="item.ttrn_task_status == 'Partially_Completed' && roleID > 1"
+                                        type="button" class="btn btn-success"
+                                        (click)="OpenApproveTaskModal(item.ttrn_id)">Approve Task</button>
+                                    <button *ngIf="item.ttrn_task_status == 'Partially_Completed' && roleID > 1"
+                                        type="button" class="btn btn-success"
+                                        (click)="OpenReOpenModal('',item.ttrn_id)">Re-Open Task</button>
+                                    <button *ngIf="item.ttrn_task_status == 'Non Complied'" type="button"
+                                        class="btn btn-danger"
+                                        (click)="OpenReasonForNonComplianceModal('',item.ttrn_id)">Reason For
+                                        Non-Compliance</button>
+                                    <button *ngIf="roleID == 6 || roleID == 7" type="button" class="btn btn-danger"
+                                        (click)="OpenDeleteTaskModal(item.ttrn_completed_date,item.ttrn_id, item.client_task_id)">Delete
+                                        Task</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center" *ngIf="responseDataTaskHistory?.length != 0">
+                        <pagination-controls id="dashboardTaskHintoryData" maxSize="5" directionLinks="true"
+                            (pageChange)="Pagination.CurrentPage=$event">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- start History popup's -->
+<div id="task_com" class="modal fade update_his" role="dialog">
+    <div class="modal-dialog">
+        <form #CompleteTaskForm="ngForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="CompleteTask_Close" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Complete Task</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <ul>
+                                <li *ngFor="let item of errorListCompleteTask" class="text-danger">{{item}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div *ngIf="completeUpdateTaskModel.task_frequency == 'Event_Based'"
+                            class="col-md-12 form-group">
+                            <label>Event Not Occurred: &emsp; <input
+                                    [(ngModel)]="completeUpdateTaskModel.ttrn_event_not_occure"
+                                    #ttrn_event_not_occure="ngModel" name="ttrn_event_not_occure"
+                                    type="checkbox"></label>
+                        </div>
+                        <div class="col-md-12 form-group" *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure">
+                            <label>Completion Date</label>
+                            <input [(ngModel)]="completeUpdateTaskModel.ttrn_completed_date"
+                                #ttrn_completed_date="ngModel" [max]="maxDate" name="ttrn_completed_date" type="date"
+                                class="form-control">
+                        </div>
+
+                        <div class="col-md-12 form-group"
+                            *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure && completeUpdateTaskModel.task_frequency!='Event_Based'">
+                            <label>Remarks</label>
+                            <textarea [(ngModel)]="completeUpdateTaskModel.ttrn_performer_comments"
+                                #ttrn_performer_comments="ngModel" name="ttrn_performer_comments" type="text"
+                                class="form-control" placeholder="Remarks"></textarea>
+                        </div>
+
+                        <div class="col-md-12 form-group"
+                            *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure && completeUpdateTaskModel.task_frequency=='Event_Based'">
+                            <label>Remarks</label>
+                            <textarea [(ngModel)]="completeUpdateTaskModel.ttrn_performer_comments"
+                                #ttrn_performer_comments="ngModel" name="ttrn_performer_comments" type="text"
+                                class="form-control" placeholder="Remarks"></textarea>
+                        </div>
+
+                        <div class="col-md-12 form-group" *ngIf="
+                            (!completeUpdateTaskModel.ttrn_event_not_occure) && (completeUpdateTaskModel.ttrn_legal_task_status!='Complied')
+                            && (completeUpdateTaskModel.ttrn_legal_task_status=='Delayed' || completeUpdateTaskModel.ttrn_legal_task_status=='Non Complied') 
+                            ">
+                            <label>Reason For Non-Compliance</label>
+                            <textarea [(ngModel)]="completeUpdateTaskModel.ttrn_reason_for_non_compliance"
+                                #ttrn_reason_for_non_compliance="ngModel" name="ttrn_reason_for_non_compliance"
+                                type="text" class="form-control" placeholder="Reason For Non-Compliance"></textarea>
+                        </div>
+
+                        <div class="col-md-12 form-group" *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure">
+                            <label>Upload Proof of Compliance</label>
+                            <input (change)="handleFileInput($event.target.files)" type="file" multiple
+                                class="form-control">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="CompleteTask()" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div id="EditDates_Admin" class="modal fade update_his" role="dialog">
+    <div class="modal-dialog">
+        <form #EditDatesForm="ngForm" (submit)="EditDates()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="EditDates_Close" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Dates</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Old Dates</th>
+                                    <th>New Dates</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Buffer days</td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <input (change)="bufferDaysOnChange(ttrn_prior_days_buffer.value)"
+                                        [(ngModel)]="editDatesModel.ttrn_prior_days_buffer"
+                                        name="ttrn_prior_days_buffer" #ttrn_prior_days_buffer="ngModel" min="0"
+                                        type="number" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Legal due date</td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.Prev_LegalDueDate"
+                                            name="Prev_LegalDueDate" class="form-control" type="date">
+                                    </td>
+                                    <td>
+                                        <input [(ngModel)]="editDatesModel.ttrn_legal_due_date"
+                                            name="ttrn_legal_due_date" class="form-control" type="date">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Unit head date</td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.Prev_UnitHeadDate"
+                                            name="Prev_UnitHeadDate" class="form-control" type="date">
+                                    </td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.ttrn_uh_due_date" name="ttrn_uh_due_date"
+                                            class="form-control" type="date">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Function date</td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.Prev_FunctionDate"
+                                            name="Prev_FunctionDate" class="form-control" type="date">
+                                    </td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.ttrn_fh_due_date" name="ttrn_fh_due_date"
+                                            class="form-control" type="date">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Approver date</td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.Prev_ApproverDate"
+                                            name="Prev_ApproverDate" class="form-control" type="date">
+                                    </td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.ttrn_rw_due_date" name="ttrn_rw_due_date"
+                                            class="form-control" type="date">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Owner date</td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.Prev_OwnerDate"
+                                            name="Prev_OwnerDate" class="form-control" type="date">
+                                    </td>
+                                    <td>
+                                        <input readonly [(ngModel)]="editDatesModel.ttrn_pr_due_date" name="ttrn_pr_due_date"
+                                            class="form-control" type="date">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="task_apr" class="modal fade update_his" role="dialog">
+    <div class="modal-dialog">
+        <form #ApproveTaskForm="ngForm" (submit)="ApproveTask()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="ApproveTask_Close" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Approve Task</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure do you want to approve this task.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="task_reo" class="modal fade update_his" role="dialog">
+    <div class="modal-dialog">
+        <form #ReOpenTaskForm="ngForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="ReOpenTask_Close" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Re-open Task</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <ul>
+                                <li *ngFor="let item of errorListReopen" class="text-danger">{{item}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>Reason for Re-Opening</label>
+                            <textarea [(ngModel)]="reOpenTaskModel.reopen_comment" required #reopen_comment="ngModel"
+                                name="reopen_comment" type="text" class="form-control"
+                                placeholder="Reason for Re-Opening"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="ReOpen()" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="task_upd" class="modal fade update_his" role="dialog">
+    <div class="modal-dialog">
+        <form #UpdateTaskForm="ngForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="UpdateTask_Close" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Update Task</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <ul>
+                                <li *ngFor="let item of errorListUpdateTask" class="text-danger">{{item}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div *ngIf="completeUpdateTaskModel.task_frequency == 'Event_Based'"
+                            class="col-md-12 form-group">
+                            <label>Event Not Occurred: &emsp; <input
+                                    [(ngModel)]="completeUpdateTaskModel.ttrn_event_not_occure"
+                                    #ttrn_event_not_occure="ngModel" name="ttrn_event_not_occure"
+                                    type="checkbox"></label>
+                        </div>
+                        <div class="col-md-12 form-group" *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure">
+                            <label>Completion Date</label>
+                            <input [(ngModel)]="completeUpdateTaskModel.ttrn_completed_date"
+                                #ttrn_completed_date="ngModel" [max]="maxDate" name="ttrn_completed_date" type="date"
+                                class="form-control">
+                        </div>
+
+                        <div class="col-md-12 form-group"
+                            *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure && completeUpdateTaskModel.task_frequency!='Event_Based'">
+                            <label>Remarks</label>
+                            <textarea [(ngModel)]="completeUpdateTaskModel.ttrn_performer_comments"
+                                #ttrn_performer_comments="ngModel" name="ttrn_performer_comments" type="text"
+                                class="form-control" placeholder="Remarks"></textarea>
+                        </div>
+
+                        <div class="col-md-12 form-group"
+                            *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure && completeUpdateTaskModel.task_frequency=='Event_Based'">
+                            <label>Remarks</label>
+                            <textarea [(ngModel)]="completeUpdateTaskModel.ttrn_performer_comments"
+                                #ttrn_performer_comments="ngModel" name="ttrn_performer_comments" type="text"
+                                class="form-control" placeholder="Remarks"></textarea>
+                        </div>
+
+                        <div class="col-md-12 form-group"
+                            *ngIf="(!completeUpdateTaskModel.ttrn_event_not_occure) 
+                            && (completeUpdateTaskModel.ttrn_legal_task_status!='Complied')
+                            && (completeUpdateTaskModel.ttrn_legal_task_status=='Delayed' || completeUpdateTaskModel.ttrn_legal_task_status=='Non Complied') ">
+                            <label>Reason For Non-Compliance</label>
+                            <textarea [(ngModel)]="completeUpdateTaskModel.ttrn_reason_for_non_compliance"
+                                #ttrn_reason_for_non_compliance="ngModel" name="ttrn_reason_for_non_compliance"
+                                type="text" class="form-control" placeholder="Reason For Non-Compliance"></textarea>
+                        </div>
+
+                        <div class="col-md-12 form-group" *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure">
+                            <label>Upload Proof of Compliance</label>
+                            <input (change)="handleFileInput($event.target.files)" type="file" multiple
+                                class="form-control">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="UpdateTask()" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="task_rea" class="modal fade update_his" role="dialog">
+    <div class="modal-dialog">
+        <form #ReasonForNonComplianceTaskForm="ngForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="ReasonForNonCompliance_Close" class="close"
+                        data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Reason For Non Compliance</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <ul>
+                                <li *ngFor="let item of errorListReasonForNonCompliance" class="text-danger">{{item}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>Reason for Non-Compliance</label>
+                            <textarea [(ngModel)]="reasonForNonComplianceTask.ttrn_reason_for_non_compliance" required
+                                #ttrn_reason_for_non_compliance="ngModel" name="ttrn_reason_for_non_compliance"
+                                placeholder="Reason for Non-Compliance" type="text" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="ReasonForNonCompliance()" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="task_del" class="modal fade update_his" role="dialog">
+    <div class="modal-dialog">
+        <form #DeleteTaskForm="ngForm" (submit)="DeleteTask()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="DeleteTask_Close" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Task</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure do you want to delete this task.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="display: none;">
+    <button type="button" id="CompleteTask_Open" class="btn btn-success" data-toggle="modal"
+        data-target="#task_com">Complete Task</button>
+    <button type="button" id="ApproveTask_Open" class="btn btn-success" data-toggle="modal"
+        data-target="#task_apr">Approve Task</button>
+    <button type="button" id="ReOpenTask_Open" class="btn btn-success" data-toggle="modal"
+        data-target="#task_reo">Re-Open Task</button>
+    <button type="button" id="UpdateTask_Open" class="btn btn-success" data-toggle="modal"
+        data-target="#task_upd">Update Task</button>
+    <button type="button" id="ReasonForNonCompliance_Open" class="btn btn-danger" data-toggle="modal"
+        data-target="#task_rea">Reason For Non-Compliance</button>
+    <button type="button" id="DeleteTask_Open" class="btn btn-danger" data-toggle="modal" data-target="#task_del">Delete
+        Task</button>
+    <button type="button" id="EditDates_Open" class="btn btn-danger" data-toggle="modal"
+        data-target="#EditDates_Admin">Edit</button>
+</div>

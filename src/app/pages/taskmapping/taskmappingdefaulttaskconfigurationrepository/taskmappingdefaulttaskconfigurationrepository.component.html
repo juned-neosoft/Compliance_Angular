@@ -1,0 +1,160 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+       <div class="row">
+          <!-- Main content -->
+          <section class="content">
+             <div class="row">
+                <div class="col-md-12">
+                   <nav class="" aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                         <li class="active breadcrumb-item" aria-current="page">Default Task Configuration</li>
+                      </ol>
+                   </nav>
+                </div>
+                <div class="col-md-12">
+                   <div class="box box-defualt  ">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Default Task Configuration</h3>
+                            <a href="" class="btn btn-primary pull-right"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Go Back</a>
+                        </div>
+                    </div>
+                      <div class="box box-defualt  ">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Search</h3>
+                        </div>
+                      <div class="box-body">
+                          
+                         <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Entity</label>
+                                    <select class="form-control">
+                                        <option value="">Select Entity</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Unit</label>
+                                    <select class="form-control">
+                                        <option value="">Select Unit</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Function</label>
+                                    <select class="form-control">
+                                        <option value="">Select Function</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                         </div>
+                         <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Executor</label>
+                                    <select class="form-control">
+                                        <option value="">Select Executor</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Evalutor</label>
+                                    <select class="form-control">
+                                        <option value="">Select Evalutor</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <select class="form-control">
+                                        <option value="">Select Type</option>
+                                    </select>
+                                </div>
+                            </div>
+                         </div>
+                         
+                        
+                         <!-- /.box-body -->
+                      </div>
+                      <div class="box-footer text-center">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                     </div>
+                   </div>
+
+                
+                   
+               <div class="box box-defualt  ">
+                
+                <div class="box-body">
+                   <div class="row">
+                       <div class="col-md-2">
+                           <label>Total Task : 17</label>
+                       </div>
+                        
+                   </div>
+                   <div class="table-responsive">
+                       <table class="table table-bordered">
+                           <thead>
+                               <tr>
+                                   <th>#</th>
+                                   <th >Task ID</th>
+                                   <th>Client Task ID</th>
+                                   <th>Frequency</th>
+                                   <th>Event</th>
+                                   <th>Sub Event</th>
+                                   <th>Type</th>
+                                   <th class="text-center">Edit/Update</th>
+                               </tr>
+                           </thead>
+                           <tbody *ngIf="responseData?.length <= 0">
+                                <tr>
+                                    <td colspan="8" class="text-center">
+                                        Data not available !
+                                    </td>
+                                </tr>
+                            </tbody>
+                           <tbody *ngIf="responseData?.length != 0">
+                               <tr *ngFor="let item of responseData | stringFilter: TableFilter  | paginate: {id: 'taskMappingImportedTaskData', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+                                   <td class="text-center">{{( i + 1) + (Pagination.CurrentPage - 1) *
+                                    Pagination.ItemsPerPage}}</td>
+                                   <td>{{item.lexcare_task_id}}</td>
+                                   <td class="">{{item.dtco_client_task_id}}</td>
+                                   <td class="">{{item.dtco_frequency}}</td>
+                                   <td class="">{{item.dtco_event}}</td>
+                                   <td class="">{{item.dtco_sub_event}}</td>
+                                   <td class="">{{item.dtco_after_before}}</td>
+                                   <td class="text-center">
+                                    <a  class="action-icon" href="javascript:void(0)" title="Edit"><i class="fa fa-edit"></i></a>
+                                   </td>
+                               </tr>
+                           </tbody>
+                       </table>
+                       <div *ngIf="responseData?.length != 0 && TableFilter == ''">
+                        <pagination-controls id="taskMappingImportedTaskData" maxSize="5"
+                            directionLinks="true" (pageChange)="Pagination.CurrentPage=$event">
+                        </pagination-controls>
+                    </div>
+                   </div>
+                   
+                </div>
+             
+           </div>
+                </div>
+             </div>
+             <!-- /.box -->
+          </section>
+          <!-- /.content -->
+       </div>
+    </div>
+    <!-- /.container -->
+ </div>
+
+
+
+
+

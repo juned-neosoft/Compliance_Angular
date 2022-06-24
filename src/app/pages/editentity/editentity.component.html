@@ -1,0 +1,61 @@
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <nav class="" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a>
+                </li>
+                <li class="breadcrumb-item"><a [routerLink]="['/entity']"
+                    routerLinkActive="router-link-active">Entity</a></li>
+                <li class="active breadcrumb-item" aria-current="page">Edit Entity</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <div class="box box-defualt  ">
+          <div class="box-header with-border">
+            <h3 class="box-title">Update Entities</h3>
+          </div>
+          <div class="box-body">
+            <form #createEntityForm="ngForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <label>Entity Name</label>
+                  <input [(ngModel)]="entityData.orga_name" #orga_name="ngModel" required name="orga_name" type="text"
+                    class="form-control" placeholder="Entity Name">
+                  <small [class.d-none]="orga_name.valid || orga_name.untouched" class="text-danger">Entity name is a
+                    required field.
+                  </small>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label>Parent</label>
+                  <select class="form-control" (blur)="ValidateID(orga_id.value)" (change)="ValidateID(orga_id.value)"
+                    [(ngModel)]="entityData.orga_id" required name="orga_id" #orga_id="ngModel">
+                    <option value="0" selected>Select Parent</option>
+                    <option *ngFor="let item of getParentDropdownListData" value={{item.orga_id}}>
+                      {{item.orga_name}}</option>
+                  </select>
+                  <small [class.d-none]="!ValidateIDHasError || orga_id.untouched" class="text-danger">Parent is a
+                    required field.
+                  </small>
+                </div>
+                <div class="col-md-4 form-group">
+                  <button [disabled]="createEntityForm.form.invalid || ValidateIDHasError" type="submit"
+                    class="btn btn-primary label-margin">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </section>
+      <!-- /.content -->
+    </div>
+  </div>
+  <!-- /.container -->
+</div>

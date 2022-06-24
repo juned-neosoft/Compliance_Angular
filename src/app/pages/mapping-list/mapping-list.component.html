@@ -1,0 +1,78 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="box box-defualt  ">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Organogram List</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class=" table table-bordered mt10">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center w80">Sr. No.</th>
+                                        <th>Entity</th>
+                                        <th>Unit</th>
+                                        <th>Function</th>
+                                        <th>List of Executors</th>
+                                        <th>List of Evaluators</th>
+                                        <th>List of Function Head</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="responseData?.length <= 0">
+                                    <tr>
+                                        <td colspan="7" class="text-center">
+                                            Data not available !
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="responseData?.length != 0">
+                                    <tr
+                                        *ngFor="let item of responseData | paginate: {id: 'mappingListData', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+                                        <td class="text-center">{{( i + 1) + (Pagination.CurrentPage - 1) *
+                                            Pagination.ItemsPerPage}}</td>
+                                        <td>{{item.orga_name}}</td>
+                                        <td>{{item.loca_name}}</td>
+                                        <td>{{item.dept_name}}</td>
+                                        <td>
+                                            <li *ngFor="let Executor of item.Executors">
+                                                <a href="javascript:void(0)" (click)="gotoUsers(Executor.user_id)"
+                                                    class="action-icon">{{Executor.user_full_name}}</a>
+                                            </li>
+                                        </td>
+                                        <td>
+                                            <li *ngFor="let Evaluator of item.Evaluators">
+                                                <a href="javascript:void(0)" (click)="gotoUsers(Evaluator.user_id)"
+                                                    class="action-icon">{{Evaluator.user_full_name}}</a>
+                                            </li>
+                                        </td>
+                                        <td>
+                                            <li *ngFor="let Function_Head of item.Function_Heads">
+                                                <a href="javascript:void(0)"
+                                                    (click)="gotoUsers(Function_Head.user_id)"
+                                                    class="action-icon">{{Function_Head.user_full_name}}</a>
+                                            </li>
+
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div *ngIf="responseData?.length != 0">
+                                <pagination-controls id="mappingListData" maxSize="5" directionLinks="true"
+                                    (pageChange)="Pagination.CurrentPage=$event"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+    <!-- /.container -->
+</div>

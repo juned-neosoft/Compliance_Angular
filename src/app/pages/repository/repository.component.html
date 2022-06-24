@@ -1,0 +1,430 @@
+<div class="content-wrapper" *ngIf="showRepository">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <li class="active breadcrumb-item" aria-current="page">Repository</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="box box-defualt  ">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Search</h3>
+                            </div>
+                            <form #taskMappingAssignTaskForm="ngForm" (ngSubmit)="onSearch()">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Entity</label>
+                                                <select (change)="ValidateEntity(entitySearch.value)"
+                                                    [(ngModel)]="repository.entitySearch" required name="entitySearch"
+                                                    #entitySearch="ngModel" class="form-control">
+                                                    <option value="0">Select Entity</option>
+                                                    <option *ngFor="let item of getEntityListFromAPI"
+                                                        value={{item.orga_id}}>
+                                                        {{item.orga_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Unit</label>
+                                                <select (change)="ValidateUnit(unitSearch.value)"
+                                                    [(ngModel)]="repository.unitSearch" required name="unitSearch"
+                                                    #unitSearch="ngModel" class="form-control">
+                                                    <option value="0">Select Unit</option>
+                                                    <option *ngFor="let item of getUnitListFromAPI"
+                                                        value={{item.loca_id}}>
+                                                        {{item.loca_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Function</label>
+                                                <select (change)="ValidateFunction(functionSearch.value)"
+                                                    [(ngModel)]="repository.functionSearch" required
+                                                    name="functionSearch" #functionSearch="ngModel"
+                                                    class="form-control">
+                                                    <option value="0">Select Function</option>
+                                                    <option *ngFor="let item of getFunctionListFromAPI"
+                                                        value={{item.dept_id}}>
+                                                        {{item.dept_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" *ngIf="AdvanceSearch">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Owner</label>
+                                                <select (change)="ValidateOwner(ownerSearch.value)"
+                                                    [(ngModel)]="repository.ownerSearch" required name="ownerSearch"
+                                                    #ownerSearch="ngModel" class="form-control">
+                                                    <option value="0">Select Owner</option>
+                                                    <option *ngFor="let item of getOwnerListFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Approver</label>
+                                                <select [(ngModel)]="repository.approverSearch" name="approverSearch"
+                                                    #approverSearch="ngModel" class="form-control">
+                                                    <option value="0">Select Approver</option>
+                                                    <option *ngFor="let item of getApproverListFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Category of Law</label>
+                                                <select [(ngModel)]="repository.categoryofLawSearch"
+                                                    name="categoryofLawSearch" #categoryofLawSearch="ngModel"
+                                                    class="form-control">
+                                                    <option value="0">Select Category of Law</option>
+                                                    <option *ngFor="let item of getCategoryOfLawsListFromAPI"
+                                                        value={{item.cat_law_id}}>
+                                                        {{item.cat_law_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Impact</label>
+                                                <select [(ngModel)]="repository.impactSearch" name="impactSearch"
+                                                    #impactSearch="ngModel" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option value="Severe">Severe</option>
+                                                    <option value="Major">Major</option>
+                                                    <option value="Moderate">Moderate</option>
+                                                    <option value="Low">Low</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Prohibitive / Prescriptive</label>
+                                                <select [(ngModel)]="repository.prohibitivePrescriptiveSearch"
+                                                    name="prohibitivePrescriptiveSearch"
+                                                    #prohibitivePrescriptiveSearch="ngModel" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option value="Prohibitive">Prohibitive</option>
+                                                    <option value="Prescriptive">Prescriptive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Type of Task</label>
+                                                <select [(ngModel)]="repository.typeOfTaskSearch"
+                                                    name="typeOfTaskSearch" #typeOfTaskSearch="ngModel"
+                                                    class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option *ngFor="let item of getTypeOfTasksListFromAPI"
+                                                        value={{item.task_type_of_task}}>
+                                                        {{item.task_type_of_task}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Frequency</label>
+                                                <select [(ngModel)]="repository.frequencySearch" name="frequencySearch"
+                                                    #frequencySearch="ngModel" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option *ngFor="let item of getFrequencyListFromAPI"
+                                                        value={{item.task_frequency}}>
+                                                        {{item.task_frequency}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Active/Inactive</label>
+                                                <select [(ngModel)]="repository.activeInactiveSearch"
+                                                    name="activeInactiveSearch" #activeInactiveSearch="ngModel"
+                                                    class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option value="Active">Active</option>
+                                                    <option value="Inactive">Inactive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Legislation</label>
+                                                <select (change)="ValidateLegislation(legislationSearch.value)"
+                                                    [(ngModel)]="repository.legislationSearch" name="legislationSearch"
+                                                    #legislationSearch="ngModel" class="form-control">
+                                                    <option value="0">Select</option>
+                                                    <option *ngFor="let item of getLegislationListFromAPI"
+                                                        value={{item.task_legi_id}}>
+                                                        {{item.task_legi_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Rule</label>
+                                                <select [(ngModel)]="repository.ruleSearch" name="ruleSearch"
+                                                    #ruleSearch="ngModel" class="form-control">
+                                                    <option value="0">Select</option>
+                                                    <option *ngFor="let item of getRuleListFromAPI"
+                                                        value={{item.task_rule_id}}>
+                                                        {{item.task_rule_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Events</label>
+                                                <select (change)="ValidateEvents(eventsSearch.value)"
+                                                    [(ngModel)]="repository.eventsSearch" name="eventsSearch"
+                                                    #eventsSearch="ngModel" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option *ngFor="let item of getEventListFromAPI"
+                                                        value={{item.task_Event}}>
+                                                        {{item.task_Event}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Sub-Events</label>
+                                                <select [(ngModel)]="repository.subEventsSearch" name="subEventsSearch"
+                                                    #subEventsSearch="ngModel" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option *ngFor="let item of getSub_EventListFromAPI"
+                                                        value={{item.task_Sub_Event}}>
+                                                        {{item.task_Sub_Event}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Event based task</label>
+                                                <select name="event-based" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <div class="box-footer text-center">
+                                    <button type="submit" class="btn btn-success">Search</button>
+                                    <button type="button" (click)="AdvanceSearchFunction()"
+                                        class="btn btn-primary">Advance Search</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="box box-defualt">
+                            <form #repositorySearchPerticularID="ngForm" (ngSubmit)="SearchPerticularID()">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Search By Client Task Id</h3>
+                                </div>
+                                <div class="box-body">
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Task Id</label>
+                                                <input [(ngModel)]="searchByID" #searchByIDVar="ngModel" required
+                                                    name="searchByID" type="text" class="form-control"
+                                                    placeholder="Entity Name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="box-footer text-center">
+                                                <button [disabled]="repositorySearchPerticularID.form.invalid"
+                                                    type="submit" class="btn btn-success">Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </form>
+                        </div>
+                        <div class="box box-defualt  ">
+                            <div class="box-body" *ngIf="responseData?.length != 0">
+                                <div class="btn-group">
+                                    <button type="button" (click)="exportExcel()" class="btn btn-success"><i
+                                            class="fa fa-download"></i> &emsp; Excel</button>
+                                    <button style="display: none;" type="button" (click)="exportPDF()"
+                                        class="btn btn-primary"><i class="fa fa-download"></i> &emsp; PDF</button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr. No.</th>
+                                                <th></th>
+                                                <th>Client Task ID</th>
+                                                <th>Legislation</th>
+                                                <th>Rule</th>
+                                                <th>Reference</th>
+                                                <th>Who</th>
+                                                <th>When</th>
+                                                <th>Activity</th>
+                                                <th>Procedure</th>
+                                                <th>Impact</th>
+                                                <th>Frequency</th>
+                                                <th>Legal Due date</th>
+                                                <th> Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="responseData?.length <= 0">
+                                            <tr>
+                                                <td colspan="12" class="text-center">
+                                                    Data not available !
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngIf="responseData?.length != 0">
+                                            <tr
+                                                *ngFor="let item of responseData | paginate: {id: 'repositoryData', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+                                                <td class="text-center">{{( i + 1) + (Pagination.CurrentPage - 1) *
+                                                    Pagination.ItemsPerPage}}</td>
+                                                <td>
+                                                    <i style="cursor: pointer;" class="fa fa-2x fa-info-circle"
+                                                        (click)="DataOnClick(item.tmap_client_task_id)"
+                                                        data-toggle="modal" data-target="#myModal"></i>
+                                                    <i style="cursor: pointer;" *ngIf="item.document_attached > 0"
+                                                        class="fa fa-2x fa-file-pdf-o"></i>
+                                                </td>
+                                                <td><a href="javascript:void(0)"
+                                                        (click)="showTaskDetailsPage(item.tmap_client_task_id)">{{item.tmap_client_task_id}}</a>
+                                                </td>
+                                                <td>{{item.task_legi_name}}</td>
+                                                <td>{{item.task_rule_name}}</td>
+                                                <td>{{item.task_reference}}</td>
+                                                <td>{{item.task_activity_who}}</td>
+                                                <td>{{item.task_activity_when}}</td>
+                                                <td>{{item.task_activity}}</td>
+                                                <td>{{item.task_procedure}}</td>
+                                                <td>{{item.task_impact}}</td>
+                                                <td>{{item.task_frequency_for_operation}}</td>
+                                                <td>{{item.task_legal_due_date}}</td>
+                                                <td>{{item.task_pr_due_date}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div *ngIf="responseData?.length != 0">
+                                        <pagination-controls id="repositoryData" maxSize="5" directionLinks="true"
+                                            (pageChange)="Pagination.CurrentPage=$event">
+                                        </pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">More Information</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="table-responsive">
+                                    <table class=" table table-bordered mt10">
+                                        <tbody>
+                                            <tr>
+                                                <td>Unit Task ID :</td>
+                                                <td>{{responseDataOnClick.tmap_client_task_id}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Entity :</td>
+                                                <td>{{responseDataOnClick.orga_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Unit :</td>
+                                                <td>{{responseDataOnClick.loca_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Function :</td>
+                                                <td>{{responseDataOnClick.dept_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Owner :</td>
+                                                <td>{{responseDataOnClick.performer_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Approver :</td>
+                                                <td>{{responseDataOnClick.reviewer_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Function Head :</td>
+                                                <td>{{responseDataOnClick.function_head_name}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+
+
+<div class="content-wrapper" *ngIf="showTaskDetails">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="back_dashbord">
+                    <a href="javascript:void(0)" (click)="showRepositoryPage()"
+                        class="btn btn-primary btn_back">Back</a>
+                    <app-dashboardtaskdetails [FromParentData]='parentData'>
+                    </app-dashboardtaskdetails>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+</div>

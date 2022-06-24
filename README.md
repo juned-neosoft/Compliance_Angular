@@ -1,2 +1,2 @@
-# Compliance_Angular
-Compliance_Angular
+# emcureComp
+Project Emcure Compliance UI

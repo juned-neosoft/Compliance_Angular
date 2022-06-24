@@ -1,0 +1,240 @@
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Main content -->
+      <section class="content">
+
+        <div class="row">
+          <div class="col-md-12">
+            <nav class="" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a>
+                </li>
+                <li class="breadcrumb-item"><a [routerLink]="['/users']" routerLinkActive="router-link-active">Users</a>
+                </li>
+                <li class="active breadcrumb-item" aria-current="page">Edit Users</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+
+        <div class="box box-defualt  ">
+          <div class="box-header with-border">
+            <h3 class="box-title">Edit User</h3>
+          </div>
+          <div class="box-body">
+
+
+            <form #createUsersForm="ngForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+              <div class="col-lg-12">
+
+                <p style="color: red;">* Mandatory Fields</p>
+
+              </div>
+              <div class="f_form_content">
+                <div class="col-md-12">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">First Name:<i
+                          class="asterisk_input">*</i></label>
+
+                      <div class="col-sm-9">
+                        <input type="text" [(ngModel)]="usersData.user_first_name" #user_first_name="ngModel" required
+                          class="form-control" name="user_first_name" placeholder="Enter First Name">
+                        <small [class.d-none]="user_first_name.valid || user_first_name.untouched"
+                          class="text-danger">This is a required field.</small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">Last Name:<i class="asterisk_input"></i></label>
+                      <div class="col-sm-9">
+                        <input type="text" [(ngModel)]="usersData.user_last_name" #user_last_name="ngModel"
+                          class="form-control" required name="user_last_name" placeholder="Enter Last Name">
+                        <small [class.d-none]="user_last_name.valid || user_last_name.untouched"
+                          class="text-danger">This is a required field.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">Mobile No.:</label>
+                      <div class="col-sm-9">
+                        <input type="text" [(ngModel)]="usersData.user_mobile" #user_mobile="ngModel"
+                          class="form-control" required name="user_mobile" placeholder="Enter Mobile Number">
+                        <small [class.d-none]="user_mobile.valid || user_mobile.untouched" class="text-danger">This is a
+                          required field.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">Mail ID:<i class="asterisk_input"></i></label>
+                      <div class="col-sm-9">
+                        <input type="email" [(ngModel)]="usersData.user_email" #user_email="ngModel"
+                          class="form-control" required name="user_email" placeholder="Enter user_email-id">
+                        <small [class.d-none]="user_email.valid || user_email.untouched" class="text-danger">This is a
+                          required field.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">User Name:<i class="asterisk_input"></i></label>
+                      <div class="col-sm-9">
+                        <input type="text" [(ngModel)]="usersData.user_username" #user_username="ngModel"
+                          class="form-control" required name="user_username" placeholder="Enter User Name">
+                        <small [class.d-none]="user_username.valid || user_username.untouched" class="text-danger">This
+                          is a required field.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">IsEnable:<i class="asterisk_input"></i></label>
+                      <div class="col-sm-9">
+                        <input type="checkbox" id="isEnable" [(ngModel)]="usersData.isEnable" #isEnable="ngModel" name="isEnable">
+                        <label for="isEnable" *ngIf="usersData.isEnable==true"> &nbsp; Enable</label>
+                        <label for="isEnable" *ngIf="usersData.isEnable==false"> &nbsp; Disable</label>
+                      </div>
+                    </div>
+                    <!-- <div class="form-group ng-scope">
+                      <label class="control-label col-sm-3" for="sel1">User Password:</label>
+                      <div class="col-sm-9">
+                        <input type="password" [(ngModel)]="usersData.user_userpassword" #user_userpassword="ngModel"
+                          class="form-control" required name="user_userpassword" placeholder="Enter Password"><i
+                          class="asterisk_input"></i>
+                        <small [class.d-none]="user_userpassword.valid || user_userpassword.untouched"
+                          class="text-danger">This is a required field.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group ng-scope" ng-if="userObj.user_id==0">
+                      <label class="control-label col-sm-3" for="sel1">Confirm Password:<i
+                          class="asterisk_input"></i></label>
+                      <div class="col-sm-9">
+                        <input type="password"
+                          class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern"
+                          required name="confirmPassword" [(ngModel)]="usersData.confirmPassword"
+                          #confirmPassword="ngModel" placeholder="Enter Confirm Password">
+                      </div>
+                    </div> -->
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">Entity:</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" required [(ngModel)]="usersData.user_organization_id"
+                          name="user_organization_id" #user_organization_id="ngModel" (change)="changeUnit()">
+                          <option value="0" selected>--Select--</option>
+                          <option *ngFor="let item of entityListFromAPI" value={{item.orga_id}}>
+                            {{item.orga_name}}</option>
+                        </select><i class="asterisk_input"></i>
+                        <small [class.d-none]="user_organization_id.valid || user_organization_id.untouched"
+                          class="text-danger">This is a required field.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">Unit:</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" required name="user_location_id" #user_location_id="ngModel"
+                          [(ngModel)]="usersData.user_location_id" (change)="changeFunction()">
+                          <option value="0" selected>--Select--</option>
+                          <option *ngFor="let item of unitListBinding" value={{item.loca_id}}>
+                            {{item.loca_name}}</option>
+                        </select><i class="asterisk_input"></i>
+                        <small [class.d-none]="user_location_id.valid || user_location_id.untouched"
+                          class="text-danger">This is a required field.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">Function:</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" required [(ngModel)]="usersData.user_department_id"
+                          #user_department_id="ngModel" name="user_department_id">
+                          <option value="0" selected>--Select--</option>
+                          <option *ngFor="let item of functionListBinding" value={{item.dept_id}}>
+                            {{item.dept_name}}</option>
+                        </select><i class="asterisk_input"></i>
+                        <small [class.d-none]="user_department_id.valid || user_department_id.untouched"
+                          class="text-danger">This is a required field.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">Employee ID:</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" [(ngModel)]="usersData.user_employee_id"
+                          #user_employee_id="ngModel" name="user_employee_id" placeholder="Enter Employee ID">
+
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">Designation:</label>
+                      <div class="col-sm-9">
+                        <select [(ngModel)]="usersData.user_designation_id" #user_designation_id="ngModel"
+                          class="form-control" name="user_designation_id">
+                          <option value="0" selected>--Select--</option>
+                          <option *ngFor="let item of designationListFromAPI" value={{item.desi_id}}>
+                            {{item.desi_name}}</option>
+                        </select>
+                        <small [class.d-none]="user_designation_id.valid || user_designation_id.untouched"
+                          class="text-danger">This is a required field.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">Role:</label>
+                      <div class="col-sm-9">
+                        <select required class="form-control" [(ngModel)]="usersData.user_role_id"
+                          #user_role_id="ngModel" name="user_role_id">
+                          <option value="0" selected>--Select--</option>
+                          <option *ngFor="let item of roleListFromAPI" value={{item.user_role_id}}>
+                            {{item.user_role_name}}</option>
+                        </select><i class="asterisk_input"></i>
+                        <small [class.d-none]="user_role_id.valid || user_role_id.untouched" class="text-danger">This is
+                          a required field.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">Address:</label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" [(ngModel)]="usersData.user_address" #user_address="ngModel"
+                          rows="4" cols="6" name="user_address" placeholder="Enter Address"></textarea>
+
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="sel1">Address:</label>
+                      <div class="col-sm-9">
+                        <a href="javascript:void(0)" class="action-icon btn btn-default" title="Access Users"
+                        (click)="accessButton(usersData.user_id)"><i class="fa fa-edit"></i> User Access</a>
+
+
+                      </div>
+                    </div>
+
+                    
+
+                  </div>
+
+                  <div class="col-md-4 form-group">
+                    <button type="submit" [disabled]="createUsersForm.form.invalid"
+                      class="btn btn-primary label-margin">Update</button>
+                  </div>
+
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+
+
+  
+      </section>
+      <!-- /.content -->
+    </div>
+  </div>
+  <!-- /.container -->
+</div>

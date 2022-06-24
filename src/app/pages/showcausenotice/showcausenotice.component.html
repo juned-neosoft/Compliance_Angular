@@ -1,0 +1,158 @@
+<div class="content-wrapper">
+   <div class="container-fluid">
+      <div class="row">
+         <!-- Main content -->
+         <section class="content">
+
+            <div class="row">
+               <div class="col-md-12">
+                  <nav class="" aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                              routerLinkActive="router-link-active">Home</a></li>
+                        <li class="active breadcrumb-item" aria-current="page">Show Cause Notices</li>
+                     </ol>
+                  </nav>
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="box box-defualt  ">
+                     <form #showCauseNoticeForm="ngForm" (ngSubmit)="onSubmit()">
+                        <div class="box-header with-border">
+                           <h3 class="box-title">Show Cause Notices Search</h3>
+                        </div>
+                        <div class="box-body">
+                           <div class="row">
+                              <div class="col-md-4 ">
+                                 <div class="form-group">
+                                    <label>Entity</label>
+                                    <select class="form-control" [(ngModel)]="selectedEntity" name="selectedEntity"
+                                       (change)="changeUnit()" #selectedEntityVar="ngModel">
+                                       <option value="0">Select Entity</option>
+                                       <option *ngFor="let item of entityListFromAPI" value={{item.orga_id}}>
+                                          {{item.orga_name}}</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Unit</label>
+                                    <select class="form-control" [(ngModel)]="selectedUnit" name="selectedUnit"
+                                       (change)="changeFunction()" #selectedUnitVar="ngModel">
+                                       <option value="0">Select Unit</option>
+                                       <option *ngFor="let item of unitListBinding" value={{item.loca_id}}>
+                                          {{item.loca_name}}</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <label>Function</label>
+                                    <select class="form-control" [(ngModel)]="selectedFunction" name="selectedFunction"
+                                       #selectedFunctionVar="ngModel">
+                                       <option value="0">Select Function</option>
+                                       <option *ngFor="let item of functionListBinding" value={{item.dept_id}}>
+                                          {{item.dept_name}}</option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="box-footer text-center">
+                           <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                     </form>
+                     <!-- /.box-body -->
+                  </div>
+                  <div class="box box-defualt  ">
+                     <div class="box-header with-border">
+                        <h3 class="box-title">Show Cause Notices</h3>
+                        <!-- <a class="pull-right btn btn-primary" routerLink="/create-show-cause-notice">
+                           <i class="fa fa-plus"></i> Add ShowCauseNotice
+                        </a> -->
+                        <a class="pull-right btn btn-primary" routerLink="/create-show-cause-notice">
+                           <i class="fa fa-plus"></i> Add Show Cause Notice
+                        </a>
+                     </div>
+                     <div class="box-body" *ngIf="responseData?.length != 0">
+                        <div class="btn-group">
+                           <button type="button" (click)="exportExcel()" class="btn btn-success"><i
+                                 class="fa fa-download"></i> &emsp; Excel</button>
+                           <button style="display: none;" type="button" (click)="exportPDF()" class="btn btn-primary"><i
+                                 class="fa fa-download"></i> &emsp; PDF</button>
+                        </div>
+                     </div>
+                     <div class="box-body">
+                        <div class="table-responsive">
+                           <table class="table table-hover table-condensed custom-table table table-bordered">
+                              <thead>
+                                 <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Entity</th>
+                                    <th>Unit</th>
+                                    <th>Function</th>
+                                    <th>Show Cause Related to</th>
+                                    <th>Notice Date</th>
+                                    <th>Received Date</th>
+                                    <th>Deadline Date</th>
+                                    <th>Action Taken</th>
+                                    <th>Responsible Person</th>
+                                    <th>Reporting person</th>
+                                    <th>Remainder Date</th>
+                                    <th>Update</th>
+                                    <th>Status</th>
+                                 </tr>
+                              </thead>
+                              <tbody *ngIf="responseData?.length <= 0">
+                                 <tr>
+                                    <td colspan="4" class="text-center">
+                                       Data not available !
+                                    </td>
+                                 </tr>
+                              </tbody>
+                              <tbody *ngIf="responseData?.length != 0">
+                                 <tr
+                                    *ngFor="let item of responseData | paginate: {id: 'showCauseNoitceData', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+                                    <td class="text-center">{{( i + 1) + (Pagination.CurrentPage - 1) *
+                                       Pagination.ItemsPerPage}}</td>
+                                    <td>{{item.orga_name}}</td>
+                                    <td>{{item.loca_name}}</td>
+                                    <td>{{item.dept_name}}</td>
+                                    <td>{{item.related_to}}</td>
+                                    <td>{{item.notice_date}}</td>
+                                    <td>{{item.recieved_date}}</td>
+                                    <td>{{item.deadline_date}}</td>
+                                    <td>{{item.action_taken}}</td>
+                                    <td>{{item.responsible_user_name}}</td>
+                                    <td>{{item.reporting_user_name}}</td>
+                                    <td>{{item.reminder_date}}</td>
+                                    <td class="text-center">
+                                       <a (click)="editButton(item.scau_id)" class="action-icon" title="Edit"><i
+                                             class="fa fa-edit"></i></a>
+                                    </td>
+                                    <td>{{item.status}}</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                           <div *ngIf="responseData?.length != 0">
+                              <pagination-controls id="showCauseNoitceData" maxSize="5" directionLinks="true"
+                                 (pageChange)="Pagination.CurrentPage=$event"></pagination-controls>
+                           </div>
+                        </div>
+
+                     </div>
+
+                     <!-- /.box-body -->
+                  </div>
+               </div>
+
+            </div>
+            <!-- /.box -->
+         </section>
+         <!-- /.content -->
+      </div>
+   </div>
+   <!-- /.container -->
+</div>

@@ -1,0 +1,119 @@
+<!-- <p>querybuilder works!</p> -->
+
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <nav class="" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a>
+                </li>
+                <!-- <li class="breadcrumb-item"><a [routerLink]="['/task-mapping']" routerLinkActive="router-link-active">Task Mapping</a></li> -->
+                <li class="active breadcrumb-item" aria-current="page">Query Builder</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="box box-defualt">
+              <div class="box-header with-border">
+                <h3 class="box-title">Query Builder</h3>
+              </div>
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+
+                    <div class="panel-group accordion" id="accordion">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Task Deletion</a>
+                          </h4>
+                        </div>
+                        <form #taskDeleteFrom="ngForm">
+                          <div id="collapse1" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <label>Client Tasks ID's<span class="mandatory">*</span></label>
+                                <textarea class="form-control text_area" [(ngModel)]="varTaskDelete" name="taskDelete"
+                                  #taskDelete="ngModel" required></textarea>
+                                <small [class.d-none]="taskDelete.valid || taskDelete.untouched"
+                                  class="text-danger">This
+                                  field is required.
+                                </small>
+                              </div>
+                              <div class="clearfix"></div>
+                              <button type="submit" class="btn btn-success" (click)="TaskDeleteQuery()"
+                                [disabled]="taskDeleteFrom.form.invalid">Submit</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Task DeActivation</a>
+                          </h4>
+                        </div>
+                        <form #DeativateForm="ngForm">
+                          <div id="collapse2" class="panel-collapse collapse">
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <label>Client Tasks ID's<span class="mandatory">*</span></label>
+                                <textarea class="form-control text_area" [(ngModel)]="varTaskDeactivate"
+                                  name="TaskDeactivate" #TaskDeactivate="ngModel" required></textarea>
+                                <small [class.d-none]="TaskDeactivate.valid || TaskDeactivate.untouched"
+                                  class="text-danger">This
+                                  field is required.
+                                </small>
+                              </div>
+                              <div class="clearfix"></div>
+                              <button type="submit" class="btn btn-success" (click)="TaskDeActivationQuery()"
+                                [disabled]="DeativateForm.form.invalid">Submit</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Task disabled</a>
+                          </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse">
+                          <form #desableForm="ngForm">
+                            <div class="panel-body">
+                              <div class="form-group">
+                                <label>Client Tasks ID's<span class="mandatory">*</span></label>
+                                <textarea class="form-control text_area" [(ngModel)]="varTaskDesable" name="TaskDesable"
+                                  #TaskDesable="ngModel" required></textarea>
+                                <small [class.d-none]="TaskDesable.valid || TaskDesable.untouched"
+                                  class="text-danger">This
+                                  field is required.
+                                </small>
+                              </div>
+                              <div class="clearfix"></div>
+                              <button type="submit" class="btn btn-success" (click)="TaskDesableQuery()"
+                                [disabled]="desableForm.form.invalid">Submit</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.box -->
+      </section>
+      <!-- /.content -->
+    </div>
+  </div>
+  <!-- /.container -->
+</div>

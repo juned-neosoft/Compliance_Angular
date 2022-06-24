@@ -1,0 +1,208 @@
+<div class="content-wrapper" *ngIf="showCalendar">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <li class="active breadcrumb-item" aria-current="page">Calendar</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="box box-defualt  ">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Search</h3>
+                            </div>
+                            <form #calendarForm="ngForm" (ngSubmit)="onSearch()">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Entity <span class="mandatory">*</span></label>
+                                                <select (change)="ValidateEntityFilter(entitySearch.value)"
+                                                    [(ngModel)]="calendar.entitySearch" required name="entitySearch"
+                                                    #entitySearch="ngModel" class="form-control">
+                                                    <option value="0">Select Entity</option>
+                                                    <option *ngFor="let item of getEntityListFromAPI"
+                                                        value={{item.orga_id}}>
+                                                        {{item.orga_name}}</option>
+                                                </select>
+                                                <small [class.d-none]="!entityHasError || entitySearch.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Unit</label>
+                                                <select (change)="ValidateUnitFilter()"
+                                                    [(ngModel)]="calendar.unitSearch" name="unitSearch"
+                                                    #unitSearch="ngModel" class="form-control">
+                                                    <option value="0">Select Unit</option>
+                                                    <option *ngFor="let item of getUnitListFromAPI"
+                                                        value={{item.loca_id}}>
+                                                        {{item.loca_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Function</label>
+                                                <select (change)="ValidateFunctionFilter()"
+                                                    [(ngModel)]="calendar.functionSearch" name="functionSearch"
+                                                    #functionSearch="ngModel" class="form-control">
+                                                    <option value="0">Select Function</option>
+                                                    <option *ngFor="let item of getFunctionListFromAPI"
+                                                        value={{item.dept_id}}>
+                                                        {{item.dept_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Owner</label>
+                                                <select (change)="ValidateOwnerFilter()"
+                                                    [(ngModel)]="calendar.ownerSearch" name="ownerSearch"
+                                                    #ownerSearch="ngModel" class="form-control">
+                                                    <option value="0">Select Owner</option>
+                                                    <option *ngFor="let item of getOwnerListFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Approver</label>
+                                                <select (change)="ValidateApproverFilter()"
+                                                    [(ngModel)]="calendar.approverSearch" name="approverSearch"
+                                                    #approverSearch="ngModel" class="form-control">
+                                                    <option value="0">Select Approver</option>
+                                                    <option *ngFor="let item of getAppoverListFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Function Head</label>
+                                                <select (change)="ValidateFunctionHeadFilter()"
+                                                    [(ngModel)]="calendar.functionHeadSearch" name="functionHeadSearch"
+                                                    #functionHeadSearch="ngModel" class="form-control">
+                                                    <option value="0">Select Function Head</option>
+                                                    <option *ngFor="let item of getFunctionHeadListFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <div class="box-footer text-center">
+                                    <button [disabled]="calendarForm.form.invalid || entityHasError" type="submit"
+                                        class="btn btn-success">Search</button>
+                                </div>
+                                <div class="box-footer text-left">
+                                    <strong class="mandatory">Note: 90 days data is available in the Dashboard</strong>    
+                                </div>
+                            </form>
+                        </div>
+                        <div class="box box-defualt  ">
+
+                            <div class="box-body">
+                                <full-calendar (click)="handleDateClick($event)" defaultView="dayGridMonth"
+                                    [plugins]="calendarPlugins" [weekends]="true" [events]="Events"></full-calendar>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">More Information</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="table-responsive">
+                                    <table class=" table table-bordered mt10">
+                                        <tbody>
+                                            <tr>
+                                                <td>Unit Task ID :</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Entity :</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Unit :</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Function :</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Owner :</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Approver :</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Function Head :</td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+
+<div class="content-wrapper" *ngIf="showTaskDetails">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="back_dashbord">
+                    <a href="javascript:void(0)" (click)="showCalendarPage()" class="btn btn-primary btn_back">Back</a>
+                    <app-dashboardtaskdetails [FromParentData]='parentData'>
+                    </app-dashboardtaskdetails>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+</div>

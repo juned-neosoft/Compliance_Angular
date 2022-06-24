@@ -1,0 +1,60 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <section class="content">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <li class="breadcrumb-item"><a [routerLink]="['/roles']"
+                                        routerLinkActive="router-link-active">Roles</a>
+                                </li>
+                                <li class="active breadcrumb-item" aria-current="page">Create Roles</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="box box-defualt  ">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Create Role</h3>
+                    </div>
+                    <div class="box-body">
+                        <form #createRoleForm="ngForm">
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Role Name</label>
+                                    <input required type="text" class="form-control" placeholder="Role Name"
+                                        name="user_role_name" [(ngModel)]="addRoleForm.user_role_name"
+                                        (change)="onChangeEvent($event)" #user_role_name="ngModel" required>
+                                    <small [class.d-none]="user_role_name.valid || user_role_name.untouched"
+                                        class="text-danger">Role is required field.
+                                    </small>
+
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label>Description</label>
+                                    <input required type="text" class="form-control" placeholder="Description"
+                                        name="description" [(ngModel)]="addRoleForm.description" #description="ngModel"
+                                        required>
+                                    <small [class.d-none]="description.valid || description.untouched"
+                                        class="text-danger">Description is required field.
+                                    </small>
+                                </div>
+
+                                <div class="col-md-4 form-group">
+                                    <button type="submit" (click)="SubmitFrom()"
+                                        [disabled]="createRoleForm.form.invalid"
+                                        class="btn btn-primary label-margin">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

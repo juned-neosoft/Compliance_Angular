@@ -1,0 +1,72 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+       <div class="row">
+          <!-- Main content -->
+          <section class="content">
+             <div class="row">
+                <div class="col-md-12">
+                   <nav class="" aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                         <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                               routerLinkActive="router-link-active">Home</a></li>
+                         <li class="active breadcrumb-item" aria-current="page">Import Entity</li>
+                      </ol>
+                   </nav>
+                </div>
+             </div>
+             <div class="row">
+ 
+                <div class="col-md-12">
+                   <div class="box box-defualt  ">
+                      <div class="box-header with-border">
+                         <h3 class="box-title">Import Entity</h3>
+                      </div>
+                      <div class="box-body">
+                         <form #importLegalTaskForm="ngForm">
+                            <div class="row">
+ 
+                               <div class="col-md-12">
+                                  <div class="form-group">
+                                     <div class="row">
+                                        <label class="col-md-3">Browse Patch File <span style="color: red;">*</span> <span
+                                              class="notice-msg">(*.CSV)</span></label>
+                                        <div class="col-md-3">
+                                           <input #fileuploadcontrol type="file" class="form-control file-input"
+                                              [(ngModel)]="file" (change)="onFileChange($event)" name="FileUpload"
+                                              #FileUpload="ngModel" required>
+                                           <small [class.d-none]="FileUpload.valid || FileUpload.untouched"
+                                              class="text-danger"> Please select csv file.
+                                           </small>
+                                        </div>
+                                     </div>
+                                  </div>
+                               </div>
+                               <div class="col-md-12">
+                                  <div class="form-group">
+                                     <div class="row">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-3">
+                                           <button type="submit" class="btn btn-success" (click)="SubmitForm()"
+                                              [disabled]="importLegalTaskForm.form.invalid">Upload</button>
+                                           <span class="notice-msg">(Press Here to Upload File!)</span>
+                                        </div>
+                                     </div>
+                                  </div>
+                               </div>
+                            </div>
+                         </form>
+                      </div>
+ 
+                      <!-- /.box-body -->
+                   </div>
+ 
+                </div>
+ 
+             </div>
+             <!-- /.box -->
+          </section>
+          <!-- /.content -->
+       </div>
+    </div>
+    <!-- /.container -->
+ </div>

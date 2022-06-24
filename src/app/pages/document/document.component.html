@@ -1,0 +1,156 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <li class="active breadcrumb-item" aria-current="page">Documents</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="box box-defualt  ">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Document</h3>
+                    </div>
+                    <div class="box-body">
+                        <!-- <form #docuntSearcForm="ngForm"  class="form-horizontal"> -->
+                        <div class="f_form_content">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label col-sm-3" for="sel1">Entity:<i
+                                                class="asterisk_input">*</i></label>
+
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="entity" [(ngModel)]="dodumentForm.entity"
+                                                #entity="ngModel" (change)="changeUnit()" required>
+                                                <option value="0" selected>---Select---</option>
+                                                <option *ngFor="let item of entityListFromAPI" value={{item.orga_id}}>
+                                                    {{item.orga_name}}</option>
+                                            </select>
+                                            <small [class.d-none]="entity.value!='0' || entity.untouched"
+                                                class="text-danger">This is a required field.</small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label col-sm-3" for="sel1">Unit:<i
+                                                class="asterisk_input"></i></label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="unit" [(ngModel)]="dodumentForm.unit"
+                                                (change)="changeFunction()">
+                                                <option value="0" selected>---Select---</option>
+                                                <option *ngFor="let item of ListUnit" value={{item.loca_id}}>
+                                                    {{item.loca_name}}</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label col-sm-3" for="sel1">Function:</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="function"
+                                                [(ngModel)]="dodumentForm.function">
+                                                <option value="0" selected>---Select---</option>
+                                                <option *ngFor="let item of listFunction" value={{item.dept_id}}>
+                                                    {{item.dept_name}}</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 form-group">
+                                    <button type="submit" class="btn btn-success label-margin">Search</button>
+                                </div>
+                                <div class="col-md-12" *ngIf="ListData?.length != 0">
+                                    <div class="col-md-3"
+                                        *ngFor="let item of ListData | paginate: {id: 'ListData', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+                                        <div class="panel panel-default" style="cursor: pointer;"
+                                            >
+                                            <div class="panel-heading text-center">
+                                                <a href="javascript:void(0)" (click)="DownloadFile(item.doc_id,item.doc_name)">
+                                                    <i class="fa fa-file-pdf" style="color: black; font-size: 30px;"></i>
+                                                </a>
+                                            </div>
+                                            <div class="panel-body text-center">
+                                                <a href="javascript:void(0)" (click)="DownloadFile(item.doc_id,item.doc_name)">
+                                                    {{item.tmap_client_task_id}} <br /> {{item.doc_name}}
+                                                </a>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div *ngIf="ListData?.length != 0">
+                                        <pagination-controls id="ListData" maxSize="7" directionLinks="true"
+                                            (pageChange)="Pagination.CurrentPage=$event"></pagination-controls>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" *ngIf="ListData?.length == 0">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading text-center">
+                                                <i class="fa fa-file-pdf" style="color: black; font-size: 30px;"></i>
+                                            </div>
+                                            <div class="panel-body text-center">
+                                                Data not found
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="table-responsive">
+                                        <table class=" table table-bordered mt10">
+
+                                            <tbody *ngIf="ListData?.length <= 0">
+                                                <tr>
+                                                    <td colspan="3" class="text-center">
+                                                        Data not available !
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody *ngIf="ListData?.length != 0">
+                                                <tr
+                                                    *ngFor="let item of ListData | paginate: {id: 'ListData', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+
+                                                    <td style="color: blue;" (click)="DownloadFile(item.doc_id)"><i
+                                                            class="fa fa-file"
+                                                            style="color: black;"></i><br>{{item.tmap_client_task_id}}
+                                                        <br>{{item.doc_name}}
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div *ngIf="ListData?.length != 0">
+                                            <pagination-controls id="ListData" maxSize="7" directionLinks="true"
+                                                (pageChange)="Pagination.CurrentPage=$event"></pagination-controls>
+                                        </div>
+                                    </div> -->
+                            </div>
+                            <br>
+
+
+                        </div>
+                        <!-- </form> -->
+
+                    </div>
+                    <!-- </form> -->
+
+                </div>
+                <!-- /.box-body -->
+
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+    <!-- /.container -->
+</div>

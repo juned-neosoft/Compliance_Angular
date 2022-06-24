@@ -1,0 +1,363 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <li class="breadcrumb-item"><a [routerLink]="['/task-mapping']"
+                                        routerLinkActive="router-link-active">Task Mapping</a></li>
+                                <li class="active breadcrumb-item" aria-current="page">Change Compliance Owner</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-12">
+                        <form #TaskMappingChangeComplianceOwnerForm="ngForm" (ngSubmit)="onSearch()">
+                            <div class="box box-defualt  ">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Search</h3>
+                                </div>
+                                <div class="box-body">
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Entity </label>
+                                                <select [(ngModel)]="changeComplianceOwnerFilter.entityFilter"
+                                                    name="entityFilter" #entityFilter="ngModel"
+                                                    (change)="ValidateEntityFilter(entityFilter.value)"
+                                                    class="form-control">
+                                                    <option value="0">Select Entity</option>
+                                                    <option *ngFor="let item of getEntityListFilterFromAPI"
+                                                        value={{item.orga_id}}>
+                                                        {{item.orga_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Unit </label>
+                                                <select [(ngModel)]="changeComplianceOwnerFilter.unitFilter"
+                                                    name="unitFilter" #unitFilter="ngModel"
+                                                    (change)="ValidateUnitFilter(unitFilter.value)"
+                                                    class="form-control">
+                                                    <option value="0">Select Unit</option>
+                                                    <option *ngFor="let item of getUnitListFilterFromAPI"
+                                                        value={{item.loca_id}}>
+                                                        {{item.loca_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Function </label>
+                                                <select [(ngModel)]="changeComplianceOwnerFilter.functionFilter"
+                                                    name="functionFilter" #functionFilter="ngModel"
+                                                    (change)="ValidateFunctionFilter(functionFilter.value)"
+                                                    class="form-control">
+                                                    <option value="0">Select Function</option>
+                                                    <option *ngFor="let item of getFunctionListFilterFromAPI"
+                                                        value={{item.dept_id}}>
+                                                        {{item.dept_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Owner </label>
+                                                <select [(ngModel)]="changeComplianceOwnerFilter.ownerFilter"
+                                                    name="entityFilter" #ownerFilter="ngModel"
+                                                    (change)="ValidateOwnerFilter(ownerFilter.value)"
+                                                    class="form-control">
+                                                    <option value="0">Select Owner</option>
+                                                    <option *ngFor="let item of getOwnerListFilterFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Approver </label>
+                                                <select [(ngModel)]="changeComplianceOwnerFilter.approverFilter"
+                                                    name="approverFilter" #approverFilter="ngModel"
+                                                    (change)="ValidateApproverFilter(approverFilter.value)"
+                                                    class="form-control">
+                                                    <option value="0">Select Approver</option>
+                                                    <option *ngFor="let item of getApproverListFilterFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Function Head</label>
+                                                <select [(ngModel)]="changeComplianceOwnerFilter.functionHeadFilter"
+                                                    name="functionHeadFilter" #functionHeadFilter="ngModel"
+                                                    (change)="ValidateFunctionHeadFilter(functionHeadFilter.value)"
+                                                    class="form-control">
+                                                    <option value="0">Select Function Head</option>
+                                                    <option *ngFor="let item of getFunctionHeadListFilterFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Legislation </label>
+                                                <select [(ngModel)]="changeComplianceOwnerFilter.legislationFilter"
+                                                    name="legislationFilter" #legislationFilter="ngModel"
+                                                    (change)="ValidateLegislationFilter(legislationFilter.value)"
+                                                    class="form-control">
+                                                    <option value="0">Select Legislation</option>
+                                                    <option *ngFor="let item of getLegislationListFilterFromAPI"
+                                                        value={{item.task_legi_id}}>
+                                                        {{item.task_legi_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Rules </label>
+                                                <select [(ngModel)]="changeComplianceOwnerFilter.rulesFilter"
+                                                    name="rulesFilter" #rulesFilter="ngModel"
+                                                    (change)="ValidateRulesFilter(rulesFilter.value)"
+                                                    class="form-control">
+                                                    <option value="0">Select Rules</option>
+                                                    <option *ngFor="let item of getRulesListFilterFromAPI"
+                                                        value={{item.task_rule_id}}>
+                                                        {{item.task_rule_name}}</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- /.box-body -->
+                                </div>
+                                <div class="box-footer text-center">
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                        <form *ngIf="selectedRecords?.length>0 ? true : false"
+                            #TaskMappingChangeComplianceOwnerAssignForm="ngForm" (ngSubmit)="onAssign()">
+                            <div class="box box-defualt">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">New Compliance Owner</h3>
+                                </div>
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="note-mendatory">* Mendatory Fields</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Entity <span class="mandatory">*</span></label>
+                                                <select (change)="ValidateEntityAssign(entityAssign.value)"
+                                                    [(ngModel)]="changeComplianceOwnerAssign.entityAssign" required
+                                                    name="entityAssign" #entityAssign="ngModel" class="form-control">
+                                                    <option value="0">Select Entity</option>
+                                                    <option *ngFor="let item of getEntityListAssignFromAPI"
+                                                        value={{item.orga_id}}>
+                                                        {{item.orga_name}}</option>
+                                                </select>
+                                                <small [class.d-none]="!entityAssignHasError || entityAssign.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Unit <span class="mandatory">*</span></label>
+                                                <select (change)="ValidateUnitAssign(unitAssign.value)"
+                                                    [(ngModel)]="changeComplianceOwnerAssign.unitAssign" required
+                                                    name="unitAssign" #unitAssign="ngModel" class="form-control">
+                                                    <option value="0">Select Unit</option>
+                                                    <option *ngFor="let item of getUnitListAssignFromAPI"
+                                                        value={{item.loca_id}}>
+                                                        {{item.loca_name}}</option>
+                                                </select>
+                                                <small [class.d-none]="!unitAssignHasError || unitAssign.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Function <span class="mandatory">*</span></label>
+                                                <select (change)="ValidateFunctionAssign(functionAssign.value)"
+                                                    [(ngModel)]="changeComplianceOwnerAssign.functionAssign" required
+                                                    name="functionAssign" #functionAssign="ngModel"
+                                                    class="form-control">
+                                                    <option value="0">Select Function</option>
+                                                    <option *ngFor="let item of getFunctionListAssignFromAPI"
+                                                        value={{item.dept_id}}>
+                                                        {{item.dept_name}}</option>
+                                                </select>
+                                                <small
+                                                    [class.d-none]="!functionAssignHasError || functionAssign.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Owner <span class="mandatory">*</span></label>
+                                                <select (change)="ValidateOwnerAssign(ownerAssign.value)"
+                                                    [(ngModel)]="changeComplianceOwnerAssign.ownerAssign" required
+                                                    name="ownerAssign" #ownerAssign="ngModel" class="form-control">
+                                                    <option value="0">Select Owner</option>
+                                                    <option *ngFor="let item of getOwnerListAssignFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                                <small [class.d-none]="!ownerAssignHasError || ownerAssign.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Approver <span class="mandatory">*</span></label>
+                                                <select (change)="ValidateApproverAssign(approverAssign.value)"
+                                                    [(ngModel)]="changeComplianceOwnerAssign.approverAssign"
+                                                    name="approverAssign" #approverAssign="ngModel"
+                                                    class="form-control">
+                                                    <option value="0">Select Approver</option>
+                                                    <option *ngFor="let item of getApproverListAssignFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                                <small
+                                                    [class.d-none]="!approverAssignHasError || approverAssign.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Function Head <span class="mandatory">*</span></label>
+                                                <select (change)="ValidateFunctionHeadAssign(functionHeadAssign.value)"
+                                                    [(ngModel)]="changeComplianceOwnerAssign.functionHeadAssign"
+                                                    name="functionHeadAssign" #functionHeadAssign="ngModel"
+                                                    class="form-control">
+                                                    <option value="0">Select Function Head</option>
+                                                    <option *ngFor="let item of getFunctionHeadListAssignFromAPI"
+                                                        value={{item.user_id}}>
+                                                        {{item.user_name}}</option>
+                                                </select>
+                                                <small
+                                                    [class.d-none]="!functionHeadAssignHasError || functionHeadAssign.untouched"
+                                                    class="text-danger">This field is a
+                                                    required field.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <div class="box-footer text-center">
+                                    <button
+                                        [disabled]="TaskMappingChangeComplianceOwnerAssignForm.form.invalid || entityAssignHasError || unitAssignHasError||functionAssignHasError ||ownerAssignHasError ||approverAssignHasError ||functionHeadAssignHasError "
+                                        type="submit" class="btn btn-primary">Assign</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="box box-defualt  ">
+
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Total Task : <span>{{responseData?.length}}</span></label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>| Selected Task : <span>{{selectedRecords?.length}}</span></label>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <input *ngIf="responseData?.length != 0"
+                                                        type="checkbox" (click)="checkAllFunction()" />
+                                                </th>
+                                                <th>Sr. No.</th>
+                                                <th>Task ID</th>
+                                                <th>Name of Legislation</th>
+                                                <th>Rule</th>
+                                                <th>Reference</th>
+                                                <th>Who</th>
+                                                <th>When</th>
+                                                <th>Activity</th>
+                                                <th>Procedure</th>
+                                                <th>Owner</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="responseData?.length <= 0">
+                                            <tr>
+                                                <td colspan="11" class="text-center">
+                                                    Data not available !
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngIf="responseData?.length != 0">
+                                            <tr *ngFor="let item of responseData; let i = index">
+                                                <td class="text-center">
+                                                    <input type="checkbox" *ngIf="showAllchecked == false"
+                                                        (click)="checkFunction(item.tmap_id)" />
+                                                    <input *ngIf="showAllchecked == true" type="checkbox" checked
+                                                        (click)="checkFunction(item.tmap_id)" />
+                                                </td>
+                                                <td class="text-center">{{ i + 1}}</td>
+                                                <td>{{item.tmap_client_tasks_id}}</td>
+                                                <td>{{item.task_legi_name}}</td>
+                                                <td>{{item.task_rule_name}}</td>
+                                                <td>{{item.task_reference}}</td>
+                                                <td>{{item.task_activity_who}}</td>
+                                                <td>{{item.task_activity_when}}</td>
+                                                <td>{{item.task_activity}}</td>
+                                                <td>{{item.task_procedure}}</td>
+                                                <td>{{item.executor_name}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- <div *ngIf="responseData?.length != 0">
+                                        <pagination-controls id="taskMappingEnableDisable" maxSize="5"
+                                            directionLinks="true" (pageChange)="Pagination.CurrentPage=$event">
+                                        </pagination-controls>
+                                    </div> -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+    <!-- /.container -->
+</div>

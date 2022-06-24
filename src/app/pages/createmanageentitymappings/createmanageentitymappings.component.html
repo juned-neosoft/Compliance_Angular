@@ -1,0 +1,126 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <li class="breadcrumb-item"><a [routerLink]="['/manageentitymappings']"
+                                        routerLinkActive="router-link-active">Manage Entity Mappings</a>
+                                </li>
+                                <li class="active breadcrumb-item" aria-current="page">Create Manage Entity Mappings
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="box box-defualt  ">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Create Entity Mappings</h3>
+                    </div>
+                    <div class="box-body">
+                        <form #createEntityForm="ngForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Select Entity</label>
+                                    <select class="form-control" (blur)="entityMethod(entity.value)"
+                                        (change)="entityMethod(entity.value)"
+                                        [(ngModel)]="manageentitymappingsData.entity" required name="entity"
+                                        #entity="ngModel">
+                                        <option value="0" selected>Select Entity</option>
+                                        <option *ngFor="let item of entityDropdown" value={{item.orga_id}}>
+                                            {{item.orga_name}}</option>
+                                    </select>
+                                    <small [class.d-none]="!entityMethodHasError || entity.untouched"
+                                        class="text-danger">Entity is a
+                                        required field.
+                                    </small>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label>Select Unit</label>
+                                    <select class="form-control" (blur)="unitMethod(unit.value)"
+                                        (change)="unitMethod(unit.value)" [(ngModel)]="manageentitymappingsData.unit"
+                                        required name="unit" #unit="ngModel">
+                                        <option value="0" selected>Select Unit</option>
+                                        <option *ngFor="let item of unitDropdown" value={{item.loca_id}}>
+                                            {{item.loca_name}}</option>
+                                    </select>
+                                    <small [class.d-none]="!unitMethodHasError || unit.untouched"
+                                        class="text-danger">Unit is a
+                                        required field.
+                                    </small>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label>Select Functions</label>
+                                    <select class="form-control" (blur)="functionMethod(functions.value)"
+                                        (change)="functionMethod(functions.value)"
+                                        [(ngModel)]="manageentitymappingsData.functions" required name="functions"
+                                        #functions="ngModel" multiple>
+                                        <option value="0" disabled selected>Select Functions</option>
+                                        <option *ngFor="let item of functionDropdown" value={{item.dept_id}}>
+                                            {{item.dept_name}}</option>
+                                    </select>
+                                    <small [class.d-none]="!functionMethodHasError || functions.untouched"
+                                        class="text-danger">Functions is a
+                                        required field.
+                                    </small>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <button
+                                        [disabled]="createEntityForm.form.invalid || entityMethodHasError || unitMethodHasError || functionMethodHasError"
+                                        type="submit" class="btn btn-primary label-margin">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+            <section class="content">
+                <div class="box box-defualt">
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class=" table table-bordered mt10">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center w80">Sr. No.</th>
+                                        <th>Entity</th>
+                                        <th>Unit</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="getMappedDepartmentsList?.length <= 0">
+                                    <tr>
+                                        <td colspan="4" class="text-center">
+                                            Mapping not available !
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="getMappedDepartmentsList?.length != 0">
+                                    <tr *ngFor="let item of getMappedDepartmentsList; let i = index">
+                                        <td class="text-center">{{i+1}}</td>
+                                        <td>{{selectedEntityName}}</td>
+                                        <td>{{selectedUnitName}}</td>
+                                        <td>{{item.dept_name}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>

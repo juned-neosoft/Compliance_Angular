@@ -1,0 +1,144 @@
+<!-- <p>compliancecertificate works!</p> -->
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/home']"
+                                        routerLinkActive="router-link-active">Home</a></li>
+                                <!-- <li class="breadcrumb-item"><a [routerLink]="['/task-mapping']" routerLinkActive="router-link-active">Task Mapping</a></li> -->
+                                <li class="active breadcrumb-item" aria-current="page">Generate Certificate</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="box box-defualt  ">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Generate Certificate</h3>
+                                <!-- <a href="" class="btn btn-primary pull-right">Import Assign Task</a> -->
+                            </div>
+                            <form #complianceCertificateForm="ngForm">
+                                <div class="box-body">
+                                    <!-- <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="note-mendatory">* Mendatory Fields</span>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="row">
+                                        <div class="form-group col-md-4 col-md-offset-2">
+                                            <label>From Date<span class="mandatory">*</span></label>
+                                            <div class=""><input class="form-control " id="" name="fromDate"
+                                                    placeholder="From Date" type="date" [(ngModel)]="fromdate"
+                                                    uib-datepicker-popup="dd-MM-yyyy"></div>
+                                            <!-- <small [class.d-none]="!CountryHasError || country.untouched"
+                                                class="text-danger">This field is a required field.
+                                            </small> -->
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>To Date<span class="mandatory">*</span></label>
+                                            <div class=""><input class="form-control " id="" name="toDate"
+                                                    placeholder="From Date" type="date" [(ngModel)]="todate"
+                                                    uib-datepicker-popup="dd-MM-yyyy"></div>
+                                            <!-- <small [class.d-none]="!CountryHasError || country.untouched"
+                                                class="text-danger">This field is a required field.
+                                            </small> -->
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <div class="box-footer text-center">
+                                    <button type="submit" class="btn btn-success"
+                                        (click)="GenerateCertificate()">Generate</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="box box-defualt  ">
+                            <div class="box-body" *ngIf="ListData?.length != 0">
+                                <div class="col-md-3 pull-left" style="padding-left: 0px">
+                                    <input type="text" class="input form-control" placeholder="Search"
+                                        [(ngModel)]="TableFilter">
+                                </div>
+                                <div class="btn-group pull-right">
+                                    <button type="button" (click)="exportExcel()" class="btn btn-success"><i
+                                            class="fa fa-download"></i>
+                                        &emsp; Excel</button>
+                                    <button style="display: none;" type="button" (click)="exportPDF()"
+                                        class="btn btn-primary"><i class="fa fa-download"></i>
+                                        &emsp; PDF</button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Certificate List :
+                                            <!-- <span>{{getAssignmentTaskListFromAPI?.length}}</span> -->
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <!-- <th><input type="checkbox" *ngIf="false" (click)="checkAllFunction()" /></th> -->
+                                                <th>Sr. No.</th>
+                                                <th>Generated By</th>
+                                                <th>Generated Date</th>
+                                                <th>From Date</th>
+                                                <th>To Date</th>
+                                                <th>Cirtificate</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tbody *ngIf="ListData?.length <= 0">
+                                            <tr>
+                                                <td colspan="6" class="text-center">
+                                                    Data not available !
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngIf="ListData?.length != 0">
+                                            <tr
+                                                *ngFor="let d of ListData | stringFilter: TableFilter  | paginate: {id: 'functionsData', itemsPerPage: Pagination.ItemsPerPage, currentPage: Pagination.CurrentPage, totalItems: Pagination.TotalRecords}; let i = index">
+                                                <td class="text-center">{{i+1}}</td>
+                                                <td>{{d.fname}}</td>
+                                                <td>{{d.created_at}}</td>
+                                                <td>{{d.from}}</td>
+                                                <td>{{d.to}}</td>
+                                                <td><a
+                                                        (click)=DownloadDocument(d.orig_file_name)>{{d.orig_file_name}}</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div *ngIf="ListData?.length != 0">
+                                        <pagination-controls id="functionsData" maxSize="5" directionLinks="true"
+                                            (pageChange)="Pagination.CurrentPage=$event"></pagination-controls>
+                                    </div>
+                                    <!-- <div *ngIf="getAssignmentTaskListFromAPI?.length != 0">
+                                        <pagination-controls id="getAssignmentTaskListFromAPI" maxSize="5"
+                                            directionLinks="true" (pageChange)="Pagination.CurrentPage=$event">
+                                        </pagination-controls>
+                                    </div> -->
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
