@@ -143,8 +143,8 @@ export class CompliancereportComponent implements OnInit {
         'Submitted Date': element.ttrn_submitted_date,
         'Status': element.task_status,
         'Document Attached': element.document_attached === 0 ? "No" : "Yes",
-        'Comments': '',
-        'Reason For Non-Compliance': ''
+        'Comments': element.ttrn_performer_comments,
+        'Reason For Non-Compliance': element.ttrn_reason_for_non_compliance
       };
       sendDataToExport.push(obj);
       countIndex += 1;
@@ -209,8 +209,8 @@ export class CompliancereportComponent implements OnInit {
         '',
         element.task_status,
         element.document_attached === 0 ? "No" : "Yes",
-        '',
-        ''
+        element.ttrn_performer_comments,
+        element.ttrn_reason_for_non_compliance
       ];
 
       rows.push(temp);

@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   // apiUrl: '/compliance/',
   // apiUrl: 'http://10.21.20.14:8081/compliance/'
-  apiUrl: 'http://localhost:8082/compliance/'
+  apiUrl: 'http://localhost:8080/compliance/'
   // apiUrl: 'http://localhost:6081/compliance/'
 };
 

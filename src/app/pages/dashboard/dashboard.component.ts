@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
   public unitChartData: any;
   public functionChartData: any;
   public finantialChartData: any;
-
+adminInfo : any;
   constructor(
     private alertify: AlertifyService,
     private spinner: NgxSpinnerService,
@@ -63,6 +63,9 @@ export class DashboardComponent implements OnInit {
 
     this.resetCharts();
     this.onLoad();
+    let userdata = JSON.parse(localStorage.getItem('user_info'));
+this.adminInfo = userdata.sess_role_id;
+    
   }
 
   onLoad() {
@@ -112,19 +115,26 @@ export class DashboardComponent implements OnInit {
     this.TableFilter = '';
     this.TabOnClick('');
 
-    if (filter == 'complied') {
+    if (filter == 'complied' || filter == 'Complied') {
+      filter = 'complied'
       this.filterDataStatus = 'Complied.';
-    } else if (filter == 'posingrisk') {
+    } else if (filter == 'posingrisk' || filter == 'Posing') {
+      filter = 'Posing'
       this.filterDataStatus = 'Posing.';
-    } else if (filter == 'noncomplied') {
+    } else if (filter == 'noncomplied' || filter == 'Overdue' ) {
+      filter = 'Overdue';
       this.filterDataStatus = 'Overdue.';
-    } else if (filter == 'watingforapproval') {
+    } else if (filter == 'watingforapproval' || filter == 'WFA') {
+      filter = 'watingforapproval'
       this.filterDataStatus = 'Waiting For Approval.';
-    } else if (filter == 'reopen') {
+    } else if (filter == 'reopen' || filter == 'Re-Opened') {
+      filter = 'Re-Opened'
       this.filterDataStatus = 'Re-Opened.';
-    } else if (filter == 'delayed') {
+    } else if (filter == 'delayed' || filter == 'Delayed') {
+      filter = 'Delayed';
       this.filterDataStatus = 'Delayed.';
-    } else if (filter == 'delayed-reported') {
+    } else if (filter == 'delayed-reported' || filter == 'Delayed Reported') {
+      filter = 'Delayed Reported' 
       this.filterDataStatus = 'Delayed Reported.';
     }
 

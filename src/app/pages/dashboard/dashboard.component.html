@@ -104,7 +104,7 @@
                                 </div>
 
                                 <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
-                                    <div class="card text-black o-hidden h-100 " style="background-color: #f9ac31a6;">
+                                    <div class="card text-black o-hidden h-100 " style="background-color: #f9ac31a6;" >
                                         <div class="card-body" title="Re-Opened">
                                             <h4>{{statustabs.ReOpened}}</h4>
                                             <div class="card-body-icon"><i class="fas fa-fw fa-users"></i></div>
@@ -114,6 +114,9 @@
                                             (click)="filterDataByStatus('reopen')"><span class="float-left">View
                                                 Details</span><span class="float-right"><i style="margin-left: 5px;"
                                                     class="fas fa-angle-right"></i></span></a>
+                                    </div>
+                                    <div class="card text-black o-hidden h-100 " style="background-color: #f9ac31a6;" *ngIf="adminInfo==7">
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -604,7 +607,7 @@
 
                                 <div class="col-md-12" *ngIf="isOverall">
                                     <div class="row m-5">
-                                        <app-overallchart [OverallChart]='overallChartData'></app-overallchart>
+                                        <app-overallchart [OverallChart]='overallChartData' (sendData)="filterDataByStatus($event)"></app-overallchart>
                                     </div>
                                 </div>
 

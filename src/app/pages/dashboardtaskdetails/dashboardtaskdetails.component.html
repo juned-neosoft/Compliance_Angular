@@ -348,16 +348,22 @@
                             *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure && completeUpdateTaskModel.task_frequency!='Event_Based'">
                             <label>Remarks</label>
                             <textarea [(ngModel)]="completeUpdateTaskModel.ttrn_performer_comments"
-                                #ttrn_performer_comments="ngModel" name="ttrn_performer_comments" type="text"
+                                #ttrn_performer_comments="ngModel" name="ttrn_performer_comments" type="text"  #myInput
+                                [maxlength]="maxChars"
                                 class="form-control" placeholder="Remarks"></textarea>
+                                <label class="nopadding clrlbl">
+                                    Character Count: {{myInput.value.length}} /{{maxChars}}</label>
                         </div>
 
                         <div class="col-md-12 form-group"
                             *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure && completeUpdateTaskModel.task_frequency=='Event_Based'">
                             <label>Remarks</label>
                             <textarea [(ngModel)]="completeUpdateTaskModel.ttrn_performer_comments"
-                                #ttrn_performer_comments="ngModel" name="ttrn_performer_comments" type="text"
+                                #ttrn_performer_comments="ngModel" name="ttrn_performer_comments" type="text"  #myInput
+                                [maxlength]="maxChars"
                                 class="form-control" placeholder="Remarks"></textarea>
+                                <label class="nopadding clrlbl">
+                                    Character Count: {{myInput.value.length}} /{{maxChars}}</label>
                         </div>
 
                         <div class="col-md-12 form-group" *ngIf="
@@ -366,20 +372,24 @@
                             ">
                             <label>Reason For Non-Compliance</label>
                             <textarea [(ngModel)]="completeUpdateTaskModel.ttrn_reason_for_non_compliance"
-                                #ttrn_reason_for_non_compliance="ngModel" name="ttrn_reason_for_non_compliance"
+                                #ttrn_reason_for_non_compliance="ngModel" name="ttrn_reason_for_non_compliance" #myInput
+                                [maxlength]="maxChars"
                                 type="text" class="form-control" placeholder="Reason For Non-Compliance"></textarea>
+                                <label class="nopadding clrlbl" >
+                                    Character Count: {{myInput.value.length}} /{{maxChars}}</label>
                         </div>
 
                         <div class="col-md-12 form-group" *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure">
                             <label>Upload Proof of Compliance</label>
                             <input (change)="handleFileInput($event.target.files)" type="file" multiple
                                 class="form-control">
+                                <label class="nopadding clrlbl" *ngIf="maxSize==true" style="color: red;">Please upload file size less than 10MB.</label>
                         </div>
 
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" (click)="CompleteTask()" class="btn btn-primary">Submit</button>
+                    <button type="button" (click)="CompleteTask()" [disabled]="maxSize" class="btn btn-primary">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -413,9 +423,9 @@
                                     </td>
                                     <td>
                                         <input (change)="bufferDaysOnChange(ttrn_prior_days_buffer.value)"
-                                        [(ngModel)]="editDatesModel.ttrn_prior_days_buffer"
-                                        name="ttrn_prior_days_buffer" #ttrn_prior_days_buffer="ngModel" min="0"
-                                        type="number" class="form-control">
+                                            [(ngModel)]="editDatesModel.ttrn_prior_days_buffer"
+                                            name="ttrn_prior_days_buffer" #ttrn_prior_days_buffer="ngModel" min="0"
+                                            type="number" class="form-control">
                                     </td>
                                 </tr>
                                 <tr>
@@ -436,8 +446,8 @@
                                             name="Prev_UnitHeadDate" class="form-control" type="date">
                                     </td>
                                     <td>
-                                        <input readonly [(ngModel)]="editDatesModel.ttrn_uh_due_date" name="ttrn_uh_due_date"
-                                            class="form-control" type="date">
+                                        <input readonly [(ngModel)]="editDatesModel.ttrn_uh_due_date"
+                                            name="ttrn_uh_due_date" class="form-control" type="date">
                                     </td>
                                 </tr>
                                 <tr>
@@ -447,8 +457,8 @@
                                             name="Prev_FunctionDate" class="form-control" type="date">
                                     </td>
                                     <td>
-                                        <input readonly [(ngModel)]="editDatesModel.ttrn_fh_due_date" name="ttrn_fh_due_date"
-                                            class="form-control" type="date">
+                                        <input readonly [(ngModel)]="editDatesModel.ttrn_fh_due_date"
+                                            name="ttrn_fh_due_date" class="form-control" type="date">
                                     </td>
                                 </tr>
                                 <tr>
@@ -458,8 +468,8 @@
                                             name="Prev_ApproverDate" class="form-control" type="date">
                                     </td>
                                     <td>
-                                        <input readonly [(ngModel)]="editDatesModel.ttrn_rw_due_date" name="ttrn_rw_due_date"
-                                            class="form-control" type="date">
+                                        <input readonly [(ngModel)]="editDatesModel.ttrn_rw_due_date"
+                                            name="ttrn_rw_due_date" class="form-control" type="date">
                                     </td>
                                 </tr>
                                 <tr>
@@ -469,8 +479,8 @@
                                             name="Prev_OwnerDate" class="form-control" type="date">
                                     </td>
                                     <td>
-                                        <input readonly [(ngModel)]="editDatesModel.ttrn_pr_due_date" name="ttrn_pr_due_date"
-                                            class="form-control" type="date">
+                                        <input readonly [(ngModel)]="editDatesModel.ttrn_pr_due_date"
+                                            name="ttrn_pr_due_date" class="form-control" type="date">
                                     </td>
                                 </tr>
                             </tbody>
@@ -523,9 +533,12 @@
                         </div>
                         <div class="col-md-12 form-group">
                             <label>Reason for Re-Opening</label>
-                            <textarea [(ngModel)]="reOpenTaskModel.reopen_comment" required #reopen_comment="ngModel"
-                                name="reopen_comment" type="text" class="form-control"
+                            <textarea #myInpu [(ngModel)]="reOpenTaskModel.reopen_comment" required #reopen_comment="ngModel"
+                                name="reopen_comment" type="text" class="form-control" 
+                                  [maxlength]="maxChars"
                                 placeholder="Reason for Re-Opening"></textarea>
+                                <label class="nopadding clrlbl">
+                                    Character Count: {{myInpu.value.length}} /{{maxChars}}</label>
                         </div>
                     </div>
                 </div>
@@ -571,16 +584,22 @@
                             *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure && completeUpdateTaskModel.task_frequency!='Event_Based'">
                             <label>Remarks</label>
                             <textarea [(ngModel)]="completeUpdateTaskModel.ttrn_performer_comments"
-                                #ttrn_performer_comments="ngModel" name="ttrn_performer_comments" type="text"
+                                #ttrn_performer_comments="ngModel" name="ttrn_performer_comments" type="text" #myInput  [maxlength]="maxChars"
                                 class="form-control" placeholder="Remarks"></textarea>
+                           
+                            <label class="nopadding clrlbl">
+                                Character Count: {{myInput.value.length}} /{{maxChars}}</label>
                         </div>
 
                         <div class="col-md-12 form-group"
                             *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure && completeUpdateTaskModel.task_frequency=='Event_Based'">
                             <label>Remarks</label>
                             <textarea [(ngModel)]="completeUpdateTaskModel.ttrn_performer_comments"
-                                #ttrn_performer_comments="ngModel" name="ttrn_performer_comments" type="text"
+                                #ttrn_performer_comments="ngModel" name="ttrn_performer_comments" type="text" #myInput  [maxlength]="maxChars"
                                 class="form-control" placeholder="Remarks"></textarea>
+                            
+                            <label class="nopadding clrlbl">
+                                Character Count: {{myInput.value.length}} /{{maxChars}}</label>
                         </div>
 
                         <div class="col-md-12 form-group"
@@ -589,20 +608,23 @@
                             && (completeUpdateTaskModel.ttrn_legal_task_status=='Delayed' || completeUpdateTaskModel.ttrn_legal_task_status=='Non Complied') ">
                             <label>Reason For Non-Compliance</label>
                             <textarea [(ngModel)]="completeUpdateTaskModel.ttrn_reason_for_non_compliance"
-                                #ttrn_reason_for_non_compliance="ngModel" name="ttrn_reason_for_non_compliance"
+                                #ttrn_reason_for_non_compliance="ngModel" name="ttrn_reason_for_non_compliance" #myInput  [maxlength]="maxChars"
                                 type="text" class="form-control" placeholder="Reason For Non-Compliance"></textarea>
+                                <label class="nopadding clrlbl">
+                                    Character Count: {{myInput.value.length}} /{{maxChars}}</label>
                         </div>
 
                         <div class="col-md-12 form-group" *ngIf="!completeUpdateTaskModel.ttrn_event_not_occure">
                             <label>Upload Proof of Compliance</label>
                             <input (change)="handleFileInput($event.target.files)" type="file" multiple
                                 class="form-control">
+                                <label class="nopadding clrlbl" *ngIf="maxSize==true" style="color: red;">Please upload file size less than 10MB.</label>
                         </div>
 
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" (click)="UpdateTask()" class="btn btn-primary">Submit</button>
+                    <button type="button" (click)="UpdateTask()" [disabled]="maxSize" class="btn btn-primary">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -629,8 +651,11 @@
                         <div class="col-md-12 form-group">
                             <label>Reason for Non-Compliance</label>
                             <textarea [(ngModel)]="reasonForNonComplianceTask.ttrn_reason_for_non_compliance" required
-                                #ttrn_reason_for_non_compliance="ngModel" name="ttrn_reason_for_non_compliance"
+                                #ttrn_reason_for_non_compliance="ngModel" name="ttrn_reason_for_non_compliance" #myInput
+                                [maxlength]="maxChars"
                                 placeholder="Reason for Non-Compliance" type="text" class="form-control"></textarea>
+                                <label class="nopadding clrlbl">
+                                    Character Count: {{myInput.value.length}} /{{maxChars}}</label>
                         </div>
                     </div>
                 </div>

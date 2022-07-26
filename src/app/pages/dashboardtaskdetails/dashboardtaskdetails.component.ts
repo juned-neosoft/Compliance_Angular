@@ -35,7 +35,7 @@ export class DashboardtaskdetailsComponent implements OnInit {
   public errorListCompleteTask = [];
   public errorListUpdateTask = [];
   public maxDate = null;
-
+  maxChars = 250;
   constructor(
     private alertify: AlertifyService,
     private spinner: NgxSpinnerService,
@@ -428,9 +428,17 @@ export class DashboardtaskdetailsComponent implements OnInit {
     document.getElementById('CompleteTask_Open').click();
   }
 
+  maxSize:boolean;
   handleFileInput(event) {
     this.completeUpdateTaskModel.ttrn_proof_of_compliance = [];
-    this.completeUpdateTaskModel.ttrn_proof_of_compliance = event;
+    if(event[0].size<10000000 ){
+      this.completeUpdateTaskModel.ttrn_proof_of_compliance = event;
+      this.maxSize = false;
+    }else{
+      this.completeUpdateTaskModel.ttrn_proof_of_compliance = null;
+      this.maxSize = true;
+    }
+    
   }
 
   OpenUpdateTaskModal(ttrn_id, task_frequency, ttrn_legal_task_status, ttrn_document) {
