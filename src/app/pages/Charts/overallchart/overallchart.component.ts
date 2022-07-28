@@ -36,8 +36,8 @@ let $this = this;
         type: "pie",
         events: {
         dataPointSelection: function(event, chartContext, config) {
-          console.log(config.w.config.labels[config.dataPointIndex]);
-          console.log(config.w.config.series[config.dataPointIndex]);
+          // console.log(config.w.config.labels[config.dataPointIndex]);
+          // console.log(config.w.config.series[config.dataPointIndex]);
           $this.sendData.emit(config.w.config.labels[config.dataPointIndex])
       }
       }

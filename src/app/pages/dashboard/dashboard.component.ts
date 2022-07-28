@@ -114,27 +114,28 @@ this.adminInfo = userdata.sess_role_id;
   filterDataByStatus(filter) {
     this.TableFilter = '';
     this.TabOnClick('');
+// console.log(filter,'finding');
 
     if (filter == 'complied' || filter == 'Complied') {
       filter = 'complied'
       this.filterDataStatus = 'Complied.';
     } else if (filter == 'posingrisk' || filter == 'Posing') {
-      filter = 'Posing'
+      filter = 'posingrisk'
       this.filterDataStatus = 'Posing.';
     } else if (filter == 'noncomplied' || filter == 'Overdue' ) {
-      filter = 'Overdue';
+      filter = 'noncomplied';
       this.filterDataStatus = 'Overdue.';
     } else if (filter == 'watingforapproval' || filter == 'WFA') {
       filter = 'watingforapproval'
       this.filterDataStatus = 'Waiting For Approval.';
     } else if (filter == 'reopen' || filter == 'Re-Opened') {
-      filter = 'Re-Opened'
+      filter = 'reopen'
       this.filterDataStatus = 'Re-Opened.';
     } else if (filter == 'delayed' || filter == 'Delayed') {
-      filter = 'Delayed';
+      filter = 'delayed';
       this.filterDataStatus = 'Delayed.';
     } else if (filter == 'delayed-reported' || filter == 'Delayed Reported') {
-      filter = 'Delayed Reported' 
+      filter = 'delayed-reported' 
       this.filterDataStatus = 'Delayed Reported.';
     }
 
