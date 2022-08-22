@@ -271,7 +271,8 @@ export class AccessUserComponent implements OnInit {
       resp => {
         this.alertify.success(`User access removed successfully.`);
         this.spinner.hide();
-        this.router.navigate(['users']);
+        this.router.navigate(['/access-user/',this.usersData.user_id]);
+        this.onLoad();
       },
       error => {
         this.spinner.hide();

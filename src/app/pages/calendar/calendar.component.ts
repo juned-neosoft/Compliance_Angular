@@ -44,13 +44,14 @@ export class CalendarComponent implements OnInit {
     this.getOwnerListFromAPI = [];
     this.getAppoverListFromAPI = [];
     this.getFunctionHeadListFromAPI = [];
+  }
 
-    this.onLoad();
+  ngAfterViewInit() {
+    this.onCall()
   }
 
   onLoad() {
     this.spinner.show();
-
     this.getEntityListFromAPI = [];
     this.getUnitListFromAPI = [];
     this.getFunctionListFromAPI = [];
@@ -77,11 +78,23 @@ export class CalendarComponent implements OnInit {
       }
     );
 
+
+  }
+
+  onCall() {
     this.spinner.show();
     this.calendarService.GetListOnLoad().subscribe(
       res => {
-        this.spinner.hide();
-        this.responseData = res.response.data.task_assigned_to_user;
+        if (res.response.status == 'Success') {
+          this.spinner.hide();
+          console.log(res, 'res run');
+          this.responseData = res.response.data.task_assigned_to_user;
+          this.onLoad();
+        }
+        else {
+          this.spinner.hide();
+          this.alertify.error(res.response.status);
+        }
       },
       err => {
         this.spinner.hide();
@@ -280,42 +293,42 @@ export class CalendarComponent implements OnInit {
   onSearch() {
     this.spinner.show();
     this.Events = [];
-console.log(this.responseData);
-    for (let i = 0; i < this.responseData.length; i++) {
-
-      if (this.calendar.entitySearch != 0 && (
-        this.calendar.unitSearch != 0 ||
-        this.calendar.functionSearch != 0 ||
-        this.calendar.ownerSearch != 0 ||
-        this.calendar.approverSearch != 0 ||
-        this.calendar.functionHeadSearch != 0)) {
-        if (this.responseData[i].task_orga_id == this.calendar.entitySearch && (
-          this.responseData[i].task_loca_id == this.calendar.unitSearch ||
-          this.responseData[i].task_dept_id == this.calendar.functionSearch ||
-          this.responseData[i].task_performer_id == this.calendar.ownerSearch ||
-          this.responseData[i].task_reviewer_id == this.calendar.approverSearch ||
-          this.responseData[i].task_function_head_id == this.calendar.functionHeadSearch)) {
-          this.Events.push(
-            {
-              title: this.responseData[i].client_task_id,
-              date: this.responseData[i].legal_due_date.split(' ')[0],
-              className: this.getClassName(this.responseData[i].task_status)
-            });
+    console.log(this.responseData);
+    if (this.responseData.length > 0) {
+      for (let i = 0; i < this.responseData.length; i++) {
+        if (this.calendar.entitySearch != 0 && (
+          this.calendar.unitSearch != 0 ||
+          this.calendar.functionSearch != 0 ||
+          this.calendar.ownerSearch != 0 ||
+          this.calendar.approverSearch != 0 ||
+          this.calendar.functionHeadSearch != 0)) {
+          if (this.responseData[i].task_orga_id == this.calendar.entitySearch && (
+            this.responseData[i].task_loca_id == this.calendar.unitSearch ||
+            this.responseData[i].task_dept_id == this.calendar.functionSearch ||
+            this.responseData[i].task_performer_id == this.calendar.ownerSearch ||
+            this.responseData[i].task_reviewer_id == this.calendar.approverSearch ||
+            this.responseData[i].task_function_head_id == this.calendar.functionHeadSearch)) {
+            this.Events.push(
+              {
+                title: this.responseData[i].client_task_id,
+                date: this.responseData[i].legal_due_date.split(' ')[0],
+                className: this.getClassName(this.responseData[i].task_status)
+              });
+          }
+        }
+        else if (this.calendar.entitySearch != 0) {
+          if (this.responseData[i].task_orga_id == this.calendar.entitySearch) {
+            this.Events.push(
+              {
+                title: this.responseData[i].client_task_id,
+                date: this.responseData[i].legal_due_date.split(' ')[0],
+                className: this.getClassName(this.responseData[i].task_status)
+              });
+          }
         }
       }
-      else if (this.calendar.entitySearch != 0) {
-        if (this.responseData[i].task_orga_id == this.calendar.entitySearch) {
-          this.Events.push(
-            {
-              title: this.responseData[i].client_task_id,
-              date: this.responseData[i].legal_due_date.split(' ')[0],
-              className: this.getClassName(this.responseData[i].task_status)
-            });
-        }
-      }
+      this.spinner.hide();
     }
-
-    this.spinner.hide();
   }
 
   showTaskDetailsPage(value) {

@@ -8,15 +8,15 @@
                     <div class="box-body">
                         <div class="p-3">
                             <div class="row">
-                                <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
+                                <div class="cardsize col-md-3" style="max-width: 27%; flex: 0 0 auto; padding: 0 5px;">
                                     <div class="card text-black o-hidden h-100 " style="background-color: #00cc33a6;">
                                         <div class="card-body" title="Complied">
-                                            <h4>{{statustabs.Complied}}</h4>
+                                            <h4>{{statustabs.allComplied}}</h4>
                                             <div class="card-body-icon"><i class="fas fa-fw fa-users"></i></div>
-                                            <div>Complied</div>
+                                            <div>All Complied</div>
                                         </div>
                                         <a class="card-footer text-black clearfix small z-1" href="javascript:void(0)"
-                                            (click)="filterDataByStatus('complied')">
+                                            (click)="filterDataByStatus('allComplied')">
                                             <span class="float-left">View Details</span>
                                             <span class="float-right">
                                                 <i style="margin-left: 5px;" class="fas fa-angle-right"></i>
@@ -25,12 +25,12 @@
                                     </div>
                                 </div>
 
-                                <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
+                                <div class="cardsize col-md-3" style="max-width: 27%; flex: 0 0 auto; padding: 0 5px;">
                                     <div class="card text-black o-hidden h-100 " style="background-color: #ffff00a6;">
                                         <div class="card-body" title="Posing">
                                             <h4>{{statustabs.Posing}}</h4>
                                             <div class="card-body-icon"><i class="fas fa-fw fa-users"></i></div>
-                                            <div>Posing</div>
+                                            <div>Upcoming</div>
                                         </div>
                                         <a class="card-footer text-black clearfix small z-1" href="javascript:void(0)"
                                             (click)="filterDataByStatus('posingrisk')">
@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
 
-                                <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
+                                <div class="cardsize col-md-3" style="max-width: 27%; flex: 0 0 auto; padding: 0 5px;">
                                     <div class="card text-black o-hidden h-100 " style="background-color: #ff0000a6;">
                                         <div class="card-body" title="Overdue">
                                             <h4>{{statustabs.NonComplied}}</h4>
@@ -56,7 +56,7 @@
                                         </a>
                                     </div>
                                 </div>
-
+<!-- 
                                 <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
                                     <div class="card text-black o-hidden h-100 " style="background-color: #bfbfbfa6;">
                                         <div class="card-body" title="Delayed">
@@ -87,14 +87,14 @@
                                                     class="fas fa-angle-right"></i></span>
                                         </a>
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
+                                <div class="cardsize col-md-3" style="max-width: 27%; flex: 0 0 auto; padding: 0 5px;">
                                     <div class="card text-black o-hidden h-100 " style="background-color: #499ed6a6;">
                                         <div class="card-body" title="Waiting For Approval">
                                             <h4>{{statustabs.WFA}}</h4>
                                             <div class="card-body-icon"><i class="fas fa-fw fa-users"></i></div>
-                                            <div>WFA</div>
+                                            <div>Approval Pending</div>
                                         </div>
                                         <a class="card-footer text-black clearfix small z-1" href="javascript:void(0)"
                                             (click)="filterDataByStatus('watingforapproval')"><span
@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
 
-                                <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;">
+                                <!-- <div class="cardsize col-md-2" style="max-width: 14%; flex: 0 0 auto; padding: 0 5px;" *ngIf="adminInfo !=1 && adminInfo!=2 && adminInfo!=7">
                                     <div class="card text-black o-hidden h-100 " style="background-color: #f9ac31a6;" >
                                         <div class="card-body" title="Re-Opened">
                                             <h4>{{statustabs.ReOpened}}</h4>
@@ -115,10 +115,8 @@
                                                 Details</span><span class="float-right"><i style="margin-left: 5px;"
                                                     class="fas fa-angle-right"></i></span></a>
                                     </div>
-                                    <div class="card text-black o-hidden h-100 " style="background-color: #f9ac31a6;" *ngIf="adminInfo==7">
-                                       
-                                    </div>
-                                </div>
+                                </div> -->
+                                
                             </div>
 
                             <div class="mt-3 row">
@@ -149,16 +147,16 @@
                                                 data-toggle="tab" href="#Function" role="tab" aria-controls="Function"
                                                 aria-selected="false">Function</a>
                                         </li>
-                                        <li class="nav-item">
+                                        <!-- <li class="nav-item">
                                             <a class="nav-link" (click)="TabOnClick('finantial')" id="Financial-tab"
                                                 data-toggle="tab" href="#Financial" role="tab" aria-controls="Financial"
                                                 aria-selected="false">Financial</a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                     <div class="tab-content" id="myTabContent">
                                         <div class="tab-pane fade in active" id="ViewGrid" role="tabpanel"
                                             aria-labelledby="ViewGrid-tab">
-                                            <div class="row m-5">
+                                            <div class="row mt-5 ml-1">
                                                 Data shown on filter: <strong>{{filterDataStatus}}</strong> Total
                                                 records are: <strong>{{responseData?.length}}</strong>
 
@@ -237,7 +235,7 @@
                                                                 <td>{{item.function_head}}</td>
                                                                 <td>{{item.ttrn_legal_due_date}}</td>
                                                                 <td></td>
-                                                                <td>{{item.ttrn_performer_comments}}</td>
+                                                                <td>{{item.comments}}</td>
                                                                 <td></td>
                                                             </tr>
                                                         </tbody>
@@ -255,7 +253,7 @@
 
                                         <div class="tab-pane fade" id="Overall" role="tabpanel"
                                             aria-labelledby="Overall-tab">
-                                            <div class="row m-5">
+                                            <div class="row mt-5">
                                                 <div class="row ml-5">
                                                     <form style="display: none;">
                                                         <div class="col-sm-4">
@@ -279,14 +277,18 @@
                                                     <table class="table table-bordered table-hover table-striped">
                                                         <thead>
                                                             <tr>
-                                                                <th>#</th>
-                                                                <th>Complied</th>
-                                                                <th>Posing</th>
-                                                                <th>Overdue</th>
-                                                                <th>Delayed</th>
-                                                                <th>Delayed Reported</th>
-                                                                <th>WFA</th>
-                                                                <th>Re-Opened</th>
+                                                                <th colspan="4" style="text-align: center">All Complied BreakUp</th>
+                                                                
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="text-align: center">#</th>
+                                                                <th style="text-align: center">Complied</th>
+                                                                <!-- <th>Posing</th>
+                                                                <th>Overdue</th> -->
+                                                                <th style="text-align: center">Delayed</th>
+                                                                <th style="text-align: center">Delayed Reported</th>
+                                                                <!-- <th>WFA</th>
+                                                                <th>Re-Opened</th> -->
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -295,24 +297,24 @@
                                                                 <td class="text-center"><a
                                                                         (click)="filterDataByStatus('complied')">{{statustabs.Complied}}</a>
                                                                 </td>
-                                                                <td class="text-center"><a
+                                                                <!-- <td class="text-center"><a
                                                                         (click)="filterDataByStatus('posingrisk')">{{statustabs.Posing}}</a>
                                                                 </td>
                                                                 <td class="text-center"><a
                                                                         (click)="filterDataByStatus('noncomplied')">{{statustabs.NonComplied}}</a>
-                                                                </td>
+                                                                </td> -->
                                                                 <td class="text-center"><a
                                                                         (click)="filterDataByStatus('delayed')">{{statustabs.Delayed}}</a>
                                                                 </td>
                                                                 <td class="text-center"><a
                                                                         (click)="filterDataByStatus('delayed-reported')">{{statustabs.DelayedReported}}</a>
                                                                 </td>
-                                                                <td class="text-center"><a
+                                                                <!-- <td class="text-center"><a
                                                                         (click)="filterDataByStatus('watingforapproval')">{{statustabs.WFA}}</a>
                                                                 </td>
                                                                 <td class="text-center"><a
                                                                         (click)="filterDataByStatus('reopen')">{{statustabs.ReOpened}}</a>
-                                                                </td>
+                                                                </td> -->
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -348,12 +350,12 @@
                                                                 <th>#</th>
                                                                 <th>Entity</th>
                                                                 <th>Complied</th>
-                                                                <th>Posing</th>
+                                                                <th>Upcoming</th>
                                                                 <th>Overdue</th>
                                                                 <th>Delayed</th>
                                                                 <th>Delayed Reported</th>
-                                                                <th>WFA</th>
-                                                                <th>Re-Opened</th>
+                                                                <th>Approval Pending</th>
+                                                                <!-- <th>Re-Opened</th> -->
                                                             </tr>
                                                         </thead>
                                                         <tbody *ngIf="entityTableData?.length != 0">
@@ -379,9 +381,9 @@
                                                                 <td class="text-center"><a
                                                                         (click)="filterDataByTabs(item.entity, 'watingforapproval', 'entity')">{{item.wfa}}</a>
                                                                 </td>
-                                                                <td class="text-center"><a
+                                                                <!-- <td class="text-center"><a
                                                                         (click)="filterDataByTabs(item.entity, 'reopen', 'entity')">{{item.re_opened}}</a>
-                                                                </td>
+                                                                </td> -->
                                                             </tr>
                                                         </tbody>
                                                         <tbody *ngIf="entityTableData?.length == 0">
@@ -421,12 +423,12 @@
                                                                 <th>#</th>
                                                                 <th>Unit</th>
                                                                 <th>Complied</th>
-                                                                <th>Posing</th>
+                                                                <th>Upcoming</th>
                                                                 <th>Overdue</th>
                                                                 <th>Delayed</th>
                                                                 <th>Delayed Reported</th>
-                                                                <th>WFA</th>
-                                                                <th>Re-Opened</th>
+                                                                <th>Approval Pending</th>
+                                                                <!-- <th>Re-Opened</th> -->
                                                             </tr>
                                                         </thead>
                                                         <tbody *ngIf="unitTableData?.length != 0">
@@ -452,9 +454,9 @@
                                                                 <td class="text-center"><a
                                                                         (click)="filterDataByTabs(item.unit, 'watingforapproval', 'unit')">{{item.wfa}}</a>
                                                                 </td>
-                                                                <td class="text-center"><a
+                                                                <!-- <td class="text-center"><a
                                                                         (click)="filterDataByTabs(item.unit, 'reopen', 'unit')">{{item.re_opened}}</a>
-                                                                </td>
+                                                                </td> -->
                                                             </tr>
                                                         </tbody>
                                                         <tbody *ngIf="unitTableData?.length == 0">
@@ -495,12 +497,12 @@
                                                                 <th>#</th>
                                                                 <th>Function</th>
                                                                 <th>Complied</th>
-                                                                <th>Posing</th>
+                                                                <th>Upcoming</th>
                                                                 <th>Overdue</th>
                                                                 <th>Delayed</th>
                                                                 <th>Delayed Reported</th>
-                                                                <th>WFA</th>
-                                                                <th>Re-Opened</th>
+                                                                <th>Approval Pending</th>
+                                                                <!-- <th>Re-Opened</th> -->
                                                             </tr>
                                                         </thead>
                                                         <tbody *ngIf="functionTableData?.length != 0">
@@ -526,9 +528,9 @@
                                                                 <td class="text-center"><a
                                                                         (click)="filterDataByTabs(item.function, 'watingforapproval', 'function')">{{item.wfa}}</a>
                                                                 </td>
-                                                                <td class="text-center"><a
+                                                                <!-- <td class="text-center"><a
                                                                         (click)="filterDataByTabs(item.function, 'reopen', 'function')">{{item.re_opened}}</a>
-                                                                </td>
+                                                                </td> -->
                                                             </tr>
                                                         </tbody>
                                                         <tbody *ngIf="functionTableData?.length == 0">

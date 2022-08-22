@@ -48,7 +48,7 @@ export class DashboardtaskdetailsComponent implements OnInit {
 
   ngOnInit() {
     this.Pagination.CurrentPage = 1;
-    this.Pagination.ItemsPerPage = 10;
+    this.Pagination.ItemsPerPage = 5;
     this.Pagination.TotalRecords = 0;
     this.responseDataTaskHistory = [];
 

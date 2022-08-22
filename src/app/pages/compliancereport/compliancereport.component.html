@@ -58,7 +58,9 @@
                                             <div class=""><input class="form-control " id="" name="toDate"
                                                     placeholder="From Date" type="date"
                                                     [(ngModel)]="compliacereport.to_date"
-                                                    uib-datepicker-popup="dd-MM-yyyy"></div>
+                                                    uib-datepicker-popup="dd-MM-yyyy"
+                                                    [max]="compliacereport.to_date" 
+                                                    ></div>
                                             <!-- <small [class.d-none]="!CountryHasError || country.untouched"
                                                 class="text-danger">This field is a required field.
                                             </small> -->

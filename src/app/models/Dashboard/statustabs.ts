@@ -6,6 +6,7 @@ export class Statustabs {
     public DelayedReported: number;
     public WFA: number;
     public ReOpened: number;
+    public allComplied: number;
 
     constructor() {
         this.Complied = 0;
@@ -15,5 +16,6 @@ export class Statustabs {
         this.DelayedReported = 0;
         this.WFA = 0;
         this.ReOpened = 0;
+        this.allComplied = 0;
     }
 }

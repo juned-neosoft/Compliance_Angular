@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   public statustabs = new Statustabs();
   public responseDataRow: any;
   public responseData: any;
+  allResponseData:any;
   public filterDataStatus: any;
   public parentData: string;
   public showDashboard = true;
@@ -68,6 +69,7 @@ this.adminInfo = userdata.sess_role_id;
     
   }
 
+  allCompiled :any;
   onLoad() {
     this.spinner.show();
     var data = {
@@ -86,8 +88,8 @@ this.adminInfo = userdata.sess_role_id;
         this.statustabs.ReOpened = res.data.ReOpened;
         this.statustabs.WFA = res.data.WaitingForApproval;
         this.statustabs.DelayedReported = res.data.delayed_reported;
-
-        this.filterDataByStatus('complied');
+        this.statustabs.allComplied= res.data.Delayed+res.data.Complied+res.data.delayed_reported;
+        this.filterDataByStatus('allComplied');
         this.spinner.hide();
 
         this.entityTableData = this.dataInputForGraphsTables(this.responseDataRow, 'entity');
@@ -121,13 +123,13 @@ this.adminInfo = userdata.sess_role_id;
       this.filterDataStatus = 'Complied.';
     } else if (filter == 'posingrisk' || filter == 'Posing') {
       filter = 'posingrisk'
-      this.filterDataStatus = 'Posing.';
+      this.filterDataStatus = 'Upcoming';
     } else if (filter == 'noncomplied' || filter == 'Overdue' ) {
       filter = 'noncomplied';
       this.filterDataStatus = 'Overdue.';
     } else if (filter == 'watingforapproval' || filter == 'WFA') {
       filter = 'watingforapproval'
-      this.filterDataStatus = 'Waiting For Approval.';
+      this.filterDataStatus = 'Approval Pending.';
     } else if (filter == 'reopen' || filter == 'Re-Opened') {
       filter = 'reopen'
       this.filterDataStatus = 'Re-Opened.';
@@ -137,17 +139,33 @@ this.adminInfo = userdata.sess_role_id;
     } else if (filter == 'delayed-reported' || filter == 'Delayed Reported') {
       filter = 'delayed-reported' 
       this.filterDataStatus = 'Delayed Reported.';
+    } else if (filter == 'allComplied' ) {
+      this.filterDataStatus = 'All Complied.';
     }
 
     this.spinner.show();
     this.responseData = [];
+    this.allResponseData = [];
+
     for (let i = 0; i < this.responseDataRow.length; i++) {
       if (this.responseDataRow[i].status.toLowerCase() == filter.toLowerCase()) {
         this.responseData.push(
           this.responseDataRow[i]
         );
       }
+      else if(filter == 'allComplied'){
+        if (this.responseDataRow[i].status.toLowerCase() == 'complied' || this.responseDataRow[i].status.toLowerCase() == 'delayed' || this.responseDataRow[i].status.toLowerCase() == 'delayed-reported') {
+          this.spinner.hide();
+          this.responseData.push(
+            this.responseDataRow[i]
+          );
+        }
     }
+      console.log(this.responseData,'FIND NEW');
+      
+     
+    }
+
     this.spinner.hide();
 
     document.getElementById('ViewGrid-tab').click();
@@ -247,7 +265,7 @@ this.adminInfo = userdata.sess_role_id;
         'Function Head': element.function_head,
         'Legal Due Date': element.ttrn_legal_due_date,
         'Ttrn ID': '',
-        'Comments': element.ttrn_performer_comments,
+        'Comments': element.comments,
         'Event_Not_Occured (Yes / No)': ''
 
       };
@@ -306,7 +324,7 @@ this.adminInfo = userdata.sess_role_id;
         element.function_head,
         element.ttrn_legal_due_date,
         '',
-        element.ttrn_performer_comments,
+        element.comments,
         ''
       ];
 
@@ -410,9 +428,14 @@ this.adminInfo = userdata.sess_role_id;
         this.statustabs.Delayed,
         this.statustabs.DelayedReported,
         this.statustabs.WFA,
-        this.statustabs.ReOpened],
-      labels: ['Complied', 'Posing', 'Overdue', 'Delayed', 'Delayed Reported', 'WFA', 'Re-Opened'],
-      colors: ['#46dc6b', '#ffff37', '#ff3f3f', '#b7b5b5', '#d5e478', '#71b5e2', '#fdbf5d']
+        // this.statustabs.ReOpened
+      ],
+      labels: ['Complied', 'Posing', 'Overdue', 'Delayed', 'Delayed Reported', 'WFA', 
+      // 'Re-Opened'
+    ],
+      colors: ['#46dc6b', '#ffff37', '#ff3f3f', '#b7b5b5', '#d5e478', '#71b5e2', 
+      // '#fdbf5d'
+    ]
     };
   }
 
