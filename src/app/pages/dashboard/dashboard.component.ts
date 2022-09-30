@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   public statustabs = new Statustabs();
   public responseDataRow: any;
   public responseData: any;
-  allResponseData:any;
+  allResponseData: any;
   public filterDataStatus: any;
   public parentData: string;
   public showDashboard = true;
@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
   public unitChartData: any;
   public functionChartData: any;
   public finantialChartData: any;
-adminInfo : any;
+  adminInfo: any;
   constructor(
     private alertify: AlertifyService,
     private spinner: NgxSpinnerService,
@@ -65,11 +65,11 @@ adminInfo : any;
     this.resetCharts();
     this.onLoad();
     let userdata = JSON.parse(localStorage.getItem('user_info'));
-this.adminInfo = userdata.sess_role_id;
-    
+    this.adminInfo = userdata.sess_role_id;
+
   }
 
-  allCompiled :any;
+  allCompiled: any;
   onLoad() {
     this.spinner.show();
     var data = {
@@ -88,7 +88,7 @@ this.adminInfo = userdata.sess_role_id;
         this.statustabs.ReOpened = res.data.ReOpened;
         this.statustabs.WFA = res.data.WaitingForApproval;
         this.statustabs.DelayedReported = res.data.delayed_reported;
-        this.statustabs.allComplied= res.data.Delayed+res.data.Complied+res.data.delayed_reported;
+        this.statustabs.allComplied = res.data.Delayed + res.data.Complied + res.data.delayed_reported;
         this.filterDataByStatus('allComplied');
         this.spinner.hide();
 
@@ -116,18 +116,18 @@ this.adminInfo = userdata.sess_role_id;
   filterDataByStatus(filter) {
     this.TableFilter = '';
     this.TabOnClick('');
-// console.log(filter,'finding');
-
+    
+    // console.log(filter,'finding');
     if (filter == 'complied' || filter == 'Complied') {
       filter = 'complied'
       this.filterDataStatus = 'Complied.';
-    } else if (filter == 'posingrisk' || filter == 'Posing') {
+    } else if (filter == 'posingrisk' || filter == 'Posing' || filter == 'Upcoming') {
       filter = 'posingrisk'
       this.filterDataStatus = 'Upcoming';
-    } else if (filter == 'noncomplied' || filter == 'Overdue' ) {
+    } else if (filter == 'noncomplied' || filter == 'Overdue') {
       filter = 'noncomplied';
       this.filterDataStatus = 'Overdue.';
-    } else if (filter == 'watingforapproval' || filter == 'WFA') {
+    } else if (filter == 'watingforapproval' || filter == 'WFA' || filter == 'Approval Pending') {
       filter = 'watingforapproval'
       this.filterDataStatus = 'Approval Pending.';
     } else if (filter == 'reopen' || filter == 'Re-Opened') {
@@ -137,12 +137,12 @@ this.adminInfo = userdata.sess_role_id;
       filter = 'delayed';
       this.filterDataStatus = 'Delayed.';
     } else if (filter == 'delayed-reported' || filter == 'Delayed Reported') {
-      filter = 'delayed-reported' 
+      filter = 'delayed-reported'
       this.filterDataStatus = 'Delayed Reported.';
-    } else if (filter == 'allComplied' ) {
+    } else if (filter == 'allComplied') {
       this.filterDataStatus = 'All Complied.';
     }
-
+    
     this.spinner.show();
     this.responseData = [];
     this.allResponseData = [];
@@ -153,20 +153,16 @@ this.adminInfo = userdata.sess_role_id;
           this.responseDataRow[i]
         );
       }
-      else if(filter == 'allComplied'){
+      else if (filter == 'allComplied') {
         if (this.responseDataRow[i].status.toLowerCase() == 'complied' || this.responseDataRow[i].status.toLowerCase() == 'delayed' || this.responseDataRow[i].status.toLowerCase() == 'delayed-reported') {
-          this.spinner.hide();
           this.responseData.push(
             this.responseDataRow[i]
           );
         }
+      }
+      // console.log(this.responseData, 'FIND NEW');
+      this.spinner.hide();
     }
-      console.log(this.responseData,'FIND NEW');
-      
-     
-    }
-
-    this.spinner.hide();
 
     document.getElementById('ViewGrid-tab').click();
   }
@@ -430,12 +426,12 @@ this.adminInfo = userdata.sess_role_id;
         this.statustabs.WFA,
         // this.statustabs.ReOpened
       ],
-      labels: ['Complied', 'Posing', 'Overdue', 'Delayed', 'Delayed Reported', 'WFA', 
-      // 'Re-Opened'
-    ],
-      colors: ['#46dc6b', '#ffff37', '#ff3f3f', '#b7b5b5', '#d5e478', '#71b5e2', 
-      // '#fdbf5d'
-    ]
+      labels: ['Complied', 'Upcoming', 'Overdue', 'Delayed', 'Delayed Reported', 'Approval Pending',
+        // 'Re-Opened'
+      ],
+      colors: ['#46dc6b', '#ffff37', '#ff3f3f', '#b7b5b5', '#d5e478', '#71b5e2',
+        // '#fdbf5d'
+      ]
     };
   }
 
@@ -457,7 +453,7 @@ this.adminInfo = userdata.sess_role_id;
 
     obj = {};
 
-    obj['name'] = 'Posing';
+    obj['name'] = 'Upcoming';
     obj['data'] = [];
     rowSeries.push(obj);
 
@@ -481,15 +477,15 @@ this.adminInfo = userdata.sess_role_id;
 
     obj = {};
 
-    obj['name'] = 'WFA';
+    obj['name'] = 'Approval Pending';
     obj['data'] = [];
     rowSeries.push(obj);
 
     obj = {};
 
-    obj['name'] = 'Re-Opened';
-    obj['data'] = [];
-    rowSeries.push(obj);
+    // obj['name'] = 'Re-Opened';
+    // obj['data'] = [];
+    // rowSeries.push(obj);
 
     for (let i = 0; i < this.entityTableData.length; i++) {
       rowSeries[0].data.push(this.entityTableData[i].complied);
@@ -498,7 +494,7 @@ this.adminInfo = userdata.sess_role_id;
       rowSeries[3].data.push(this.entityTableData[i].delayed);
       rowSeries[4].data.push(this.entityTableData[i].delayed_reported);
       rowSeries[5].data.push(this.entityTableData[i].wfa);
-      rowSeries[6].data.push(this.entityTableData[i].re_opened);
+      // rowSeries[6].data.push(this.entityTableData[i].re_opened);
     }
 
     var setHeight = 0;
@@ -534,7 +530,7 @@ this.adminInfo = userdata.sess_role_id;
 
     obj = {};
 
-    obj['name'] = 'Posing';
+    obj['name'] = 'Upcoming';
     obj['data'] = [];
     rowSeries.push(obj);
 
@@ -558,15 +554,15 @@ this.adminInfo = userdata.sess_role_id;
 
     obj = {};
 
-    obj['name'] = 'WFA';
+    obj['name'] = 'Approval Pending';
     obj['data'] = [];
     rowSeries.push(obj);
 
     obj = {};
 
-    obj['name'] = 'Re-Opened';
-    obj['data'] = [];
-    rowSeries.push(obj);
+    // obj['name'] = 'Re-Opened';
+    // obj['data'] = [];
+    // rowSeries.push(obj);
 
     for (let i = 0; i < this.unitTableData.length; i++) {
       rowSeries[0].data.push(this.unitTableData[i].complied);
@@ -575,7 +571,7 @@ this.adminInfo = userdata.sess_role_id;
       rowSeries[3].data.push(this.unitTableData[i].delayed);
       rowSeries[4].data.push(this.unitTableData[i].delayed_reported);
       rowSeries[5].data.push(this.unitTableData[i].wfa);
-      rowSeries[6].data.push(this.unitTableData[i].re_opened);
+      // rowSeries[6].data.push(this.unitTableData[i].re_opened);
     }
 
     var setHeight = 0;
@@ -611,7 +607,7 @@ this.adminInfo = userdata.sess_role_id;
 
     obj = {};
 
-    obj['name'] = 'Posing';
+    obj['name'] = 'Upcoming';
     obj['data'] = [];
     rowSeries.push(obj);
 
@@ -635,15 +631,15 @@ this.adminInfo = userdata.sess_role_id;
 
     obj = {};
 
-    obj['name'] = 'WFA';
+    obj['name'] = 'Approval Pending';
     obj['data'] = [];
     rowSeries.push(obj);
 
     obj = {};
 
-    obj['name'] = 'Re-Opened';
-    obj['data'] = [];
-    rowSeries.push(obj);
+    // obj['name'] = 'Re-Opened';
+    // obj['data'] = [];
+    // rowSeries.push(obj);
 
     for (let i = 0; i < this.functionTableData.length; i++) {
       rowSeries[0].data.push(this.functionTableData[i].complied);
@@ -652,7 +648,7 @@ this.adminInfo = userdata.sess_role_id;
       rowSeries[3].data.push(this.functionTableData[i].delayed);
       rowSeries[4].data.push(this.functionTableData[i].delayed_reported);
       rowSeries[5].data.push(this.functionTableData[i].wfa);
-      rowSeries[6].data.push(this.functionTableData[i].re_opened);
+      // rowSeries[6].data.push(this.functionTableData[i].re_opened);
     }
 
     var setHeight = 0;

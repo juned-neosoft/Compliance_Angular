@@ -262,8 +262,9 @@
                                                 </td>
                                                 <td><i (click)="DownloadDocument(doc.udoc_id,doc.udoc_original_file_name)"
                                                         class="fa fa-download" style="cursor: pointer;"></i></td>
-                                                <td class="text-danger"><i (click)="DeleteDocument(doc.udoc_id)"
+                                                <td class="text-danger" *ngIf="item.ttrn_task_status != 'Completed'"><i (click)="DeleteDocument(doc.udoc_id)"
                                                         class="fa fa-trash" style="cursor: pointer;"></i></td>
+                                                        <td class="text-danger" *ngIf="item.ttrn_task_status == 'Completed'" style="display: none;"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -280,7 +281,7 @@
                                         (click)="OpenCompleteTaskModal(item.ttrn_id, item.task_frequency, item.ttrn_legal_task_status, item.ttrn_document)">Complete
                                         Task</button>
                                     <button
-                                        *ngIf="item.ttrn_task_status == 'Completed' || item.ttrn_task_status == 'Partially_Completed'"
+                                        *ngIf="item.ttrn_task_status != 'Completed' || item.ttrn_task_status == 'Partially_Completed'"
                                         type="button" class="btn btn-success"
                                         (click)="OpenUpdateTaskModal(item.ttrn_id, item.task_frequency, item.ttrn_legal_task_status, item.ttrn_document)">Update
                                         Task</button>
