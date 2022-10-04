@@ -49,6 +49,7 @@ export class CompliancecertificateComponent implements OnInit {
     this.complinceService.GenerateComplicanceCertificate(data).subscribe((data: any) => {
       if (data.response.status == "Success") {
         this.alertify.success("Cerificate denerated successfully");
+        this.BindCertificate();
         this.spinner.hide();
       }
       else {
